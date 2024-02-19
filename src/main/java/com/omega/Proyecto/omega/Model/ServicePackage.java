@@ -19,13 +19,8 @@ public class ServicePackage {
     private Long idPackage;
     @ManyToMany
     private List<TouristicServ> touristicServs;
-    private Double costPackage;
+    private float costPackage;
     private boolean discount;
-
-    public void setTouristicServs(TouristicServ service){
-        touristicServs.add(service);
-        checkCost();
-    }
 
     public void setTouristicServs(List<TouristicServ> services){
         touristicServs = services;
@@ -34,7 +29,7 @@ public class ServicePackage {
 
     private void checkCost(){
         discount = touristicServs.size() > 1;
-        costPackage = 0.0;
+        costPackage = 0;
         for(TouristicServ serv : touristicServs){
             costPackage = costPackage + serv.getCost();
         }

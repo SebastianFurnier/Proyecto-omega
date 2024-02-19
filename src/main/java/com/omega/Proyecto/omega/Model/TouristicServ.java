@@ -21,5 +21,5 @@ public class TouristicServ {
     private String description;
     private String destiny;
     private Date serviceDate;
-    private Double cost;
+    private float cost;
 }
