@@ -1,6 +1,6 @@
 package com.omega.Proyecto.omega.Controller;
 
-import com.omega.Proyecto.omega.Model.SalePackage;
+import com.omega.Proyecto.omega.Model.ServicePackage;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Service.ServiceSalePackage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,12 @@ public class ControllerPackage {
     }
 
     @GetMapping("/get/{id}")
-    public SalePackage getPackage(@PathVariable Long id){
+    public ServicePackage getPackage(@PathVariable Long id){
         return servicePackage.getPackage(id);
     }
 
     @GetMapping("/getAll")
-    public List<SalePackage> getAllPackages(){
+    public List<ServicePackage> getAllPackages(){
         return servicePackage.getAllPackage();
     }
 

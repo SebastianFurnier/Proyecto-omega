@@ -1,7 +1,6 @@
 package com.omega.Proyecto.omega.Service;
 
-import com.omega.Proyecto.omega.Model.Sale;
-import com.omega.Proyecto.omega.Model.SalePackage;
+import com.omega.Proyecto.omega.Model.ServicePackage;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositorySalePackage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class ServiceSalePackage implements IServiceSalePackage {
     private IRepositorySalePackage repositoryPaquete;
     @Override
     public void createPackage(List<TouristicServ> services) {
-        SalePackage packageAux = new SalePackage();
+        ServicePackage packageAux = new ServicePackage();
         packageAux.setTouristicServs(services);
         repositoryPaquete.save(packageAux);
     }
@@ -27,18 +26,18 @@ public class ServiceSalePackage implements IServiceSalePackage {
     }
 
     @Override
-    public SalePackage getPackage(Long id) {
+    public ServicePackage getPackage(Long id) {
         return repositoryPaquete.findById(id).orElse(null);
     }
 
     @Override
-    public List<SalePackage> getAllPackage() {
+    public List<ServicePackage> getAllPackage() {
         return repositoryPaquete.findAll();
     }
 
     @Override
     public void editSalePackage(List<TouristicServ> services, Long idPackage) {
-        SalePackage packageAux = this.getPackage(idPackage);
+        ServicePackage packageAux = this.getPackage(idPackage);
         packageAux.setTouristicServs(services);
         repositoryPaquete.save(packageAux);
     }

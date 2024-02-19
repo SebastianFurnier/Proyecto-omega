@@ -24,5 +24,5 @@ public class Sale {
     //@OneToOne
     // Private Persona cliente;
     @OneToOne
-    private SalePackage aSalePackage;
+    private ServicePackage aServicePackage;
 }

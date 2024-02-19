@@ -13,11 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class SalePackage {
+public class ServicePackage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPackage;
-    @OneToMany
+    @ManyToMany
     private List<TouristicServ> touristicServs;
     private Double costPackage;
     private boolean discount;
