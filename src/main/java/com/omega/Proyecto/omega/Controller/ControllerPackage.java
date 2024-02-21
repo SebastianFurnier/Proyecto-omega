@@ -1,8 +1,8 @@
 package com.omega.Proyecto.omega.Controller;
 
-import com.omega.Proyecto.omega.Model.ServicePackage;
+import com.omega.Proyecto.omega.Model.TouristicServicesPackage;
 import com.omega.Proyecto.omega.Model.TouristicServ;
-import com.omega.Proyecto.omega.Service.ServiceSalePackage;
+import com.omega.Proyecto.omega.Service.ServiceTouristicServicePackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/package")
 public class ControllerPackage {
     @Autowired
-    private ServiceSalePackage servicePackage;
+    private ServiceTouristicServicePackage servicePackage;
 
     @PostMapping("/create")
     public void createPackage(@RequestBody List<TouristicServ> services){
@@ -26,12 +26,12 @@ public class ControllerPackage {
     }
 
     @GetMapping("/get/{id}")
-    public ServicePackage getPackage(@PathVariable Long id){
+    public TouristicServicesPackage getPackage(@PathVariable Long id){
         return servicePackage.getPackage(id);
     }
 
     @GetMapping("/getAll")
-    public List<ServicePackage> getAllPackages(){
+    public List<TouristicServicesPackage> getAllPackages(){
         return servicePackage.getAllPackage();
     }
 

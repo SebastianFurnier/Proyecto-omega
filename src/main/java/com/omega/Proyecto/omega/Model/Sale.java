@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -17,12 +17,12 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idVenta;
-    private Date DateSale;
+    private LocalDate DateSale;
     private PaymentMethod paymentMethod;
     //@OneToOne
     //private Persona empleado;
     //@OneToOne
     // Private Persona cliente;
     @OneToOne
-    private ServicePackage aServicePackage;
+    private TouristicServicesPackage aTouristicServicesPackage;
 }

@@ -1,4 +1,4 @@
-package com.omega.Proyecto.repository;
+package com.omega.Proyecto.ServicesTest;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import com.omega.Proyecto.omega.Service.ServiceTouristicServ;

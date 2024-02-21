@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class SalePackage {
+public class TouristicServicesPackage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPackage;

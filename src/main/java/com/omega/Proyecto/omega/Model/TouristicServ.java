@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,6 +20,6 @@ public class TouristicServ {
     private String name;
     private String description;
     private String destiny;
-    private Date serviceDate;
+    private LocalDate serviceDate;
     private float cost;
 }

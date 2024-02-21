@@ -10,29 +10,30 @@ import java.util.List;
 @Service
 public class ServiceTouristicServ implements IServiceTouristicServ {
     @Autowired
-    private IRepositoryTouristicServ repositoryServicio;
+    private IRepositoryTouristicServ repositoryTouristicServ;
     @Override
-    public void createService(TouristicServ touristicServ) {
-        repositoryServicio.save(touristicServ);
+    public TouristicServ createService(TouristicServ touristicServ) {
+        return repositoryTouristicServ.save(touristicServ);
     }
 
     @Override
-    public void deleteService(Long id) {
-        repositoryServicio.deleteById(id);
+    public boolean deleteService(Long id) {
+        repositoryTouristicServ.deleteById(id);
+        return true;
     }
 
     @Override
     public TouristicServ getService(Long id) {
-        return repositoryServicio.findById(id).orElse(null);
+        return repositoryTouristicServ.findById(id).orElse(null);
     }
 
     @Override
     public List<TouristicServ> getAllServices() {
-        return repositoryServicio.findAll();
+        return repositoryTouristicServ.findAll();
     }
 
     @Override
-    public void edit(TouristicServ touristicServ){
-        this.createService(touristicServ);
+    public TouristicServ editService(TouristicServ touristicServ){
+        return this.createService(touristicServ);
     }
 }
