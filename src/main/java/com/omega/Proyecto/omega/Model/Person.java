@@ -1,24 +1,28 @@
 package com.omega.Proyecto.omega.Model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-@Entity
-@Setter
-@Getter
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String name;
     private String username;
     private String dni;
-    private Date birthDay;
+    private LocalDate birthDay;
     private String nationality;
     private String phoneNumber;
     private String email;

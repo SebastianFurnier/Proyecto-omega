@@ -1,6 +1,8 @@
 package com.omega.Proyecto.omega.Service;
 
+import com.omega.Proyecto.omega.Model.Client;
 import com.omega.Proyecto.omega.Model.Sale;
+import com.omega.Proyecto.omega.Model.TouristicServicesPackage;
 import com.omega.Proyecto.omega.Repository.IRepositorySale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -3,6 +3,7 @@ package com.omega.Proyecto.omega.Service;
 import com.omega.Proyecto.omega.Model.Employee;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,6 @@ public interface IServiceEmployee {
     public Employee getEmployee(Long id);
     public List<Employee> getAllEmployee();
 
-    public void modifyEmployee(Long idOriginal, Long newId ,String newName , String newUsername , String newDni ,
-                                   Date newDate , String newNationality , String newPhoneNumbre , String newEmail , String newPosition , Double newSalary);
+    public void modifyEmployee(Long idOriginal, Long newId , String newName , String newUsername , String newDni ,
+                               LocalDate newDate , String newNationality , String newPhoneNumbre , String newEmail , String newPosition , Double newSalary);
 }

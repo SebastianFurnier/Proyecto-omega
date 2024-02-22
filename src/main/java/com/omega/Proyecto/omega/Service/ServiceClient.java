@@ -5,6 +5,7 @@ import com.omega.Proyecto.omega.Repository.IRepositoryClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class ServiceClient implements IServiceClient{
     }
 
     @Override
-    public void modifyClient(Long idOriginal, Long newId, String newName, String newUsername, String newDni, Date newDate,
+    public void modifyClient(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate,
                              String newNationality, String newPhoneNumbre, String newEmail) {
 
         Client cli = this.getClient(idOriginal);

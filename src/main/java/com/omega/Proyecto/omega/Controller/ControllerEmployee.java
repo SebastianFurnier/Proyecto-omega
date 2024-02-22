@@ -5,6 +5,7 @@ import com.omega.Proyecto.omega.Service.IServiceEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class ControllerEmployee {
                                    @RequestParam (required = false,name = "newName")String newName,
                                    @RequestParam (required = false,name = "newUsername")String newUsername,
                                    @RequestParam (required = false,name = "newDni")String newDni,
-                                   @RequestParam (required = false,name = "newDate") Date newDate,
+                                   @RequestParam (required = false,name = "newDate") LocalDate newDate,
                                    @RequestParam (required = false,name = "newNationality") String newNationality,
                                    @RequestParam (required = false,name = "nnewPhoneNumbre")String newPhoneNumbre,
                                    @RequestParam (required = false,name = "newEmail")String newEmail,

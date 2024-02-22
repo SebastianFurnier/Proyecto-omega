@@ -35,6 +35,6 @@ public class ControllerTouristicServ {
 
     @PutMapping("/edit")
     public void editService(@RequestBody TouristicServ touristicServ){
-        serviceTouristicServ.edit(touristicServ);
+        serviceTouristicServ.editService(touristicServ);
     }
 }
