@@ -13,8 +13,8 @@ public class ServiceSale implements IServiceSale {
     private IRepositorySale repositoryVenta;
 
     @Override
-    public void createSale(Sale sale) {
-        repositoryVenta.save(sale);
+    public Sale createSale(Sale sale) {
+        return repositoryVenta.save(sale);
     }
 
     @Override
