@@ -4,16 +4,14 @@ import com.omega.Proyecto.omega.Model.Employee;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 
 public interface IServiceEmployee {
-    public void createEmployee(Employee emplo);
-    public void deleteEmployee(Long id);
-    public Employee getEmployee(Long id);
-    public List<Employee> getAllEmployee();
-
-    public void modifyEmployee(Long idOriginal, Long newId , String newName , String newUsername , String newDni ,
+    void createEmployee(Employee emplo);
+    void deleteEmployee(Long id);
+    Employee getEmployee(Long id);
+    List<Employee> getAllEmployee();
+    void modifyEmployee(Long idOriginal, Long newId , String newName , String newUsername , String newDni ,
                                LocalDate newDate , String newNationality , String newPhoneNumbre , String newEmail , String newPosition , Double newSalary);
 }

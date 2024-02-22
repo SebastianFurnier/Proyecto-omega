@@ -3,11 +3,9 @@ package com.omega.Proyecto.omega.Controller;
 import com.omega.Proyecto.omega.Model.Client;
 import com.omega.Proyecto.omega.Service.IServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController
