@@ -43,10 +43,10 @@ public class ControllerEmployee {
                                    @RequestParam (required = false,name = "newDni")String newDni,
                                    @RequestParam (required = false,name = "newDate") LocalDate newDate,
                                    @RequestParam (required = false,name = "newNationality") String newNationality,
-                                   @RequestParam (required = false,name = "nnewPhoneNumbre")String newPhoneNumbre,
+                                   @RequestParam (required = false,name = "newPhoneNumbre")String newPhoneNumbre,
                                    @RequestParam (required = false,name = "newEmail")String newEmail,
                                    @RequestParam (required = false,name = "newPosition")String newPosition,
-                                   @RequestParam (required = false,name = "newSalary")Double newSalary){
+                                   @RequestParam (required = false,name = "newSalary")Long newSalary){
 
     IServEmplo.modifyEmployee(id,newId,newName,newUsername,newDni,newDate,newNationality,newPhoneNumbre,newEmail,newPosition,newSalary);
 

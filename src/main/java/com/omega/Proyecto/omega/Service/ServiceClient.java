@@ -13,10 +13,9 @@ public class ServiceClient implements IServiceClient{
     @Autowired
     IRepositoryClient IRepoClient;
 
-
     @Override
-    public void createClient(Client cli) {
-        IRepoClient.save(cli);
+    public Client createClient(Client cli) {
+       return IRepoClient.save(cli);
     }
 
     @Override

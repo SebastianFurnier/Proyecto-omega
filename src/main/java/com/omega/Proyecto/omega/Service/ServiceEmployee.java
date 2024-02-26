@@ -36,7 +36,7 @@ public class ServiceEmployee implements IServiceEmployee{
 
     @Override
     public void modifyEmployee(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate, String newNationality,
-                               String newPhoneNumber, String newEmail , String newPosition, Double newSalary) {
+                               String newPhoneNumber, String newEmail , String newPosition, Long newSalary) {
 
         Employee emplo = this.getEmployee(idOriginal);
 

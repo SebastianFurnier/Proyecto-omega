@@ -13,5 +13,5 @@ public interface IServiceEmployee {
     Employee getEmployee(Long id);
     List<Employee> getAllEmployee();
     void modifyEmployee(Long idOriginal, Long newId , String newName , String newUsername , String newDni ,
-                               LocalDate newDate , String newNationality , String newPhoneNumbre , String newEmail , String newPosition , Double newSalary);
+                               LocalDate newDate , String newNationality , String newPhoneNumbre , String newEmail , String newPosition , Long newSalary);
 }

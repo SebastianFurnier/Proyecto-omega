@@ -1,11 +1,8 @@
 package com.omega.Proyecto.ServicesTest;
 
 import com.omega.Proyecto.omega.Model.Sale;
-import com.omega.Proyecto.omega.Model.TouristicServ;
-import com.omega.Proyecto.omega.Model.TouristicServicesPackage;
 import com.omega.Proyecto.omega.Repository.IRepositorySale;
 import com.omega.Proyecto.omega.Service.ServiceSale;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;

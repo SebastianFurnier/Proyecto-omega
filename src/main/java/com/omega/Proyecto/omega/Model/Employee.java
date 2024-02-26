@@ -13,7 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee extends Person{
-
     private String position;
-    private Double salary;
+    private Long salary;
 }
