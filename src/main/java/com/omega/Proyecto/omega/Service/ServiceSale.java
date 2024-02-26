@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class ServiceSale implements IServiceSale {
     @Autowired
-    private IRepositorySale repositoryVenta;
+    private IRepositorySale repositoryVenta; //Cambiar por: repositorySale , para que el codigo sea todo en ingles.
 
     @Override
     public void createSale(Sale sale) {
