@@ -12,7 +12,7 @@ import java.util.List;
 public class ServiceSalePackage implements IServiceSalePackage {
 
     @Autowired
-    private IRepositorySalePackage repositoryPaquete;
+    private IRepositorySalePackage repositoryPaquete; // Cambiar repositoryPaquete x repositoryPackage
     @Override
     public void createPackage(List<TouristicServ> services) {
         ServicePackage packageAux = new ServicePackage();
