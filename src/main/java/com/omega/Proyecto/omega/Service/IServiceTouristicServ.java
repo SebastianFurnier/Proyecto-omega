@@ -1,13 +1,15 @@
 package com.omega.Proyecto.omega.Service;
 
+import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 
 import java.util.List;
 
 public interface IServiceTouristicServ {
-    public void createService(TouristicServ touristicServ);
-    public void deleteService(Long id);
-    public TouristicServ getService(Long id);
-    public List<TouristicServ> getAllServices();
-    public void edit(TouristicServ touristicServ);
+    TouristicServ createService(TouristicServ touristicServ);
+    boolean deleteService(Long id) throws ObjectNotFoundException;
+    TouristicServ getService(Long id) throws ObjectNotFoundException;
+    List<TouristicServ> getAllActiveServices();
+    TouristicServ editService(TouristicServ touristicServ);
+    TouristicServ activateService(Long id) throws ObjectNotFoundException;
 }

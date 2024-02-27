@@ -32,5 +32,4 @@ public class ControllerSale {
     public List<Sale> getAllSale(){
         return serviceSale.getAllSales();
     }
-
 }

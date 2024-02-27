@@ -5,7 +5,7 @@ import com.omega.Proyecto.omega.Service.IServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -17,7 +17,7 @@ public class ControllerClient {
 
     @PostMapping("/create")
     public void createClient(@RequestBody Client cli){
-        IServClient.createClient(cli);
+         IServClient.createClient(cli);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -41,9 +41,9 @@ public class ControllerClient {
                                @RequestParam (required = false,name = "newName")String newName,
                                @RequestParam (required = false,name = "newUsername")String newUsername,
                                @RequestParam (required = false,name = "newDni")String newDni,
-                               @RequestParam (required = false,name = "newDate") Date newDate,
+                               @RequestParam (required = false,name = "newDate") LocalDate newDate,
                                @RequestParam (required = false,name = "newNationality") String newNationality,
-                               @RequestParam (required = false,name = "nnewPhoneNumbre")String newPhoneNumbre,
+                               @RequestParam (required = false,name = "newPhoneNumbre")String newPhoneNumbre,
                                @RequestParam (required = false,name = "newEmail")String newEmail){
         IServClient.modifyClient(id,newId,newName,newUsername,newDni,newDate,newNationality,newPhoneNumbre,newEmail);
 

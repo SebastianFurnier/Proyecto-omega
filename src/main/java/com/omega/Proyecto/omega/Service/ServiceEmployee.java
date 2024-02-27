@@ -5,7 +5,7 @@ import com.omega.Proyecto.omega.Repository.IRepositoryEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -35,8 +35,8 @@ public class ServiceEmployee implements IServiceEmployee{
     }
 
     @Override
-    public void modifyEmployee(Long idOriginal, Long newId, String newName, String newUsername, String newDni, Date newDate, String newNationality,
-                                   String newPhoneNumbre, String newEmail , String newPosition,Double newSalary) {
+    public void modifyEmployee(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate, String newNationality,
+                               String newPhoneNumber, String newEmail , String newPosition, Long newSalary) {
 
         Employee emplo = this.getEmployee(idOriginal);
 
@@ -46,7 +46,7 @@ public class ServiceEmployee implements IServiceEmployee{
         emplo.setDni(newDni);
         emplo.setBirthDay(newDate);
         emplo.setNationality(newNationality);
-        emplo.setPhoneNumber(newPhoneNumbre);
+        emplo.setPhoneNumber(newPhoneNumber);
         emplo.setEmail(newEmail);
         emplo.setPosition(newPosition);
         emplo.setSalary(newSalary);

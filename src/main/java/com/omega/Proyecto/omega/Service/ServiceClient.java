@@ -5,37 +5,36 @@ import com.omega.Proyecto.omega.Repository.IRepositoryClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class ServiceClient implements IServiceClient{
     @Autowired
-    IRepositoryClient IRepoClient;
-
+    IRepositoryClient repositoryClient;
 
     @Override
-    public void createClient(Client cli) {
-        IRepoClient.save(cli);
+    public Client createClient(Client cli) {
+       return repositoryClient.save(cli);
     }
 
     @Override
     public void deleteClient(Long id) {
-        IRepoClient.deleteById(id);
+        repositoryClient.deleteById(id);
     }
 
     @Override
     public Client getClient(Long id) {
-        return IRepoClient.findById(id).orElse(null);
+        return repositoryClient.findById(id).orElse(null);
     }
 
     @Override
     public List<Client> getAllClient() {
-        return IRepoClient.findAll();
+        return repositoryClient.findAll();
     }
 
     @Override
-    public void modifyClient(Long idOriginal, Long newId, String newName, String newUsername, String newDni, Date newDate,
+    public void modifyClient(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate,
                              String newNationality, String newPhoneNumbre, String newEmail) {
 
         Client cli = this.getClient(idOriginal);
@@ -48,6 +47,6 @@ public class ServiceClient implements IServiceClient{
         cli.setPhoneNumber(newPhoneNumbre);
         cli.setEmail(newEmail);
 
-        IRepoClient.save(cli);
+        repositoryClient.save(cli);
     }
 }

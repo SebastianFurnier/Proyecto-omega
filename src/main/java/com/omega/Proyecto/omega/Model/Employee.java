@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
+
 @Getter
 @Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee extends Person{
     private String position;
-    private Double salary;
+    private Long salary;
 }

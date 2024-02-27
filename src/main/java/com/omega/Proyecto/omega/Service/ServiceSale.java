@@ -13,8 +13,8 @@ public class ServiceSale implements IServiceSale {
     private IRepositorySale repositoryVenta; //Cambiar por: repositorySale , para que el codigo sea todo en ingles.
 
     @Override
-    public void createSale(Sale sale) {
-        repositoryVenta.save(sale);
+    public Sale createSale(Sale sale) {
+        return repositoryVenta.save(sale);
     }
 
     @Override
