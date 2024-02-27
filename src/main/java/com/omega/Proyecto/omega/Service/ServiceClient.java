@@ -11,26 +11,26 @@ import java.util.List;
 @Service
 public class ServiceClient implements IServiceClient{
     @Autowired
-    IRepositoryClient IRepoClient;
+    IRepositoryClient repositoryClient;
 
     @Override
     public Client createClient(Client cli) {
-       return IRepoClient.save(cli);
+       return repositoryClient.save(cli);
     }
 
     @Override
     public void deleteClient(Long id) {
-        IRepoClient.deleteById(id);
+        repositoryClient.deleteById(id);
     }
 
     @Override
     public Client getClient(Long id) {
-        return IRepoClient.findById(id).orElse(null);
+        return repositoryClient.findById(id).orElse(null);
     }
 
     @Override
     public List<Client> getAllClient() {
-        return IRepoClient.findAll();
+        return repositoryClient.findAll();
     }
 
     @Override
@@ -47,6 +47,6 @@ public class ServiceClient implements IServiceClient{
         cli.setPhoneNumber(newPhoneNumbre);
         cli.setEmail(newEmail);
 
-        IRepoClient.save(cli);
+        repositoryClient.save(cli);
     }
 }

@@ -1,4 +1,5 @@
 package com.omega.Proyecto.ServicesTest;
+import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import com.omega.Proyecto.omega.Service.ServiceTouristicServ;
@@ -31,15 +32,19 @@ public class ServiceTouristicServTest
 
     @Test
     public void createTouristicServTest(){
+
+        TouristicServ touristicServ1 = new TouristicServ();
         Mockito.when(repositoryTouristicServ.save(touristicServ)).thenReturn(touristicServ);
 
         TouristicServ touristicServAux = serviceTouristicServ.createService(touristicServ);
 
         Assertions.assertEquals(touristicServAux, touristicServ);
+        Assertions.assertNotEquals(touristicServ1, touristicServAux);
     }
 
+
     @Test
-    public void deleteTourtisticServTest(){
+    public void deleteTourtisticServTest() throws ObjectNotFoundException{
         Long id = 1L;
         Mockito.doNothing().when(repositoryTouristicServ).deleteById(id);
 
@@ -49,7 +54,7 @@ public class ServiceTouristicServTest
     }
 
     @Test
-    public void getTouristicServTest(){
+    public void getTouristicServTest() throws ObjectNotFoundException {
         Long id = 1L;
         Mockito.when(repositoryTouristicServ.findById(id)).thenReturn(Optional.of(touristicServ));
 
@@ -64,7 +69,7 @@ public class ServiceTouristicServTest
         touristicServices.add(touristicServ);
         Mockito.when(repositoryTouristicServ.findAll()).thenReturn(touristicServices);
 
-        List<TouristicServ> touristicServicesAux = serviceTouristicServ.getAllServices();
+        List<TouristicServ> touristicServicesAux = serviceTouristicServ.getAllActiveServices();
 
         Assertions.assertEquals(touristicServicesAux, touristicServices);
     }

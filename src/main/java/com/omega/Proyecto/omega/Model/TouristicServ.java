@@ -19,7 +19,8 @@ public class TouristicServ {
     private Long idTouristicService;
     private String name;
     private String description;
-    private String destiny;
+    private String destination;
     private LocalDate serviceDate;
     private float cost;
+    private boolean active;
 }
