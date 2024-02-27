@@ -14,13 +14,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-
+@RunWith(SpringRunner.class)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.MOCK,
+        classes = ServiceSale.class)
+@AutoConfigureMockMvc
 public class ServiceClientTest
 {
+    @MockBean
+    private IRepositoryClient repoClient;
+    @Autowired
+    private ServiceClient serviceClient;
+    private final Client newClient = new Client();
 
 
     @Test
     public void createClientTest(){
+        Mockito.when(repoClient.save(newClient)).thenReturn(newClient);
 
+        Client clientAux = serviceClient.createClient(newClient);
+
+        Assertions.assertEquals(newClient,clientAux);
     }
 }
