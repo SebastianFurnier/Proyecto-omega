@@ -15,8 +15,8 @@ public class ServiceEmployee implements IServiceEmployee{
     IRepositoryEmployee IRepoEmplo;
 
     @Override
-    public void createEmployee(Employee emplo) {
-        IRepoEmplo.save(emplo);
+    public Employee createEmployee(Employee emplo) {
+        return IRepoEmplo.save(emplo);
     }
 
     @Override
