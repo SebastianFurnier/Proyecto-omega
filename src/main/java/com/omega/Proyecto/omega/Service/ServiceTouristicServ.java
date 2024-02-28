@@ -35,8 +35,8 @@ public class ServiceTouristicServ implements IServiceTouristicServ
         return true;
     }
 
-    //Cuando haga el merge con la rama de implementacion de errores
-    //modifico este metodo para que busque  solo id's activos.
+    //When I can merge this branch with Omega 24 branch
+    // I will modify this method to only search active id's.
     @Override
     public TouristicServ getService(Long id) throws ObjectNotFoundException {
         Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
@@ -60,8 +60,8 @@ public class ServiceTouristicServ implements IServiceTouristicServ
         return repositoryTouristicServ.getInactiveTouristicServices();
     }
 
-    //Cuando haga el merge con la rama de implementacion de errores
-    //modifico este metodo para que busque  solo id's inactivos.
+    //When I can merge this branch with Omega 24 branch
+    // I will modify this method to only search active id's.
     @Override
     public TouristicServ activateService(Long id) throws ObjectNotFoundException{
         Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
