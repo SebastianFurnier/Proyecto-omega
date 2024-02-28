@@ -21,9 +21,11 @@ public class TouristicServicesPackage {
     private List<TouristicServ> touristicServs;
     private float costPackage;
     private boolean discount;
+    private boolean active;
 
     public void setTouristicServs(List<TouristicServ> services){
         touristicServs = services;
+        this.active = true;
         checkCost();
     }
 
