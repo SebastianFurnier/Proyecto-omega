@@ -1,5 +1,7 @@
 package com.omega.Proyecto.omega.Controller;
 
+import com.omega.Proyecto.omega.Error.ErrorDataException;
+import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
 import com.omega.Proyecto.omega.Model.Sale;
 import com.omega.Proyecto.omega.Service.ServiceSale;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +16,17 @@ public class ControllerSale {
     private ServiceSale serviceSale;
 
     @PostMapping("/create")
-    public void createSale(@RequestBody Sale sale){
+    public void createSale(@RequestBody Sale sale) throws ErrorDataException {
         serviceSale.createSale(sale);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteSale(@PathVariable Long id){
+    public void deleteSale(@PathVariable Long id) throws ObjectNotFoundException {
         serviceSale.deleteSale(id);
     }
 
     @GetMapping("/getSale/{id}")
-    public Sale getSale(@PathVariable Long id){
+    public Sale getSale(@PathVariable Long id) throws ObjectNotFoundException{
         return serviceSale.getSale(id);
     }
 

@@ -25,4 +25,5 @@ public class Sale {
     private Client client;
     @OneToOne
     private TouristicServicesPackage touristicServicesPackage;
+    private boolean active;
 }

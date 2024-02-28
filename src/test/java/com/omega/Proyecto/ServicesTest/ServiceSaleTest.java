@@ -1,5 +1,7 @@
 package com.omega.Proyecto.ServicesTest;
 
+import com.omega.Proyecto.omega.Error.ErrorDataException;
+import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
 import com.omega.Proyecto.omega.Model.Sale;
 import com.omega.Proyecto.omega.Repository.IRepositorySale;
 import com.omega.Proyecto.omega.Service.ServiceSale;
@@ -31,7 +33,7 @@ public class ServiceSaleTest
     private final Sale newSale = new Sale();
 
     @Test
-    public void createCorrectSale(){
+    public void createCorrectSale() throws ErrorDataException {
         Mockito.when(repositorySale.save(newSale)).thenReturn(newSale);
 
         Sale saleAux = serviceSale.createSale(newSale);
@@ -40,7 +42,7 @@ public class ServiceSaleTest
     }
 
     @Test
-    public void getSale(){
+    public void getSale() throws ObjectNotFoundException{
         Long id = 1L;
         Mockito.when(repositorySale.findById(id)).thenReturn(Optional.of(newSale));
 
@@ -60,7 +62,7 @@ public class ServiceSaleTest
     }
 
     @Test
-    public void deleteSale(){
+    public void deleteSale() throws ObjectNotFoundException {
         Long id = 1L;
         Mockito.doNothing().when(repositorySale).deleteById(id);
 

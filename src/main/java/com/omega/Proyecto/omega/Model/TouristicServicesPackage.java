@@ -21,10 +21,12 @@ public class TouristicServicesPackage {
     private List<TouristicServ> touristicServs;
     private float costPackage;
     private boolean discount;
+    private boolean active;
 
     public void setTouristicServs(List<TouristicServ> services){
         touristicServs = services;
         checkCost();
+        activatePackage();
     }
 
     private void checkCost(){
@@ -33,5 +35,9 @@ public class TouristicServicesPackage {
         for(TouristicServ serv : touristicServs){
             costPackage = costPackage + serv.getCost();
         }
+    }
+
+    private void activatePackage(){
+        this.active = true;
     }
 }
