@@ -11,15 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface IRepositoryTouristicServPackage extends JpaRepository<TouristicServicesPackage, Long> {
-    @Query("SELECT TSP FROM TouristicServicesPackage TSP WHERE TSP.active = true")
-    List<TouristicServicesPackage> getActiveTouristicServicesPackage();
+    List<TouristicServicesPackage> getTouristicServicesPackagesByActive(boolean active);
 
-    @Query("SELECT TSP FROM TouristicServicesPackage TSP WHERE TSP.active = false")
-    List<TouristicServicesPackage> getInactiveTouristicServicesPackage();
-
-    @Query("SELECT TSP FROM TouristicServicesPackage TSP WHERE TSP.active = true AND TSP.idPackage = :id")
-    Optional<TouristicServicesPackage> getActiveTouristicServicesById(@Param("id") Long id);
-
-    @Query("SELECT TSP FROM TouristicServicesPackage TSP WHERE TSP.active = false AND TSP.idPackage = :id")
-    Optional<TouristicServicesPackage> getInactiveTouristicServicesPackageById(@Param("id") Long id);
+    Optional<TouristicServicesPackage> getTouristicServicesPackageByActiveAndIdPackage(boolean active, Long idPackage);
 }

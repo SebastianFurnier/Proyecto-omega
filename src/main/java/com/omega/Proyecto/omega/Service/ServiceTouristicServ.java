@@ -55,7 +55,8 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     @Override
     public TouristicServ getActiveService(Long id) throws ObjectNotFoundException {
 
-        Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.getActiveTouristicServicesById(id);
+        Optional<TouristicServ> optionalTouristicServ =
+                repositoryTouristicServ.getTouristicServsByActiveAndIdTouristicService(true, id);
         return optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
                 "There is no active service with this ID.", "error", HttpStatus.NOT_FOUND
         )));
@@ -63,7 +64,8 @@ public class ServiceTouristicServ implements IServiceTouristicServ
 
     @Override
     public TouristicServ getInactiveService(Long id) throws ObjectNotFoundException{
-        Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.getInactiveTouristicServicesById(id);
+        Optional<TouristicServ> optionalTouristicServ =
+                repositoryTouristicServ.getTouristicServsByActiveAndIdTouristicService(false, id);
         return optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
                 "There is no service with this ID.", "error", HttpStatus.NOT_FOUND
         )));
@@ -71,12 +73,12 @@ public class ServiceTouristicServ implements IServiceTouristicServ
 
     @Override
     public List<TouristicServ> getAllActiveServices() {
-        return repositoryTouristicServ.getActiveTouristicServices();
+        return repositoryTouristicServ.getTouristicServByActive(true);
     }
 
     @Override
     public List<TouristicServ> getAllInactiveServices(){
-        return repositoryTouristicServ.getInactiveTouristicServices();
+        return repositoryTouristicServ.getTouristicServByActive(false);
     }
 
     @Override

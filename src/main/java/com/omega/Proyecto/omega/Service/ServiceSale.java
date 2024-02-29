@@ -57,14 +57,16 @@ public class ServiceSale implements IServiceSale {
 
     @Override
     public Sale getActiveSale(Long id) throws ObjectNotFoundException {
-        Optional<Sale> optionalSale = repositorySale.getActiveSaleById(id);
+        Optional<Sale> optionalSale =
+                repositorySale.getSalesByActiveAndIdSale(true, id);
         return optionalSale.orElseThrow(() -> new ObjectNotFoundException("ID not found.",
                 new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
     }
 
     @Override
     public Sale getInactiveSale(Long id) throws ObjectNotFoundException{
-        Optional<Sale> optionalSale = repositorySale.getInactiveSaleById(id);
+        Optional<Sale> optionalSale =
+                repositorySale.getSalesByActiveAndIdSale(false, id);
         return optionalSale.orElseThrow(() -> new ObjectNotFoundException("ID not found.",
                 new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
     }
@@ -75,10 +77,12 @@ public class ServiceSale implements IServiceSale {
     }
 
     @Override
-    public List<Sale> getAllActiveSales(){return repositorySale.getActivaSale();}
+    public List<Sale> getAllActiveSales(){
+        return repositorySale.getSaleByActive(true);
+    }
 
     @Override
     public List<Sale> getAllInactiveSales(){
-        return repositorySale.getInactiveSale();
+        return repositorySale.getSaleByActive(false);
     }
 }

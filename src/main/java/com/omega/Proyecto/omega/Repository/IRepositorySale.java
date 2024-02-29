@@ -11,15 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface IRepositorySale extends JpaRepository<Sale, Long> {
-    @Query("SELECT S FROM Sale S WHERE S.active = true")
-    List<Sale> getActivaSale();
 
-    @Query("SELECT S FROM Sale S WHERE S.active = false")
-    List<Sale> getInactiveSale();
+    List<Sale> getSaleByActive(boolean active);
 
-    @Query("SELECT S FROM Sale S WHERE S.active = true AND S.idSale = :id")
-    Optional<Sale> getActiveSaleById(@Param("id") Long id);
-
-    @Query("SELECT S FROM Sale S WHERE S.active = false AND S.idSale = :id")
-    Optional<Sale> getInactiveSaleById(@Param("id") Long id);
+    Optional<Sale> getSalesByActiveAndIdSale(boolean active, Long idSale);
 }

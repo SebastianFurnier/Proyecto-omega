@@ -11,16 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface IRepositoryTouristicServ extends JpaRepository<TouristicServ, Long> {
-    @Query("SELECT TS FROM TouristicServ TS WHERE TS.active = true")
-    List<TouristicServ> getActiveTouristicServices();
+     List<TouristicServ> getTouristicServByActive(boolean active);
 
-    @Query("SELECT TS FROM TouristicServ TS WHERE TS.active = false")
-    List<TouristicServ> getInactiveTouristicServices();
-
-    @Query("SELECT TS FROM TouristicServ TS WHERE TS.active = true AND TS.idTouristicService = :id")
-    Optional<TouristicServ> getActiveTouristicServicesById(@Param("id") Long id);
-
-    @Query("SELECT TS FROM TouristicServ TS WHERE TS.active = false AND TS.idTouristicService = :id")
-    Optional<TouristicServ> getInactiveTouristicServicesById(@Param("id") Long id);
+     Optional<TouristicServ> getTouristicServsByActiveAndIdTouristicService(boolean active, Long idTouristicService);
 
 }

@@ -43,7 +43,7 @@ public class ServiceTouristicServicePackage implements IServiceTouristicServiceP
     @Override
     public TouristicServicesPackage getActivePackage(Long id) throws ObjectNotFoundException {
         Optional<TouristicServicesPackage> optionalTouristicServicesPackage =
-                repositoryPackage.getActiveTouristicServicesById(id);
+                repositoryPackage.getTouristicServicesPackageByActiveAndIdPackage(true, id);
 
         return optionalTouristicServicesPackage.orElseThrow( () -> new ObjectNotFoundException("ID not found.",
                 new ExceptionDetails("There is no active package with this ID.", "error",
@@ -53,7 +53,7 @@ public class ServiceTouristicServicePackage implements IServiceTouristicServiceP
     @Override
     public TouristicServicesPackage getInactivePackage(Long id) throws ObjectNotFoundException{
         Optional<TouristicServicesPackage> optionalTouristicServicesPackage =
-                repositoryPackage.getInactiveTouristicServicesPackageById(id);
+                repositoryPackage.getTouristicServicesPackageByActiveAndIdPackage(false, id);
 
         return optionalTouristicServicesPackage.orElseThrow( () -> new ObjectNotFoundException("ID not found.",
                 new ExceptionDetails("There is no package with this ID.",
@@ -68,12 +68,12 @@ public class ServiceTouristicServicePackage implements IServiceTouristicServiceP
 
     @Override
     public List<TouristicServicesPackage> getAllInactivePackage(){
-        return repositoryPackage.getInactiveTouristicServicesPackage();
+        return repositoryPackage.getTouristicServicesPackagesByActive(false);
     }
 
     @Override
     public List<TouristicServicesPackage> getAllActivePackage(){
-        return repositoryPackage.getActiveTouristicServicesPackage();
+        return repositoryPackage.getTouristicServicesPackagesByActive(true);
     }
 
     @Override
