@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idVenta;
+    private Long idSale;
     private LocalDate dateSale;
     private PaymentMethod paymentMethod;
     @ManyToOne
@@ -25,4 +25,5 @@ public class Sale {
     private Client client;
     @OneToOne
     private TouristicServicesPackage touristicServicesPackage;
+    private boolean active;
 }

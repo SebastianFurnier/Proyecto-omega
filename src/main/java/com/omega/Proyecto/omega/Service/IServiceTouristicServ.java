@@ -9,7 +9,9 @@ public interface IServiceTouristicServ {
     TouristicServ createService(TouristicServ touristicServ);
     boolean deleteService(Long id) throws ObjectNotFoundException;
     TouristicServ getService(Long id) throws ObjectNotFoundException;
+    TouristicServ getInactiveService(Long id);
     List<TouristicServ> getAllActiveServices();
     TouristicServ editService(TouristicServ touristicServ);
+    List<TouristicServ> getAllInactiveServices();
     TouristicServ activateService(Long id) throws ObjectNotFoundException;
 }

@@ -10,25 +10,35 @@ import java.util.List;
 @Service
 public class ServiceSale implements IServiceSale {
     @Autowired
-    private IRepositorySale repositoryVenta; //Cambiar por: repositorySale , para que el codigo sea todo en ingles.
+    private IRepositorySale repositorySale;
 
     @Override
     public Sale createSale(Sale sale) {
-        return repositoryVenta.save(sale);
+        return repositorySale.save(sale);
     }
 
     @Override
     public void deleteSale(Long id) {
-        repositoryVenta.deleteById(id);
+        repositorySale.deleteById(id);
     }
 
     @Override
     public Sale getSale(Long id) {
-        return repositoryVenta.findById(id).orElse(null);
+        return repositorySale.findById(id).orElse(null);
+    }
+
+    @Override
+    public Sale getInactiveSale(Long id){
+        return repositorySale.getInactiveSaleById(id);
     }
 
     @Override
     public List<Sale> getAllSales() {
-        return repositoryVenta.findAll();
+        return repositorySale.findAll();
+    }
+
+    @Override
+    public List<Sale> getAllInactiveSales(){
+        return repositorySale.getInactiveSale();
     }
 }
