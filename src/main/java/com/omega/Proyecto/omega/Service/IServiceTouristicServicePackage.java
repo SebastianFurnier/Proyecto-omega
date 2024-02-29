@@ -11,7 +11,9 @@ public interface IServiceTouristicServicePackage {
     TouristicServicesPackage createPackage(List<TouristicServ> services) throws ErrorDataException;
     void deletePackage(Long id) throws ObjectNotFoundException;
     TouristicServicesPackage getPackage(Long id) throws ObjectNotFoundException;
+    TouristicServicesPackage getInactivePackage(Long id);
     List<TouristicServicesPackage> getAllPackage();
     void editSalePackage(List<TouristicServ> services, Long idPackage) throws ObjectNotFoundException;
+    List<TouristicServicesPackage> getAllInactivePackage();
 
 }

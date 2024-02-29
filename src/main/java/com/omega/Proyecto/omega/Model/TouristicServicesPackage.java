@@ -25,6 +25,7 @@ public class TouristicServicesPackage {
 
     public void setTouristicServs(List<TouristicServ> services){
         touristicServs = services;
+        this.active = true;
         checkCost();
         activatePackage();
     }

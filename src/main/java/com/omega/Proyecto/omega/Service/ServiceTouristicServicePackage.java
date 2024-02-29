@@ -54,8 +54,18 @@ public class ServiceTouristicServicePackage implements IServiceTouristicServiceP
     }
 
     @Override
+    public TouristicServicesPackage getInactivePackage(Long id){
+        return repositoryPackage.getInactiveTouristicServicesPackageById(id);
+    }
+
+    @Override
     public List<TouristicServicesPackage> getAllPackage() {
         return repositoryPackage.findAll();
+    }
+
+    @Override
+    public List<TouristicServicesPackage> getAllInactivePackage(){
+        return repositoryPackage.getInactiveTouristicServicesPackage();
     }
 
     @Override

@@ -11,4 +11,5 @@ public interface IServiceSale {
     public void deleteSale(Long id) throws ObjectNotFoundException;
     public Sale getSale(Long id) throws ObjectNotFoundException;
     public List<Sale> getAllSales();
+    List<Sale> getAllInactiveSales();
 }

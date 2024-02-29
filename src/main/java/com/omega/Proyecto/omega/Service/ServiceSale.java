@@ -67,7 +67,17 @@ public class ServiceSale implements IServiceSale {
     }
 
     @Override
+    public Sale getInactiveSale(Long id){
+        return repositorySale.getInactiveSaleById(id);
+    }
+
+    @Override
     public List<Sale> getAllSales() {
         return repositorySale.findAll();
+    }
+
+    @Override
+    public List<Sale> getAllInactiveSales(){
+        return repositorySale.getInactiveSale();
     }
 }
