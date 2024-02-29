@@ -27,7 +27,6 @@ public class TouristicServicesPackage {
         touristicServs = services;
         this.active = true;
         checkCost();
-        activatePackage();
     }
 
     private void checkCost(){
@@ -36,9 +35,5 @@ public class TouristicServicesPackage {
         for(TouristicServ serv : touristicServs){
             costPackage = costPackage + serv.getCost();
         }
-    }
-
-    private void activatePackage(){
-        this.active = true;
     }
 }
