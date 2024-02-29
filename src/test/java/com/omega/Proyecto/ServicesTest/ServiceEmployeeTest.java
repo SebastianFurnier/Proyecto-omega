@@ -64,18 +64,9 @@ public class ServiceEmployeeTest {
         Assertions.assertEquals(employeeListAux,employeeList);
     }
 
+
     @Test
     public void deleteEmployee(){
-        Long id = 1L;
-        Mockito.doNothing().when(repoEmployee).deleteById(id);
-
-        servEmployee.deleteEmployee(id);
-
-        Mockito.verify(repoEmployee, Mockito.times(1)).deleteById(id);
-    }
-
-    @Test
-    public void deleteEmployeeTest(){
         Employee emplo = new Employee();
         emplo.setId(1L);
         emplo.setFlag(true);

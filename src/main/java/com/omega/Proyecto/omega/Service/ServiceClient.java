@@ -20,7 +20,9 @@ public class ServiceClient implements IServiceClient{
 
     @Override
     public void deleteClient(Long id) {
-        repositoryClient.deleteById(id);
+        Client cli = this.getClient(id);
+        cli.setFlag(false);
+        this.createClient(cli);
     }
 
     @Override
