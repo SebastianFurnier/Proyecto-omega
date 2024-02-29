@@ -29,7 +29,7 @@ public class ControllerPackage {
 
     @GetMapping("/get/{id}")
     public TouristicServicesPackage getPackage(@PathVariable Long id) throws ObjectNotFoundException{
-        return servicePackage.getPackage(id);
+        return servicePackage.getActivePackage(id);
     }
 
     @GetMapping("/getAll")
@@ -41,11 +41,11 @@ public class ControllerPackage {
     public void addService(@RequestBody TouristicServ service, @RequestBody Long id) throws ObjectNotFoundException{
         List<TouristicServ> servicesListAux = new ArrayList<>();
         servicesListAux.add(service);
-        servicePackage.editSalePackage(servicesListAux, id);
+        servicePackage.editPackage(servicesListAux, id);
     }
 
     @PutMapping("/addAllServices")
     public void addAllService(@RequestBody List<TouristicServ> services, @RequestBody Long id) throws ObjectNotFoundException{
-        servicePackage.editSalePackage(services, id);
+        servicePackage.editPackage(services, id);
     }
 }

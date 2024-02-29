@@ -59,7 +59,7 @@ public class ServiceTouristicServTest
         Long id = 1L;
         Mockito.when(repositoryTouristicServ.findById(id)).thenReturn(Optional.of(touristicServ));
 
-        TouristicServ touristicServAux = serviceTouristicServ.getService(id);
+        TouristicServ touristicServAux = serviceTouristicServ.getActiveService(id);
 
         Assertions.assertEquals(touristicServAux, touristicServ);
     }

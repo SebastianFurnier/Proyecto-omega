@@ -46,7 +46,7 @@ public class ServiceSaleTest
         Long id = 1L;
         Mockito.when(repositorySale.findById(id)).thenReturn(Optional.of(newSale));
 
-        Sale saleAux = serviceSale.getSale(id);
+        Sale saleAux = serviceSale.getActiveSale(id);
 
         Assertions.assertEquals(saleAux, newSale);
     }

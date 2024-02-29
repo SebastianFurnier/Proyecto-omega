@@ -27,7 +27,7 @@ public class ControllerSale {
 
     @GetMapping("/getSale/{id}")
     public Sale getSale(@PathVariable Long id) throws ObjectNotFoundException{
-        return serviceSale.getSale(id);
+        return serviceSale.getActiveSale(id);
     }
 
     @GetMapping("/getAllSale")

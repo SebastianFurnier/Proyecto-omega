@@ -58,7 +58,7 @@ public class ServiceTouristicServicePackageTest
         Long id = 1L;
         Mockito.when(repositoryTouristicServPackage.findById(id)).thenReturn(Optional.of(touristicServicesPackage));
 
-        TouristicServicesPackage touristicServicesPackageAux = serviceTouristicServicePackage.getPackage(id);
+        TouristicServicesPackage touristicServicesPackageAux = serviceTouristicServicePackage.getActivePackage(id);
 
         Assertions.assertEquals(touristicServicesPackageAux, touristicServicesPackage);
     }

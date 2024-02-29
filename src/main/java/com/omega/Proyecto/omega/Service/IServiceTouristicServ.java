@@ -9,10 +9,13 @@ import java.util.List;
 public interface IServiceTouristicServ {
     TouristicServ createService(TouristicServ touristicServ) throws ErrorDataException;
     void deleteService(Long id) throws ObjectNotFoundException, ErrorDataException;
-    TouristicServ getService(Long id) throws ObjectNotFoundException;
-    TouristicServ getInactiveService(Long id);
+    TouristicServ getActiveService(Long id) throws ObjectNotFoundException;
+    TouristicServ getInactiveService(Long id) throws ObjectNotFoundException;
     List<TouristicServ> getAllActiveServices();
     List<TouristicServ> getAllInactiveServices();
     TouristicServ editService(TouristicServ touristicServ) throws ErrorDataException;
+
+    List<TouristicServ> getAllServices();
+
     TouristicServ activateService(Long id) throws ObjectNotFoundException, ErrorDataException;
 }

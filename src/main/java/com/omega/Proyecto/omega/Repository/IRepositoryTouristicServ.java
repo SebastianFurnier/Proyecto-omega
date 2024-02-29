@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IRepositoryTouristicServ extends JpaRepository<TouristicServ, Long> {
@@ -17,9 +18,9 @@ public interface IRepositoryTouristicServ extends JpaRepository<TouristicServ, L
     List<TouristicServ> getInactiveTouristicServices();
 
     @Query("SELECT TS FROM TouristicServ TS WHERE TS.active = true AND TS.idTouristicService = :id")
-    TouristicServ getActiveTouristicServicesById(@Param("id") Long id);
+    Optional<TouristicServ> getActiveTouristicServicesById(@Param("id") Long id);
 
     @Query("SELECT TS FROM TouristicServ TS WHERE TS.active = false AND TS.idTouristicService = :id")
-    TouristicServ getInactiveTouristicServicesById(@Param("id") Long id);
+    Optional<TouristicServ> getInactiveTouristicServicesById(@Param("id") Long id);
 
 }

@@ -10,10 +10,13 @@ import java.util.List;
 public interface IServiceTouristicServicePackage {
     TouristicServicesPackage createPackage(List<TouristicServ> services) throws ErrorDataException;
     void deletePackage(Long id) throws ObjectNotFoundException;
-    TouristicServicesPackage getPackage(Long id) throws ObjectNotFoundException;
-    TouristicServicesPackage getInactivePackage(Long id);
+    TouristicServicesPackage getActivePackage(Long id) throws ObjectNotFoundException;
+    TouristicServicesPackage getInactivePackage(Long id) throws ObjectNotFoundException;
     List<TouristicServicesPackage> getAllPackage();
-    void editSalePackage(List<TouristicServ> services, Long idPackage) throws ObjectNotFoundException;
+
+    List<TouristicServicesPackage> getAllActivePackage();
+
+    void editPackage(List<TouristicServ> services, Long idPackage) throws ObjectNotFoundException;
     List<TouristicServicesPackage> getAllInactivePackage();
 
 }

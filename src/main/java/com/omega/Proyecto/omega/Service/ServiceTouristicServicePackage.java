@@ -18,12 +18,13 @@ public class ServiceTouristicServicePackage implements IServiceTouristicServiceP
 
     @Autowired
     private IRepositoryTouristicServPackage repositoryPackage;
+
     @Override
     public TouristicServicesPackage createPackage(List<TouristicServ> services) throws ErrorDataException {
 
         if (services.isEmpty())
             throw new ErrorDataException("Incorrect data.",
-                    new ExceptionDetails("Incorrect data.", "error", HttpStatus.BAD_REQUEST));
+                    new ExceptionDetails("You must send one o more services.", "error", HttpStatus.BAD_REQUEST));
 
         TouristicServicesPackage packageAux = new TouristicServicesPackage();
         packageAux.setTouristicServs(services);
@@ -33,29 +34,31 @@ public class ServiceTouristicServicePackage implements IServiceTouristicServiceP
     @Override
     public void deletePackage(Long id) throws ObjectNotFoundException {
 
-        Optional<TouristicServicesPackage> optionalTouristicServicesPackage = repositoryPackage.findById(id);
-
-        optionalTouristicServicesPackage.orElseThrow(() -> new ObjectNotFoundException("ID not found.",
-                new ExceptionDetails("There is no package with this ID.",
-                        "error", HttpStatus.NOT_FOUND)));
-
-        TouristicServicesPackage touristicServicesPackage = optionalTouristicServicesPackage.get();
+        TouristicServicesPackage touristicServicesPackage = this.getActivePackage(id);
         touristicServicesPackage.setActive(false);
 
         repositoryPackage.save(touristicServicesPackage);
     }
 
     @Override
-    public TouristicServicesPackage getPackage(Long id) throws ObjectNotFoundException {
-        Optional<TouristicServicesPackage> optionalTouristicServicesPackage = repositoryPackage.findById(id);
+    public TouristicServicesPackage getActivePackage(Long id) throws ObjectNotFoundException {
+        Optional<TouristicServicesPackage> optionalTouristicServicesPackage =
+                repositoryPackage.getActiveTouristicServicesById(id);
 
         return optionalTouristicServicesPackage.orElseThrow( () -> new ObjectNotFoundException("ID not found.",
-                new ExceptionDetails("There is no package with this ID.", "error", HttpStatus.BAD_REQUEST)));
+                new ExceptionDetails("There is no active package with this ID.", "error",
+                        HttpStatus.BAD_REQUEST)));
     }
 
     @Override
-    public TouristicServicesPackage getInactivePackage(Long id){
-        return repositoryPackage.getInactiveTouristicServicesPackageById(id);
+    public TouristicServicesPackage getInactivePackage(Long id) throws ObjectNotFoundException{
+        Optional<TouristicServicesPackage> optionalTouristicServicesPackage =
+                repositoryPackage.getInactiveTouristicServicesPackageById(id);
+
+        return optionalTouristicServicesPackage.orElseThrow( () -> new ObjectNotFoundException("ID not found.",
+                new ExceptionDetails("There is no package with this ID.",
+                        "error", HttpStatus.BAD_REQUEST)));
+
     }
 
     @Override
@@ -69,8 +72,13 @@ public class ServiceTouristicServicePackage implements IServiceTouristicServiceP
     }
 
     @Override
-    public void editSalePackage(List<TouristicServ> services, Long idPackage) throws ObjectNotFoundException{
-        TouristicServicesPackage packageAux = this.getPackage(idPackage);
+    public List<TouristicServicesPackage> getAllActivePackage(){
+        return repositoryPackage.getActiveTouristicServicesPackage();
+    }
+
+    @Override
+    public void editPackage(List<TouristicServ> services, Long idPackage) throws ObjectNotFoundException{
+        TouristicServicesPackage packageAux = this.getActivePackage(idPackage);
         packageAux.setTouristicServs(services);
         repositoryPackage.save(packageAux);
     }

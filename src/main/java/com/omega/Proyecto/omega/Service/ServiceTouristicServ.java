@@ -6,7 +6,6 @@ import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -48,30 +47,26 @@ public class ServiceTouristicServ implements IServiceTouristicServ
 
     @Override
     public void deleteService(Long id) throws ObjectNotFoundException, ErrorDataException {
-
-        Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
-        optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
-                "There is no service with this ID.", "error", HttpStatus.NOT_FOUND
-        )));
-
-        TouristicServ touristicServAux = optionalTouristicServ.get();
+        TouristicServ touristicServAux = this.getActiveService(id);
         touristicServAux.setActive(false);
         this.createService(touristicServAux);
-
     }
 
     @Override
-    public TouristicServ getService(Long id) throws ObjectNotFoundException {
+    public TouristicServ getActiveService(Long id) throws ObjectNotFoundException {
 
-        Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
+        Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.getActiveTouristicServicesById(id);
+        return optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
+                "There is no active service with this ID.", "error", HttpStatus.NOT_FOUND
+        )));
+    }
+
+    @Override
+    public TouristicServ getInactiveService(Long id) throws ObjectNotFoundException{
+        Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.getInactiveTouristicServicesById(id);
         return optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
                 "There is no service with this ID.", "error", HttpStatus.NOT_FOUND
         )));
-    }
-
-    @Override
-    public TouristicServ getInactiveService(Long id){
-        return repositoryTouristicServ.getInactiveTouristicServicesById(id);
     }
 
     @Override
@@ -84,17 +79,15 @@ public class ServiceTouristicServ implements IServiceTouristicServ
         return repositoryTouristicServ.getInactiveTouristicServices();
     }
 
-    //When I can merge this branch with Omega 24 branch
-    // I will modify this method to only search active id's.
+    @Override
+    public List<TouristicServ> getAllServices(){
+        return repositoryTouristicServ.findAll();
+    }
+
     @Override
     public TouristicServ activateService(Long id) throws ObjectNotFoundException, ErrorDataException {
 
-        Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
-        optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
-                "There is no service with this ID.", "error", HttpStatus.NOT_FOUND
-        )));
-
-        TouristicServ touristicServAux = optionalTouristicServ.get();
+        TouristicServ touristicServAux = this.getInactiveService(id);
 
         if (!touristicServAux.isActive()) {
             touristicServAux.setActive(true);

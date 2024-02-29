@@ -27,12 +27,12 @@ public class ControllerTouristicServ {
 
     @GetMapping("/get/{id}")
     public TouristicServ getService(@PathVariable Long id) throws ObjectNotFoundException {
-        return serviceTouristicServ.getService(id);
+        return serviceTouristicServ.getActiveService(id);
     }
 
     @GetMapping("/getAll")
     public List<TouristicServ> getAllServices(){
-        return serviceTouristicServ.getAllActiveServices();
+        return serviceTouristicServ.getAllServices();
     }
 
     @PostMapping("/activate/{id}")
