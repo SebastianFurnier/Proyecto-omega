@@ -46,9 +46,10 @@ public class ControllerEmployee {
                                    @RequestParam (required = false,name = "newPhoneNumbre")String newPhoneNumbre,
                                    @RequestParam (required = false,name = "newEmail")String newEmail,
                                    @RequestParam (required = false,name = "newPosition")String newPosition,
-                                   @RequestParam (required = false,name = "newSalary")Long newSalary){
+                                   @RequestParam (required = false,name = "newSalary")Long newSalary,
+                                   @RequestParam (required = false,name = "flag")boolean flag){
 
-    IServEmplo.modifyEmployee(id,newId,newName,newUsername,newDni,newDate,newNationality,newPhoneNumbre,newEmail,newPosition,newSalary);
+    IServEmplo.modifyEmployee(id,newId,newName,newUsername,newDni,newDate,newNationality,newPhoneNumbre,newEmail,newPosition,newSalary,flag);
 
     return this.IServEmplo.getEmployee(id);
 

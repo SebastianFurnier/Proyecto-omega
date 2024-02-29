@@ -21,7 +21,9 @@ public class ServiceEmployee implements IServiceEmployee{
 
     @Override
     public void deleteEmployee(Long id) {
-        IRepoEmplo.deleteById(id);
+        Employee employee = this.getEmployee(id);
+        employee.setFlag(false);
+        this.createEmployee(employee);
     }
 
     @Override
@@ -36,7 +38,7 @@ public class ServiceEmployee implements IServiceEmployee{
 
     @Override
     public void modifyEmployee(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate, String newNationality,
-                               String newPhoneNumber, String newEmail , String newPosition, Long newSalary) {
+                               String newPhoneNumber, String newEmail , String newPosition, Long newSalary,boolean flag) {
 
         Employee emplo = this.getEmployee(idOriginal);
 
@@ -50,6 +52,7 @@ public class ServiceEmployee implements IServiceEmployee{
         emplo.setEmail(newEmail);
         emplo.setPosition(newPosition);
         emplo.setSalary(newSalary);
+        emplo.setFlag(flag);
 
         this.createEmployee(emplo);
     }

@@ -9,4 +9,5 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Client extends Person{
+    private boolean flag;
 }

@@ -10,9 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Employee extends Person{
     private String position;
     private Long salary;
+    private boolean flag;
 }
