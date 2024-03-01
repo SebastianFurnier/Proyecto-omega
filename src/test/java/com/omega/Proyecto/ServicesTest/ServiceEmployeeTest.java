@@ -4,6 +4,7 @@ import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryEmployee;
 import com.omega.Proyecto.omega.Service.ServiceClient;
 import com.omega.Proyecto.omega.Service.ServiceEmployee;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BooleanSupplier;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
@@ -62,13 +64,18 @@ public class ServiceEmployeeTest {
         Assertions.assertEquals(employeeListAux,employeeList);
     }
 
+
     @Test
     public void deleteEmployee(){
-        Long id = 1L;
-        Mockito.doNothing().when(repoEmployee).deleteById(id);
+        Employee emplo = new Employee();
+        emplo.setId(1L);
+        emplo.setFlag(true);
+        Mockito.when(repoEmployee.findById(emplo.getId())).thenReturn(Optional.of(emplo));
 
-        servEmployee.deleteEmployee(id);
+        servEmployee.deleteEmployee(emplo.getId());
 
-        Mockito.verify(repoEmployee, Mockito.times(1)).deleteById(id);
+        Assertions.assertFalse(emplo.isFlag());
     }
+
+
 }

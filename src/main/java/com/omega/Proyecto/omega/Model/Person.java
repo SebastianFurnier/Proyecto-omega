@@ -9,10 +9,11 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person {

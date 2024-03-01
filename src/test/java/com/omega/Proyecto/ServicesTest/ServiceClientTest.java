@@ -1,6 +1,7 @@
 package com.omega.Proyecto.ServicesTest;
 
 import com.omega.Proyecto.omega.Model.Client;
+import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryClient;
 import com.omega.Proyecto.omega.Service.ServiceClient;
 import com.omega.Proyecto.omega.Service.ServiceSale;
@@ -63,14 +64,16 @@ public class ServiceClientTest
         Assertions.assertEquals(clientListAux,clientListAux);
     }
 
+
     @Test
-    public void deleteClient(){
-        Long id = 1L;
-        Mockito.doNothing().when(repoClient).deleteById(id);
+    public void deleteClientTest(){
+        Client cli = new Client();
+        cli.setId(1L);
+        cli.setFlag(true);
+        Mockito.when(repoClient.findById(cli.getId())).thenReturn(Optional.of(cli));
 
-        serviceClient.deleteClient(id);
+        serviceClient.deleteClient(cli.getId());
 
-        Mockito.verify(repoClient, Mockito.times(1)).deleteById(id);
+        Assertions.assertFalse(cli.isFlag());
     }
-
 }

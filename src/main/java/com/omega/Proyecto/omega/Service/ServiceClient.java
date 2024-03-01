@@ -20,7 +20,9 @@ public class ServiceClient implements IServiceClient{
 
     @Override
     public void deleteClient(Long id) {
-        repositoryClient.deleteById(id);
+        Client cli = this.getClient(id);
+        cli.setFlag(false);
+        this.createClient(cli);
     }
 
     @Override
@@ -35,7 +37,7 @@ public class ServiceClient implements IServiceClient{
 
     @Override
     public void modifyClient(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate,
-                             String newNationality, String newPhoneNumbre, String newEmail) {
+                             String newNationality, String newPhoneNumbre, String newEmail,boolean flag) {
 
         Client cli = this.getClient(idOriginal);
         cli.setId(newId);
@@ -46,6 +48,7 @@ public class ServiceClient implements IServiceClient{
         cli.setNationality(newNationality);
         cli.setPhoneNumber(newPhoneNumbre);
         cli.setEmail(newEmail);
+        cli.setFlag(flag);
 
         repositoryClient.save(cli);
     }

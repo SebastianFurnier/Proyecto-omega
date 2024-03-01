@@ -13,5 +13,5 @@ public interface IServiceClient {
     Client getClient(Long id);
     List<Client> getAllClient();
     void modifyClient(Long idOriginal, Long newId , String newName , String newUsername , String newDni ,
-                             LocalDate newDate , String newNationality , String newPhoneNumbre , String newEmail);
+                             LocalDate newDate , String newNationality , String newPhoneNumbre , String newEmail,boolean flag);
 }
