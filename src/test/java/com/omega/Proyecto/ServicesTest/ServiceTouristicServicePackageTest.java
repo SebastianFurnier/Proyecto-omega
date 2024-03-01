@@ -1,4 +1,6 @@
 package com.omega.Proyecto.ServicesTest;
+import com.omega.Proyecto.omega.Error.ErrorDataException;
+import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
 import com.omega.Proyecto.omega.Model.TouristicServicesPackage;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServPackage;
@@ -33,7 +35,7 @@ public class ServiceTouristicServicePackageTest
 
     //Corregir prueba
     @Test
-    public void createTouristicServPackage(){
+    public void createTouristicServPackage() throws ErrorDataException {
         Mockito.when(repositoryTouristicServPackage.save(touristicServicesPackage)).thenReturn(touristicServicesPackage);
 
         TouristicServicesPackage touristicServicesPackageAux = serviceTouristicServicePackage.createPackage(listTouristicServices);
@@ -42,7 +44,7 @@ public class ServiceTouristicServicePackageTest
     }
 
     @Test
-    public void deleteTouristicPackage(){
+    public void deleteTouristicPackage() throws ObjectNotFoundException {
         Long id = 1L;
         Mockito.doNothing().when(repositoryTouristicServPackage).deleteById(id);
 
@@ -52,11 +54,11 @@ public class ServiceTouristicServicePackageTest
     }
 
     @Test
-    public void getTouristicPackageTest(){
+    public void getTouristicPackageTest() throws ObjectNotFoundException{
         Long id = 1L;
         Mockito.when(repositoryTouristicServPackage.findById(id)).thenReturn(Optional.of(touristicServicesPackage));
 
-        TouristicServicesPackage touristicServicesPackageAux = serviceTouristicServicePackage.getPackage(id);
+        TouristicServicesPackage touristicServicesPackageAux = serviceTouristicServicePackage.getActivePackage(id);
 
         Assertions.assertEquals(touristicServicesPackageAux, touristicServicesPackage);
     }

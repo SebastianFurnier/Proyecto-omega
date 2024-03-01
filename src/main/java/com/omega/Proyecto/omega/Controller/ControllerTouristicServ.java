@@ -1,5 +1,6 @@
 package com.omega.Proyecto.omega.Controller;
 
+import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Service.ServiceTouristicServ;
@@ -15,32 +16,32 @@ public class ControllerTouristicServ {
     private ServiceTouristicServ serviceTouristicServ;
 
     @PostMapping("/create")
-    public void createService(@RequestBody TouristicServ touristicServ){
+    public void createService(@RequestBody TouristicServ touristicServ) throws ErrorDataException {
         serviceTouristicServ.createService(touristicServ);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteService(@PathVariable Long id) throws ObjectNotFoundException{
+    public void deleteService(@PathVariable Long id) throws ObjectNotFoundException, ErrorDataException {
         serviceTouristicServ.deleteService(id);
     }
 
     @GetMapping("/get/{id}")
     public TouristicServ getService(@PathVariable Long id) throws ObjectNotFoundException {
-        return serviceTouristicServ.getService(id);
+        return serviceTouristicServ.getActiveService(id);
     }
 
     @GetMapping("/getAll")
     public List<TouristicServ> getAllServices(){
-        return serviceTouristicServ.getAllActiveServices();
+        return serviceTouristicServ.getAllServices();
     }
 
     @PostMapping("/activate/{id}")
-    public TouristicServ activateService(@PathVariable Long id)  throws ObjectNotFoundException{
+    public TouristicServ activateService(@PathVariable Long id) throws ObjectNotFoundException, ErrorDataException {
         return serviceTouristicServ.activateService(id);
     }
 
     @PutMapping("/edit")
-    public void editService(@RequestBody TouristicServ touristicServ){
+    public void editService(@RequestBody TouristicServ touristicServ) throws ErrorDataException {
         serviceTouristicServ.editService(touristicServ);
     }
 }

@@ -7,18 +7,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IRepositoryTouristicServPackage extends JpaRepository<TouristicServicesPackage, Long> {
-    @Query("SELECT TSP FROM TouristicServicesPackage TSP WHERE TSP.active = true")
-    List<TouristicServicesPackage> getActiveTouristicServicesPackage();
+    List<TouristicServicesPackage> getTouristicServicesPackagesByActive(boolean active);
 
-    @Query("SELECT TSP FROM TouristicServicesPackage TSP WHERE TSP.active = false")
-    List<TouristicServicesPackage> getInactiveTouristicServicesPackage();
-
-    @Query("SELECT TSP FROM TouristicServicesPackage TSP WHERE TSP.active = true AND TSP.idPackage = :id")
-    TouristicServicesPackage getActiveTouristicServicesById(@Param("id") Long id);
-
-    @Query("SELECT TSP FROM TouristicServicesPackage TSP WHERE TSP.active = false AND TSP.idPackage = :id")
-    TouristicServicesPackage getInactiveTouristicServicesPackageById(@Param("id") Long id);
+    Optional<TouristicServicesPackage> getTouristicServicesPackageByActiveAndIdPackage(boolean active, Long idPackage);
 }
