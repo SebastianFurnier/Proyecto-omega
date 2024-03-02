@@ -5,6 +5,7 @@ import com.omega.Proyecto.omega.Model.Employee;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 
 public interface IServiceEmployee {
@@ -14,4 +15,8 @@ public interface IServiceEmployee {
     List<Employee> getAllEmployee();
     void modifyEmployee(Long idOriginal, Long newId , String newName , String newUsername , String newDni ,
                                LocalDate newDate , String newNationality , String newPhoneNumbre , String newEmail , String newPosition , Long newSalary,boolean flag);
+
+    List<Employee> getEmployeesByFlag(boolean flag);
+
+    Optional<Employee> getEmployeeByFlagAndId(boolean flag,Long id);
 }

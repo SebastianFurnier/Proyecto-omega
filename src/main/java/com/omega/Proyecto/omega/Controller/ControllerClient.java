@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/client")
@@ -49,5 +50,15 @@ public class ControllerClient {
         IServClient.modifyClient(id,newId,newName,newUsername,newDni,newDate,newNationality,newPhoneNumbre,newEmail,flag);
 
         return this.IServClient.getClient(id);
+    }
+
+    @GetMapping("/getAllFlag/{flag}")
+    public List<Client> getAllFlag(@PathVariable boolean flag){
+        return IServClient.getClientsByFlag(flag);
+    }
+
+    @GetMapping("/getClientFlagAndId/{flag}/{id}")
+    public Optional<Client> getClientByFlagAndById(@PathVariable boolean flag,@PathVariable Long id){
+        return IServClient.getClientByFlagAndId(flag,id);
     }
 }

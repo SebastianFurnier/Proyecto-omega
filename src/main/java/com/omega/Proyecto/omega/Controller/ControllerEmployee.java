@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -53,5 +54,15 @@ public class ControllerEmployee {
 
     return this.IServEmplo.getEmployee(id);
 
+    }
+
+    @GetMapping("/getEmployeesByFlag/{flag}")
+    public List<Employee> getEmployeesByFlag(@PathVariable boolean flag){
+        return IServEmplo.getEmployeesByFlag(flag);
+    }
+
+    @GetMapping("/getEmployeeByFlagAndId/{flag}/{id}")
+    public Optional<Employee> getEmployeeByFlagAndId(@PathVariable boolean flag,@PathVariable Long id){
+        return IServEmplo.getEmployeeByFlagAndId(flag,id);
     }
 }

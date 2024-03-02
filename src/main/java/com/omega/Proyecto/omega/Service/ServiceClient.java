@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceClient implements IServiceClient{
@@ -52,4 +53,16 @@ public class ServiceClient implements IServiceClient{
 
         repositoryClient.save(cli);
     }
+
+    @Override
+    public List<Client> getClientsByFlag(boolean flag) {
+        return repositoryClient.getClientsByFlag(flag);
+    }
+
+    @Override
+    public Optional<Client> getClientByFlagAndId(boolean flag, Long id) {
+        return repositoryClient.getClientByFlagAndId(flag,id);
+    }
+
+
 }

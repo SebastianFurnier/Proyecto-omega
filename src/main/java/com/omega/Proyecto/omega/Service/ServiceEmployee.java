@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceEmployee implements IServiceEmployee{
@@ -55,5 +56,15 @@ public class ServiceEmployee implements IServiceEmployee{
         emplo.setFlag(flag);
 
         this.createEmployee(emplo);
+    }
+
+    @Override
+    public List<Employee> getEmployeesByFlag(boolean flag) {
+        return IRepoEmplo.getEmployeesByFlag(flag);
+    }
+
+    @Override
+    public Optional<Employee> getEmployeeByFlagAndId(boolean flag, Long id) {
+        return IRepoEmplo.getEmployeeByFlagAndId(flag,id);
     }
 }
