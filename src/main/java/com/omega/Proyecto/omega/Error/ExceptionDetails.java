@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,4 +14,5 @@ import org.springframework.http.HttpStatus;
 public class ExceptionDetails {
     private String userMessage;
     private String severity;
+    private HttpStatus status;
 }

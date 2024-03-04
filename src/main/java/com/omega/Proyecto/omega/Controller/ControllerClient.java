@@ -1,5 +1,6 @@
 package com.omega.Proyecto.omega.Controller;
 
+import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Model.Client;
 import com.omega.Proyecto.omega.Service.IServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class ControllerClient {
     IServiceClient IServClient;
 
     @PostMapping("/create")
-    public void createClient(@RequestBody Client cli){
+    public void createClient(@RequestBody Client cli) {
          IServClient.createClient(cli);
     }
 

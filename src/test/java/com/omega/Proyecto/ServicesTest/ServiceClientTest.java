@@ -1,5 +1,7 @@
 package com.omega.Proyecto.ServicesTest;
 
+import com.omega.Proyecto.omega.Error.ErrorDataException;
+import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
 import com.omega.Proyecto.omega.Model.Client;
 import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryClient;
@@ -36,7 +38,7 @@ public class ServiceClientTest
 
 
     @Test
-    public void createClient(){
+    public void createClient() throws ErrorDataException {
         Mockito.when(repoClient.save(newClient)).thenReturn(newClient);
 
         Client clientAux = serviceClient.createClient(newClient);
@@ -45,7 +47,7 @@ public class ServiceClientTest
     }
 
     @Test
-    public void getClient(){
+    public void getClient() throws ObjectNotFoundException {
         Long id = 1L;
         Mockito.when(repoClient.findById(id)).thenReturn(Optional.of(newClient));
 
@@ -66,7 +68,7 @@ public class ServiceClientTest
 
 
     @Test
-    public void deleteClientTest(){
+    public void deleteClientTest() throws ObjectNotFoundException {
         Client cli = new Client();
         cli.setId(1L);
         cli.setFlag(true);
