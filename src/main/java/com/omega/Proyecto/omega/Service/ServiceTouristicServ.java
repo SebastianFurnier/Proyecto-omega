@@ -26,8 +26,7 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     public boolean deleteService(Long id) throws ObjectNFException {
         Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
         optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails(
-                "There is no service with this ID.", "error"
-        )));
+                "There is no service with this ID.", "error",HttpStatus.BAD_REQUEST )));
 
         TouristicServ touristicServAux = optionalTouristicServ.get();
         touristicServAux.setActive(false);
@@ -42,8 +41,7 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     public TouristicServ getService(Long id) throws ObjectNFException {
         Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
         return optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails(
-                "There is no service with this ID.", "error"
-        )));
+                "There is no service with this ID.", "error",HttpStatus.BAD_REQUEST )));
     }
 
     @Override
