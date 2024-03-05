@@ -113,6 +113,4 @@ public class ServiceClient implements IServiceClient{
                 , new ExceptionDetails ("Id is not found","error",HttpStatus.NOT_FOUND)));
     }
 
-
-
 }

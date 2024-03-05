@@ -1,8 +1,12 @@
 package com.omega.Proyecto.omega.Service;
 
+import com.omega.Proyecto.omega.Error.ErrorDataException;
+import com.omega.Proyecto.omega.Error.ExceptionDetails;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,19 +20,20 @@ public class ServiceEmployee implements IServiceEmployee{
     IRepositoryEmployee IRepoEmplo;
 
     @Override
-    public Employee createEmployee(Employee emplo) {
+    public Employee createEmployee(Employee emplo) throws ErrorDataException {
         return IRepoEmplo.save(emplo);
     }
 
     @Override
-    public void deleteEmployee(Long id) {
+    public void deleteEmployee(Long id) throws ObjectNFException {
         Employee employee = this.getEmployee(id);
         employee.setFlag(false);
-        this.createEmployee(employee);
+
+        IRepoEmplo.save(employee);
     }
 
     @Override
-    public Employee getEmployee(Long id) {
+    public Employee getEmployee(Long id) throws ObjectNFException {
         return IRepoEmplo.findById(id).orElse(null);
     }
 
@@ -39,7 +44,8 @@ public class ServiceEmployee implements IServiceEmployee{
 
     @Override
     public void modifyEmployee(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate, String newNationality,
-                               String newPhoneNumber, String newEmail , String newPosition, Long newSalary,boolean flag) {
+                               String newPhoneNumber, String newEmail , String newPosition, Long newSalary,boolean flag)
+                                throws ErrorDataException,ObjectNFException{
 
         Employee emplo = this.getEmployee(idOriginal);
 
@@ -64,7 +70,10 @@ public class ServiceEmployee implements IServiceEmployee{
     }
 
     @Override
-    public Optional<Employee> getEmployeeByFlagAndId(boolean flag, Long id) {
-        return IRepoEmplo.getEmployeeByFlagAndId(flag,id);
+    public Employee getEmployeeByFlagAndId(boolean flag, Long id) throws ObjectNFException{
+        Optional<Employee> optionalEmployee= IRepoEmplo.getEmployeeByFlagAndId(flag,id);
+
+        return optionalEmployee.orElseThrow(()-> new ObjectNFException("Id is not found.",
+                new ExceptionDetails("ID is not found","error", HttpStatus.NOT_FOUND)));
     }
 }

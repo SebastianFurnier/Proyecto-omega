@@ -64,7 +64,7 @@ public class ControllerEmployee {
     }
 
     @GetMapping("/getEmployeeByFlagAndId/{flag}/{id}")
-    public Optional<Employee> getEmployeeByFlagAndId(@PathVariable boolean flag,@PathVariable Long id) throws ErrorDataException ,ObjectNFException{
-        return IServEmplo.getEmployeeByFlagAndId(flag,id);
+    public Employee getEmployeeByFlagAndId(@PathVariable boolean flag,@PathVariable Long id) throws ObjectNFException, ErrorDataException {
+        return IServEmplo.getEmployeeByFlagAndId(flag, id);
     }
 }

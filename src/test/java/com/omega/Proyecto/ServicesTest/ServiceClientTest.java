@@ -8,6 +8,7 @@ import com.omega.Proyecto.omega.Service.ServiceClient;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -62,6 +63,15 @@ public class ServiceClientTest
         Assertions.assertEquals(clientListAux,clientListAux);
     }
 
+    @Test
+    public void getClientsByFlag(){
+        List<Client> clientList = serviceClient.getClientsByFlag(true);
+        Mockito.when(repoClient.findAll()).thenReturn(clientList);
+
+        List<Client> clientListAux = serviceClient.getClientsByFlag(true);
+
+        Assertions.assertEquals(clientList,clientListAux);
+    }
 
     @Test
     public void deleteClientTest() throws ObjectNFException {
@@ -73,6 +83,18 @@ public class ServiceClientTest
         serviceClient.deleteClient(cli.getId());
 
         Assertions.assertFalse(cli.isFlag());
+    }
+
+    @Test (expected = ObjectNFException.class)
+    public void deleteClientExceptionTest() throws ObjectNFException{
+        Client cli = new Client();
+        cli.setId(1L);
+        cli.setFlag(true);
+        Mockito.when(repoClient.findById(cli.getId())).thenReturn(Optional.of(cli));
+
+        serviceClient.getClientByFlagAndId(false,1L);
+
+        Assertions.assertTrue(cli.isFlag());
     }
 
     @Test (expected = ObjectNFException.class)

@@ -1,5 +1,7 @@
 package com.omega.Proyecto.ServicesTest;
 
+import com.omega.Proyecto.omega.Error.ErrorDataException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryEmployee;
 import com.omega.Proyecto.omega.Service.ServiceClient;
@@ -36,7 +38,7 @@ public class ServiceEmployeeTest {
 
 
     @Test
-    public void createEmployee(){
+    public void createEmployee() throws ErrorDataException {
         Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
 
         Employee employeeAux = servEmployee.createEmployee(newEmployee);
@@ -45,7 +47,7 @@ public class ServiceEmployeeTest {
     }
 
     @Test
-    public void getEmployee(){
+    public void getEmployee() throws ObjectNFException {
         Long id = 1L;
         Mockito.when(repoEmployee.findById(id)).thenReturn(Optional.of(newEmployee));
 
@@ -66,7 +68,7 @@ public class ServiceEmployeeTest {
 
 
     @Test
-    public void deleteEmployee(){
+    public void deleteEmployee() throws ObjectNFException{
         Employee emplo = new Employee();
         emplo.setId(1L);
         emplo.setFlag(true);
@@ -76,6 +78,7 @@ public class ServiceEmployeeTest {
 
         Assertions.assertFalse(emplo.isFlag());
     }
+
 
 
 }

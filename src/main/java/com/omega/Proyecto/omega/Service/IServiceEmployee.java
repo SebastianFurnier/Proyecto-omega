@@ -21,5 +21,5 @@ public interface IServiceEmployee {
 
     List<Employee> getEmployeesByFlag(boolean flag);
 
-    Optional<Employee> getEmployeeByFlagAndId(boolean flag,Long id) throws ErrorDataException,ObjectNFException;
+    Employee getEmployeeByFlagAndId(boolean flag,Long id) throws ErrorDataException,ObjectNFException;
 }
