@@ -1,7 +1,7 @@
 package com.omega.Proyecto.omega.Controller;
 
 import com.omega.Proyecto.omega.Error.ErrorDataException;
-import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Sale;
 import com.omega.Proyecto.omega.Service.ServiceSale;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,12 @@ public class ControllerSale {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteSale(@PathVariable Long id) throws ObjectNotFoundException {
+    public void deleteSale(@PathVariable Long id) throws ObjectNFException {
         serviceSale.deleteSale(id);
     }
 
     @GetMapping("/getSale/{id}")
-    public Sale getSale(@PathVariable Long id) throws ObjectNotFoundException{
+    public Sale getSale(@PathVariable Long id) throws ObjectNFException {
         return serviceSale.getActiveSale(id);
     }
 

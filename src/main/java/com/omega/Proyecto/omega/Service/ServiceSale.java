@@ -2,7 +2,7 @@ package com.omega.Proyecto.omega.Service;
 
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ExceptionDetails;
-import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Sale;
 import com.omega.Proyecto.omega.Repository.IRepositorySale;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class ServiceSale implements IServiceSale {
         if(sale.getEmployee() == null)
             return "Employee cannot be empty";
 
-        if(sale.getTouristicServicesPackage() == null)
+        if(sale.getTouristicServPack() == null)
             return "Package cannot be empty";
 
         return null;
@@ -48,7 +48,7 @@ public class ServiceSale implements IServiceSale {
     }
 
     @Override
-    public void deleteSale(Long id) throws ObjectNotFoundException {
+    public void deleteSale(Long id) throws ObjectNFException {
         Sale sale = getActiveSale(id);
         sale.setActive(false);
 
@@ -56,18 +56,18 @@ public class ServiceSale implements IServiceSale {
     }
 
     @Override
-    public Sale getActiveSale(Long id) throws ObjectNotFoundException {
+    public Sale getActiveSale(Long id) throws ObjectNFException {
         Optional<Sale> optionalSale =
                 repositorySale.getSalesByActiveAndIdSale(true, id);
-        return optionalSale.orElseThrow(() -> new ObjectNotFoundException("ID not found.",
+        return optionalSale.orElseThrow(() -> new ObjectNFException("ID not found.",
                 new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
     }
 
     @Override
-    public Sale getInactiveSale(Long id) throws ObjectNotFoundException{
+    public Sale getInactiveSale(Long id) throws ObjectNFException {
         Optional<Sale> optionalSale =
                 repositorySale.getSalesByActiveAndIdSale(false, id);
-        return optionalSale.orElseThrow(() -> new ObjectNotFoundException("ID not found.",
+        return optionalSale.orElseThrow(() -> new ObjectNFException("ID not found.",
                 new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
     }
 

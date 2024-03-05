@@ -1,7 +1,7 @@
 package com.omega.Proyecto.omega.Controller;
 
 import com.omega.Proyecto.omega.Error.ErrorDataException;
-import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Service.ServiceTouristicServ;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,12 @@ public class ControllerTouristicServ {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteService(@PathVariable Long id) throws ObjectNotFoundException, ErrorDataException {
+    public void deleteService(@PathVariable Long id) throws ObjectNFException, ErrorDataException {
         serviceTouristicServ.deleteService(id);
     }
 
     @GetMapping("/get/{id}")
-    public TouristicServ getService(@PathVariable Long id) throws ObjectNotFoundException {
+    public TouristicServ getService(@PathVariable Long id) throws ObjectNFException {
         return serviceTouristicServ.getActiveService(id);
     }
 
@@ -36,7 +36,7 @@ public class ControllerTouristicServ {
     }
 
     @PostMapping("/activate/{id}")
-    public TouristicServ activateService(@PathVariable Long id) throws ObjectNotFoundException, ErrorDataException {
+    public TouristicServ activateService(@PathVariable Long id) throws ObjectNFException, ErrorDataException {
         return serviceTouristicServ.activateService(id);
     }
 
