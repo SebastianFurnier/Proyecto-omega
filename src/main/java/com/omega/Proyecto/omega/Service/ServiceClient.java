@@ -77,7 +77,6 @@ public class ServiceClient implements IServiceClient{
                 new ExceptionDetails("ID not found","error",HttpStatus.NOT_FOUND)));
     }
 
-
     @Override
     public void modifyClient(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate,
                              String newNationality, String newPhoneNumbre, String newEmail,boolean flag) throws ErrorDataException, ObjectNFException {

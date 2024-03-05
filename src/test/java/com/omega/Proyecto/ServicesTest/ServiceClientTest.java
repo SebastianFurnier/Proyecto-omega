@@ -74,4 +74,16 @@ public class ServiceClientTest
 
         Assertions.assertFalse(cli.isFlag());
     }
+
+    @Test (expected = ObjectNFException.class)
+    public void getClientByFlagAndIdTest() throws ObjectNFException {
+        Long idOne = 1L;
+        Long idTwo = 2L;
+
+        Mockito.when(repoClient.getClientByFlagAndId(true,idOne)).thenReturn(Optional.of(newClient));
+
+        Assertions.assertEquals(serviceClient.getClientByFlagAndId(true,idTwo),newClient);
+    }
+
+
 }
