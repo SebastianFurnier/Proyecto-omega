@@ -5,6 +5,7 @@ import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,9 +66,9 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     @Override
     public TouristicServ activateService(Long id) throws ObjectNFException {
         Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
-        optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails(
-                "There is no service with this ID.", "error"
-        )));
+        optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails("There is no service with this ID.",
+                "error", HttpStatus.BAD_REQUEST)));
+
         TouristicServ touristicServAux = optionalTouristicServ.get();
         touristicServAux.setActive(true);
         this.createService(touristicServAux);
