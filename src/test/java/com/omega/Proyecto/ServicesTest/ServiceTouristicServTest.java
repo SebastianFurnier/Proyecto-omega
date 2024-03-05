@@ -1,5 +1,5 @@
 package com.omega.Proyecto.ServicesTest;
-import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import com.omega.Proyecto.omega.Service.ServiceTouristicServ;
@@ -44,7 +44,7 @@ public class ServiceTouristicServTest
 
 
     @Test
-    public void deleteTourtisticServTest() throws ObjectNotFoundException{
+    public void deleteTourtisticServTest() throws ObjectNFException {
         Long id = 1L;
         Mockito.doNothing().when(repositoryTouristicServ).deleteById(id);
 
@@ -54,7 +54,7 @@ public class ServiceTouristicServTest
     }
 
     @Test
-    public void getTouristicServTest() throws ObjectNotFoundException {
+    public void getTouristicServTest() throws ObjectNFException {
         Long id = 1L;
         Mockito.when(repositoryTouristicServ.findById(id)).thenReturn(Optional.of(touristicServ));
 

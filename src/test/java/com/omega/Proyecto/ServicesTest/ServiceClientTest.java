@@ -1,17 +1,13 @@
 package com.omega.Proyecto.ServicesTest;
 
 import com.omega.Proyecto.omega.Error.ErrorDataException;
-import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Client;
-import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryClient;
 import com.omega.Proyecto.omega.Service.ServiceClient;
-import com.omega.Proyecto.omega.Service.ServiceSale;
-import org.aspectj.apache.bcel.generic.InstructionConstants;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -47,7 +43,7 @@ public class ServiceClientTest
     }
 
     @Test
-    public void getClient() throws ObjectNotFoundException {
+    public void getClient() throws ObjectNFException {
         Long id = 1L;
         Mockito.when(repoClient.findById(id)).thenReturn(Optional.of(newClient));
 
@@ -68,7 +64,7 @@ public class ServiceClientTest
 
 
     @Test
-    public void deleteClientTest() throws ObjectNotFoundException {
+    public void deleteClientTest() throws ObjectNFException {
         Client cli = new Client();
         cli.setId(1L);
         cli.setFlag(true);

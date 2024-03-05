@@ -1,10 +1,12 @@
 package com.omega.Proyecto.omega.Service;
 
 import com.omega.Proyecto.omega.Error.ErrorDataException;
-import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
+import com.omega.Proyecto.omega.Error.ExceptionDetails;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Client;
 import com.omega.Proyecto.omega.Repository.IRepositoryClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -51,19 +53,47 @@ public class ServiceClient implements IServiceClient{
 
     @Override
     public Client createClient(Client cli) throws ErrorDataException {
+        String errorMessage = checkDataClient(cli);
+        if (errorMessage != null){
+            throw new ErrorDataException(errorMessage,new ExceptionDetails(errorMessage,"error", HttpStatus.BAD_REQUEST));
+        }
+        cli.setFlag(true);
        return repositoryClient.save(cli);
     }
 
     @Override
-    public void deleteClient(Long id) throws ObjectNotFoundException {
+    public void deleteClient(Long id) throws ObjectNFException {
         Client cli = this.getClient(id);
         cli.setFlag(false);
-        this.createClient(cli);
+
+        repositoryClient.save(cli);
     }
 
     @Override
-    public Client getClient(Long id) throws ObjectNotFoundException{
-        return repositoryClient.findById(id).orElse(null);
+    public Client getClient(Long id) throws ObjectNFException {
+        Optional<Client> optionalClient = repositoryClient.findById(id);
+
+        return optionalClient.orElseThrow(() -> new ObjectNFException("ID not found",
+                new ExceptionDetails("ID not found","error",HttpStatus.NOT_FOUND)));
+    }
+
+
+    @Override
+    public void modifyClient(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate,
+                             String newNationality, String newPhoneNumbre, String newEmail,boolean flag) throws ErrorDataException, ObjectNFException {
+
+            Client cli = this.getClient(idOriginal);
+            cli.setId(newId);
+            cli.setName(newName);
+            cli.setUsername(newUsername);
+            cli.setDni(newDni);
+            cli.setBirthDay(newDate);
+            cli.setNationality(newNationality);
+            cli.setPhoneNumber(newPhoneNumbre);
+            cli.setEmail(newEmail);
+            cli.setFlag(flag);
+
+            this.createClient(cli);
     }
 
     @Override
@@ -72,32 +102,18 @@ public class ServiceClient implements IServiceClient{
     }
 
     @Override
-    public void modifyClient(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate,
-                             String newNationality, String newPhoneNumbre, String newEmail,boolean flag) throws ErrorDataException{
-
-        Client cli = this.getClient(idOriginal);
-        cli.setId(newId);
-        cli.setName(newName);
-        cli.setUsername(newUsername);
-        cli.setDni(newDni);
-        cli.setBirthDay(newDate);
-        cli.setNationality(newNationality);
-        cli.setPhoneNumber(newPhoneNumbre);
-        cli.setEmail(newEmail);
-        cli.setFlag(flag);
-
-        repositoryClient.save(cli);
-    }
-
-    @Override
     public List<Client> getClientsByFlag(boolean flag) {
         return repositoryClient.getClientsByFlag(flag);
     }
 
     @Override
-    public Optional<Client> getClientByFlagAndId(boolean flag, Long id) {
-        return repositoryClient.getClientByFlagAndId(flag,id);
+    public Client getClientByFlagAndId(boolean flag, Long id) throws ObjectNFException{
+        Optional<Client> optionalClient = repositoryClient.getClientByFlagAndId(flag,id);
+
+        return optionalClient.orElseThrow(()-> new ObjectNFException("Id is not found"
+                , new ExceptionDetails ("Id is not found","error",HttpStatus.NOT_FOUND)));
     }
+
 
 
 }

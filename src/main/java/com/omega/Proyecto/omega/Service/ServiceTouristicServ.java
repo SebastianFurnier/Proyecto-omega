@@ -1,7 +1,7 @@
 package com.omega.Proyecto.omega.Service;
 
 import com.omega.Proyecto.omega.Error.ExceptionDetails;
-import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,9 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     }
 
     @Override
-    public boolean deleteService(Long id) throws ObjectNotFoundException {
+    public boolean deleteService(Long id) throws ObjectNFException {
         Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
-        optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
+        optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails(
                 "There is no service with this ID.", "error"
         )));
 
@@ -38,9 +38,9 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     //When I can merge this branch with Omega 24 branch
     // I will modify this method to only search active id's.
     @Override
-    public TouristicServ getService(Long id) throws ObjectNotFoundException {
+    public TouristicServ getService(Long id) throws ObjectNFException {
         Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
-        return optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
+        return optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails(
                 "There is no service with this ID.", "error"
         )));
     }
@@ -63,9 +63,9 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     //When I can merge this branch with Omega 24 branch
     // I will modify this method to only search active id's.
     @Override
-    public TouristicServ activateService(Long id) throws ObjectNotFoundException{
+    public TouristicServ activateService(Long id) throws ObjectNFException {
         Optional<TouristicServ> optionalTouristicServ = repositoryTouristicServ.findById(id);
-        optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
+        optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails(
                 "There is no service with this ID.", "error"
         )));
         TouristicServ touristicServAux = optionalTouristicServ.get();
