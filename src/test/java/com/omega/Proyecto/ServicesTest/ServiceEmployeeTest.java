@@ -83,11 +83,17 @@ public class ServiceEmployeeTest {
     public void getEmployeeByFlagAndIdTest() throws ObjectNFException{
         Long id = 1L;
         Long idAux = 2L;
-
         Mockito.when(repoEmployee.getEmployeeByFlagAndId(true,id)).thenReturn(Optional.of(newEmployee));
 
         Assertions.assertEquals(servEmployee.getEmployeeByFlagAndId(true,idAux),newEmployee);
+    }
 
+    @Test (expected = ObjectNFException.class)
+    public void modifyClientTest() throws ObjectNFException{
+        Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
+        newEmployee.setId(2L);
+
+        Assertions.assertEquals(servEmployee.getEmployee(1L),newEmployee);
     }
 
 }

@@ -3,6 +3,7 @@ package com.omega.Proyecto.omega.Service;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ExceptionDetails;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
+import com.omega.Proyecto.omega.Model.Client;
 import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,57 @@ public class ServiceEmployee implements IServiceEmployee{
     @Autowired
     IRepositoryEmployee IRepoEmplo;
 
+
+    private String checkDataEmployee(Employee emplo){
+        LocalDate hourNow = LocalDate.now();
+        int birthday = hourNow.compareTo(emplo.getBirthDay());
+        int adult = 18;
+
+
+        if(emplo.getName().isEmpty() && emplo.getUsername().isEmpty()){
+            return "Name or username is empty";
+        }
+
+        if(emplo.getEmail().isEmpty()){
+            return "The field of Email cannot be empty";
+        }
+
+        if(emplo.getDni().isEmpty()){
+            return "The field of Dni cannot be empty";
+        }
+
+        if (emplo.getPhoneNumber().isEmpty()){
+            return "The field of Phone cannot be empty";
+        }
+
+        if (emplo.getBirthDay().isAfter(LocalDate.now())){
+            return "Incorrect date.";
+        }
+
+        if (birthday < adult){
+            return "The age is not sufficient for register ";
+        }
+
+        if (emplo.getSalary() < 0L){
+            return "The salary can´t smallest to 0";
+        }
+
+        if(emplo.getPosition().equalsIgnoreCase("administrator")
+                || emplo.getPosition().equalsIgnoreCase("manager")){
+            return "The position doesn´t exist";
+        }
+
+        return null;
+    }
+
     @Override
     public Employee createEmployee(Employee emplo) throws ErrorDataException {
+        String errorMessage = checkDataEmployee(emplo) ;
+        if (errorMessage != null){
+            throw new ErrorDataException(errorMessage,new ExceptionDetails(errorMessage,"error",
+                    HttpStatus.BAD_REQUEST));
+        }
+        emplo.setFlag(true);
         return IRepoEmplo.save(emplo);
     }
 
@@ -34,7 +84,9 @@ public class ServiceEmployee implements IServiceEmployee{
 
     @Override
     public Employee getEmployee(Long id) throws ObjectNFException {
-        return IRepoEmplo.findById(id).orElse(null);
+        Optional<Employee> optionalEmployee= IRepoEmplo.findById(id);
+        return optionalEmployee.orElseThrow(()-> new ObjectNFException("ID not found",
+                new ExceptionDetails("ID not found","error",HttpStatus.NOT_FOUND)));
     }
 
     @Override
