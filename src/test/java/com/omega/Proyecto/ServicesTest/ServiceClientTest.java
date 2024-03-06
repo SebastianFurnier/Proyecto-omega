@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class ServiceClientTest
 
 
     @Test
-    public void createClient() throws ErrorDataException {
+    public void createClientTest() throws ErrorDataException {
         Mockito.when(repoClient.save(newClient)).thenReturn(newClient);
 
         Client clientAux = serviceClient.createClient(newClient);
@@ -44,7 +45,7 @@ public class ServiceClientTest
     }
 
     @Test
-    public void getClient() throws ObjectNFException {
+    public void getClientTest() throws ObjectNFException {
         Long id = 1L;
         Mockito.when(repoClient.findById(id)).thenReturn(Optional.of(newClient));
 
@@ -54,7 +55,7 @@ public class ServiceClientTest
     }
 
     @Test
-    public void getAllClient(){
+    public void getAllClientTest(){
         List<Client> clientList = new ArrayList<>();
         Mockito.when(repoClient.findAll()).thenReturn(clientList);
 
@@ -64,7 +65,7 @@ public class ServiceClientTest
     }
 
     @Test
-    public void getClientsByFlag(){
+    public void getClientsByFlagTest(){
         List<Client> clientList = serviceClient.getClientsByFlag(true);
         Mockito.when(repoClient.findAll()).thenReturn(clientList);
 
@@ -74,7 +75,7 @@ public class ServiceClientTest
     }
 
     @Test
-    public void deleteClientTest() throws ObjectNFException {
+    public void deleteClientTest() throws ObjectNFException{
         Client cli = new Client();
         cli.setId(1L);
         cli.setFlag(true);
@@ -98,14 +99,20 @@ public class ServiceClientTest
     }
 
     @Test (expected = ObjectNFException.class)
-    public void getClientByFlagAndIdTest() throws ObjectNFException {
+    public void getClientByFlagAndIdTest() throws ObjectNFException{
         Long idOne = 1L;
         Long idTwo = 2L;
-
         Mockito.when(repoClient.getClientByFlagAndId(true,idOne)).thenReturn(Optional.of(newClient));
 
         Assertions.assertEquals(serviceClient.getClientByFlagAndId(true,idTwo),newClient);
     }
 
+    @Test (expected = ObjectNFException.class)
+    public void modifyClientTest() throws ObjectNFException{
+        Mockito.when(repoClient.save(newClient)).thenReturn(newClient);
+        newClient.setId(2L);
+
+       Assertions.assertEquals(serviceClient.getClient(1L),newClient);
+    }
 
 }

@@ -38,7 +38,7 @@ public class ServiceEmployeeTest {
 
 
     @Test
-    public void createEmployee() throws ErrorDataException {
+    public void createEmployeeTest() throws ErrorDataException {
         Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
 
         Employee employeeAux = servEmployee.createEmployee(newEmployee);
@@ -47,7 +47,7 @@ public class ServiceEmployeeTest {
     }
 
     @Test
-    public void getEmployee() throws ObjectNFException {
+    public void getEmployeeTest() throws ObjectNFException {
         Long id = 1L;
         Mockito.when(repoEmployee.findById(id)).thenReturn(Optional.of(newEmployee));
 
@@ -57,7 +57,7 @@ public class ServiceEmployeeTest {
     }
 
     @Test
-    public void getAllEmployee(){
+    public void getAllEmployeeTest(){
         List<Employee> employeeList = new ArrayList<>();
         Mockito.when(repoEmployee.findAll()).thenReturn(employeeList);
 
@@ -68,7 +68,7 @@ public class ServiceEmployeeTest {
 
 
     @Test
-    public void deleteEmployee() throws ObjectNFException{
+    public void deleteEmployeeTest() throws ObjectNFException{
         Employee emplo = new Employee();
         emplo.setId(1L);
         emplo.setFlag(true);
@@ -79,6 +79,15 @@ public class ServiceEmployeeTest {
         Assertions.assertFalse(emplo.isFlag());
     }
 
+    @Test (expected = ObjectNFException.class)
+    public void getEmployeeByFlagAndIdTest() throws ObjectNFException{
+        Long id = 1L;
+        Long idAux = 2L;
 
+        Mockito.when(repoEmployee.getEmployeeByFlagAndId(true,id)).thenReturn(Optional.of(newEmployee));
+
+        Assertions.assertEquals(servEmployee.getEmployeeByFlagAndId(true,idAux),newEmployee);
+
+    }
 
 }
