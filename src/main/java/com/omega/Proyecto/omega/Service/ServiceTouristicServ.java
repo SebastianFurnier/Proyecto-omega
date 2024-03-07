@@ -2,7 +2,7 @@ package com.omega.Proyecto.omega.Service;
 
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ExceptionDetails;
-import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,13 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     private IRepositoryTouristicServ repositoryTouristicServ;
 
     private String checkDataService(TouristicServ touristicServ){
-        if (touristicServ.getName().isBlank())
+        if (touristicServ.getName() == null || touristicServ.getName().isBlank())
             return "Name cannot be empty.";
 
         if(touristicServ.getCost() <= 0)
             return "Cost must be greater than zero.";
 
-        if(touristicServ.getDestination().isBlank())
+        if(touristicServ.getDestination() == null || touristicServ.getDestination().isBlank())
             return "Destination cannot be empty";
 
         if(touristicServ.getServiceDate().isBefore(LocalDate.now()))
@@ -46,27 +46,27 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     }
 
     @Override
-    public void deleteService(Long id) throws ObjectNotFoundException, ErrorDataException {
+    public void deleteService(Long id) throws ObjectNFException, ErrorDataException {
         TouristicServ touristicServAux = this.getActiveService(id);
         touristicServAux.setActive(false);
         this.createService(touristicServAux);
     }
 
     @Override
-    public TouristicServ getActiveService(Long id) throws ObjectNotFoundException {
+    public TouristicServ getActiveService(Long id) throws ObjectNFException {
 
         Optional<TouristicServ> optionalTouristicServ =
                 repositoryTouristicServ.getTouristicServsByActiveAndIdTouristicService(true, id);
-        return optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
+        return optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails(
                 "There is no active service with this ID.", "error", HttpStatus.NOT_FOUND
         )));
     }
 
     @Override
-    public TouristicServ getInactiveService(Long id) throws ObjectNotFoundException{
+    public TouristicServ getInactiveService(Long id) throws ObjectNFException {
         Optional<TouristicServ> optionalTouristicServ =
                 repositoryTouristicServ.getTouristicServsByActiveAndIdTouristicService(false, id);
-        return optionalTouristicServ.orElseThrow(() -> new ObjectNotFoundException("ID not found.", new ExceptionDetails(
+        return optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails(
                 "There is no service with this ID.", "error", HttpStatus.NOT_FOUND
         )));
     }
@@ -87,7 +87,7 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     }
 
     @Override
-    public TouristicServ activateService(Long id) throws ObjectNotFoundException, ErrorDataException {
+    public TouristicServ activateService(Long id) throws ObjectNFException, ErrorDataException {
 
         TouristicServ touristicServAux = this.getInactiveService(id);
 

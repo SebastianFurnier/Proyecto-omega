@@ -1,6 +1,6 @@
 package com.omega.Proyecto.ServicesTest;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
-import com.omega.Proyecto.omega.Error.ObjectNotFoundException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import com.omega.Proyecto.omega.Service.ServiceTouristicServ;
@@ -14,8 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
@@ -29,35 +29,41 @@ public class ServiceTouristicServTest
     private IRepositoryTouristicServ repositoryTouristicServ;
     @Autowired
     private ServiceTouristicServ serviceTouristicServ;
-    private final TouristicServ touristicServ = new TouristicServ();
+
+    private final TouristicServ touristicServ = new TouristicServ(1L, "Pasaje Argentina-Brasil",
+            "Pasaje de avion", "Brasil", LocalDate.now().plusDays(7),
+            10000, true);
 
     @Test
-    public void createTouristicServTest() throws ErrorDataException {
+    public void createCorrectTouristicServTest() throws ErrorDataException {
 
-        TouristicServ touristicServ1 = new TouristicServ();
-        Mockito.when(repositoryTouristicServ.save(touristicServ)).thenReturn(touristicServ);
+        Mockito.when(repositoryTouristicServ.save(this.touristicServ)).thenReturn(this.touristicServ);
 
-        TouristicServ touristicServAux = serviceTouristicServ.createService(touristicServ);
+        TouristicServ touristicServAux = serviceTouristicServ.createService(this.touristicServ);
 
-        Assertions.assertEquals(touristicServAux, touristicServ);
-        Assertions.assertNotEquals(touristicServ1, touristicServAux);
+        Assertions.assertEquals(touristicServAux, this.touristicServ);
     }
 
+    @Test(expected = ErrorDataException.class)
+    public void createIncorrectTouristicServTest() throws ErrorDataException {
+        TouristicServ touristicServAux = new TouristicServ();
 
-    @Test
-    public void deleteTourtisticServTest() throws ObjectNotFoundException, ErrorDataException {
+        serviceTouristicServ.createService(touristicServAux);
+    }
+
+    @Test(expected = ObjectNFException.class)
+    public void deleteIncorrectIdTouristicServTest() throws ObjectNFException, ErrorDataException {
         Long id = 1L;
         Mockito.doNothing().when(repositoryTouristicServ).deleteById(id);
 
         serviceTouristicServ.deleteService(id);
-
-        Mockito.verify(repositoryTouristicServ, Mockito.times(1)).deleteById(id);
     }
 
     @Test
-    public void getTouristicServTest() throws ObjectNotFoundException {
+    public void getTouristicServTest() throws ObjectNFException {
         Long id = 1L;
-        Mockito.when(repositoryTouristicServ.findById(id)).thenReturn(Optional.of(touristicServ));
+        Mockito.when(repositoryTouristicServ.getTouristicServsByActiveAndIdTouristicService(true, id))
+                .thenReturn(Optional.of(touristicServ));
 
         TouristicServ touristicServAux = serviceTouristicServ.getActiveService(id);
 
@@ -66,13 +72,12 @@ public class ServiceTouristicServTest
 
     @Test
     public void getAllTouristicServTest(){
-        List<TouristicServ> touristicServices = new ArrayList<>();
-        touristicServices.add(touristicServ);
-        Mockito.when(repositoryTouristicServ.findAll()).thenReturn(touristicServices);
+        Mockito.when(repositoryTouristicServ.findAll()).thenReturn(new ArrayList<>());
 
-        List<TouristicServ> touristicServicesAux = serviceTouristicServ.getAllActiveServices();
+        serviceTouristicServ.getAllServices();
 
-        Assertions.assertEquals(touristicServicesAux, touristicServices);
+        Mockito.verify(repositoryTouristicServ, Mockito.times(1)).findAll();
+
     }
 
     @Test
@@ -83,6 +88,15 @@ public class ServiceTouristicServTest
         touristicServAux = serviceTouristicServ.editService(touristicServ);
 
         Assertions.assertEquals(touristicServAux, touristicServ);
+    }
+
+    @Test(expected = ErrorDataException.class)
+    public void editServiceIncorrectDataTest() throws ErrorDataException {
+        Mockito.when(repositoryTouristicServ.save(touristicServ)).thenReturn(touristicServ);
+        TouristicServ touristicServAux = new TouristicServ();
+
+        serviceTouristicServ.editService(touristicServAux);
+
     }
 }
 
