@@ -25,24 +25,9 @@ public class ControllerPackage {
         servicePackage.deletePackage(id);
     }
 
-    @GetMapping("/getActive/{id}")
-    public TouristicServPack getActivePackage(@PathVariable Long id) throws ObjectNFException {
-        return servicePackage.getActivePackage(id);
-    }
-
-    @GetMapping("/getInactive/{id}")
-    public TouristicServPack getInactivePackage(@PathVariable Long id) throws ObjectNFException{
-        return servicePackage.getInactivePackage(id);
-    }
-
-    @GetMapping("/getAllActive")
-    public List<TouristicServPack>  getAllActivePackage(){
-        return servicePackage.getAllActivePackage();
-    }
-
-    @GetMapping("/getAllInactive")
-    public List<TouristicServPack> getAllInactivePackage(){
-        return servicePackage.getAllInactivePackage();
+    @GetMapping("/get/{id}")
+    public TouristicServicesPackage getPackage(@PathVariable Long id){
+        return servicePackage.getPackage(id);
     }
 
     @GetMapping("/getAll")
