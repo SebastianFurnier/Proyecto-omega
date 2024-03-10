@@ -1,10 +1,10 @@
 package com.omega.Proyecto.ServicesTest;
 
+import com.omega.Proyecto.omega.Error.ErrorDataException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryEmployee;
-import com.omega.Proyecto.omega.Service.ServiceClient;
 import com.omega.Proyecto.omega.Service.ServiceEmployee;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -14,11 +14,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BooleanSupplier;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
@@ -36,16 +36,27 @@ public class ServiceEmployeeTest {
 
 
     @Test
-    public void createEmployee(){
+    public void createEmployeeTest() throws ErrorDataException {
+        newEmployee.setId(1L);
+        newEmployee.setName("Client");
+        newEmployee.setUsername("Aux");
+        newEmployee.setDni("12456654");
+        newEmployee.setBirthDay(LocalDate.parse("1999-04-23"));
+        newEmployee.setNationality("Argentina");
+        newEmployee.setPhoneNumber("123456897");
+        newEmployee.setEmail("ClientAux@gmail.com");
+        newEmployee.setPosition("administrator");
+        newEmployee.setSalary(20000L);
+
         Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
 
-        Employee employeeAux = servEmployee.createEmployee(newEmployee);
+        Employee emploAux = servEmployee.createEmployee(newEmployee);
 
-        Assertions.assertEquals(newEmployee,employeeAux);
+        Assertions.assertEquals(newEmployee, emploAux);
     }
 
     @Test
-    public void getEmployee(){
+    public void getEmployeeTest() throws ObjectNFException {
         Long id = 1L;
         Mockito.when(repoEmployee.findById(id)).thenReturn(Optional.of(newEmployee));
 
@@ -55,7 +66,7 @@ public class ServiceEmployeeTest {
     }
 
     @Test
-    public void getAllEmployee(){
+    public void getAllEmployeeTest(){
         List<Employee> employeeList = new ArrayList<>();
         Mockito.when(repoEmployee.findAll()).thenReturn(employeeList);
 
@@ -64,9 +75,28 @@ public class ServiceEmployeeTest {
         Assertions.assertEquals(employeeListAux,employeeList);
     }
 
+    @Test (expected = ErrorDataException.class)
+    public void createEmployeeTestExceptions() throws ErrorDataException {
+        Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
+
+        Employee emploAux = new Employee();
+        emploAux.setId(1L);
+        emploAux.setName("Employee");
+        emploAux.setUsername("Aux");
+        emploAux.setDni("12456654");
+        emploAux.setBirthDay(LocalDate.parse("1999-04-23"));
+        emploAux.setNationality("Argentina");
+        emploAux.setPhoneNumber("123456897");
+        emploAux.setEmail("EmployeeAux@gmail.com");
+        emploAux.setSalary(10000L);
+
+        servEmployee.createEmployee(emploAux);
+
+        Assertions.assertEquals(emploAux,newEmployee);
+    }
 
     @Test
-    public void deleteEmployee(){
+    public void deleteEmployeeTest() throws ObjectNFException{
         Employee emplo = new Employee();
         emplo.setId(1L);
         emplo.setFlag(true);
@@ -77,5 +107,21 @@ public class ServiceEmployeeTest {
         Assertions.assertFalse(emplo.isFlag());
     }
 
+    @Test (expected = ObjectNFException.class)
+    public void getEmployeeByFlagAndIdTest() throws ObjectNFException{
+        Long id = 1L;
+        Long idAux = 2L;
+        Mockito.when(repoEmployee.getEmployeeByFlagAndId(true,id)).thenReturn(Optional.of(newEmployee));
+
+        Assertions.assertEquals(servEmployee.getEmployeeByFlagAndId(true,idAux),newEmployee);
+    }
+
+    @Test (expected = ObjectNFException.class)
+    public void modifyClientTest() throws ObjectNFException{
+        Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
+        newEmployee.setId(2L);
+
+        Assertions.assertEquals(servEmployee.getEmployee(1L),newEmployee);
+    }
 
 }
