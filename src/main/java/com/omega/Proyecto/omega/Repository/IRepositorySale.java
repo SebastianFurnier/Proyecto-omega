@@ -7,12 +7,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface IRepositorySale extends JpaRepository<Sale, Long> {
+    @Query("SELECT S FROM Sale S WHERE S.active = true")
+    List<Sale> getActivaSale();
 
-    List<Sale> getSaleByActive(boolean active);
+    @Query("SELECT S FROM Sale S WHERE S.active = false")
+    List<Sale> getInactiveSale();
 
-    Optional<Sale> getSalesByActiveAndIdSale(boolean active, Long idSale);
+    @Query("SELECT S FROM Sale S WHERE S.active = true AND S.idSale = :id")
+    Sale getActiveSaleById(@Param("id") Long id);
+
+    @Query("SELECT S FROM Sale S WHERE S.active = false AND S.idSale = :id")
+    Sale getInactiveSaleById(@Param("id") Long id);
 }

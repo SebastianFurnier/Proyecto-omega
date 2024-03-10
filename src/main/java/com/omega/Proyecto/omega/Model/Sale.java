@@ -24,6 +24,6 @@ public class Sale {
     @ManyToOne
     private Client client;
     @OneToOne
-    private TouristicServPack touristicServPack;
+    private TouristicServicesPackage touristicServicesPackage;
     private boolean active;
 }
