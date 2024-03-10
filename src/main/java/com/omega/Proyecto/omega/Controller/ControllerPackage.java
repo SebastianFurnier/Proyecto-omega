@@ -1,8 +1,10 @@
 package com.omega.Proyecto.omega.Controller;
 
-import com.omega.Proyecto.omega.Model.TouristicServicesPackage;
+import com.omega.Proyecto.omega.Error.ErrorDataException;
+import com.omega.Proyecto.omega.Error.ObjectNFException;
+import com.omega.Proyecto.omega.Model.TouristicServPack;
 import com.omega.Proyecto.omega.Model.TouristicServ;
-import com.omega.Proyecto.omega.Service.ServiceTouristicServicePackage;
+import com.omega.Proyecto.omega.Service.ServiceTouristicServPack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,37 +15,37 @@ import java.util.List;
 @RequestMapping("/api/package")
 public class ControllerPackage {
     @Autowired
-    private ServiceTouristicServicePackage servicePackage;
+    private ServiceTouristicServPack servicePackage;
 
     @PostMapping("/create")
-    public void createPackage(@RequestBody List<TouristicServ> services){
+    public void createPackage(@RequestBody List<TouristicServ> services) throws ErrorDataException {
         servicePackage.createPackage(services);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deletePackage(@PathVariable Long id){
+    public void deletePackage(@PathVariable Long id) throws ObjectNFException {
         servicePackage.deletePackage(id);
     }
 
     @GetMapping("/get/{id}")
-    public TouristicServicesPackage getPackage(@PathVariable Long id){
-        return servicePackage.getPackage(id);
+    public TouristicServPack getPackage(@PathVariable Long id) throws ObjectNFException {
+        return servicePackage.getActivePackage(id);
     }
 
     @GetMapping("/getAll")
-    public List<TouristicServicesPackage> getAllPackages(){
+    public List<TouristicServPack> getAllPackages(){
         return servicePackage.getAllPackage();
     }
 
     @PutMapping("/addService")
-    public void addService(@RequestBody TouristicServ service, @RequestBody Long id){
+    public void addService(@RequestBody TouristicServ service, @RequestBody Long id) throws ObjectNFException {
         List<TouristicServ> servicesListAux = new ArrayList<>();
         servicesListAux.add(service);
-        servicePackage.editSalePackage(servicesListAux, id);
+        servicePackage.editPackage(servicesListAux, id);
     }
 
     @PutMapping("/addAllServices")
-    public void addAllService(@RequestBody List<TouristicServ> services, @RequestBody Long id){
-        servicePackage.editSalePackage(services, id);
+    public void addAllService(@RequestBody List<TouristicServ> services, @RequestBody Long id) throws ObjectNFException {
+        servicePackage.editPackage(services, id);
     }
 }

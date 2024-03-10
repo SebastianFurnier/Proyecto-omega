@@ -13,10 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class TouristicServicesPackage {
+public class TouristicServPack {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idPackage;
+    private Long idPack;
     @ManyToMany
     private List<TouristicServ> touristicServs;
     private float costPackage;
