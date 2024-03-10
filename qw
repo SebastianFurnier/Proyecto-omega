@@ -1,0 +1,29 @@
+[1mdiff --git a/src/main/java/com/omega/Proyecto/omega/Advise/BaseController.java b/src/main/java/com/omega/Proyecto/omega/Advise/BaseController.java[m
+[1mindex 217cbce..6d93b60 100644[m
+[1m--- a/src/main/java/com/omega/Proyecto/omega/Advise/BaseController.java[m
+[1m+++ b/src/main/java/com/omega/Proyecto/omega/Advise/BaseController.java[m
+[36m@@ -1,8 +1,8 @@[m
+ package com.omega.Proyecto.omega.Advise;[m
+ [m
+[31m-import com.omega.Proyecto.omega.Error.ErrorDataException;[m
+ import com.omega.Proyecto.omega.Error.ExceptionDetails;[m
+ import com.omega.Proyecto.omega.Error.ObjectNFException;[m
+[32m+[m[32mimport org.springframework.http.HttpStatus;[m
+ import org.springframework.http.ResponseEntity;[m
+ import org.springframework.web.bind.annotation.ControllerAdvice;[m
+ import org.springframework.web.bind.annotation.ExceptionHandler;[m
+[36m@@ -12,11 +12,6 @@[m [mpublic class BaseController {[m
+ [m
+     @ExceptionHandler(value = ObjectNFException.class)[m
+     public ResponseEntity<ExceptionDetails> handleObjectNotFoundException(ObjectNFException exception){[m
+[31m-        return new ResponseEntity<>(exception.getDetails(), exception.getDetails().getStatus());[m
+[32m+[m[32m        return new ResponseEntity<>(exception.getDetails(), HttpStatus.BAD_REQUEST);[m
+     }[m
+[31m-[m
+[31m-    @ExceptionHandler(value = ErrorDataException.class)[m
+[31m-    public ResponseEntity<ExceptionDetails> handleErrorDataException(ErrorDataException exception){[m
+[31m-        return new ResponseEntity<>(exception.getDetails(), exception.getDetails().getStatus());[m
+[31m-    }[m
+[31m-}[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
