@@ -23,9 +23,25 @@ public class ControllerSale {
         serviceSale.deleteSale(id);
     }
 
-    @GetMapping("/getSale/{id}")
-    public Sale getSale(@PathVariable Long id){
-        return serviceSale.getSale(id);
+
+    @GetMapping("/getActiveSale/{id}")
+    public Sale getActiveSale(@PathVariable Long id) throws ObjectNFException {
+        return serviceSale.getActiveSale(id);
+    }
+
+    @GetMapping("/getInactiveSale/{id}")
+    public Sale getInactiveSale(@PathVariable Long id) throws ObjectNFException{
+        return serviceSale.getInactiveSale(id);
+    }
+
+    @GetMapping("/getAllActive")
+    public List<Sale> getAllActiveSales(){
+        return serviceSale.getAllActiveSales();
+    }
+
+    @GetMapping("/getAllInactive")
+    public List<Sale> getAllInactiveSales(){
+        return serviceSale.getAllInactiveSales();
     }
 
     @GetMapping("/getAllSale")

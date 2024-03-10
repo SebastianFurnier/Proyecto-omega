@@ -24,9 +24,25 @@ public class ControllerTouristicServ {
         serviceTouristicServ.deleteService(id);
     }
 
-    @GetMapping("/get/{id}")
-    public TouristicServ getService(@PathVariable Long id) throws ObjectNFException {
-        return serviceTouristicServ.getService(id);
+
+    @GetMapping("/getActive/{id}")
+    public TouristicServ getActiveService(@PathVariable Long id) throws ObjectNFException {
+        return serviceTouristicServ.getActiveService(id);
+    }
+
+    @GetMapping("/getInactive/{id}")
+    public TouristicServ getInactiveService(@PathVariable Long id) throws ObjectNFException{
+        return serviceTouristicServ.getInactiveService(id);
+    }
+
+    @GetMapping("/getAllActive")
+    public List<TouristicServ> getAllActiveServices(){
+        return serviceTouristicServ.getAllActiveServices();
+    }
+
+    @GetMapping("/getAllInactive")
+    public List<TouristicServ> getAllInactiveServices(){
+        return serviceTouristicServ.getAllInactiveServices();
     }
 
     @GetMapping("/getAll")
