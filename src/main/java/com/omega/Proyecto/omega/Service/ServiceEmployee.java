@@ -11,7 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -22,9 +25,10 @@ public class ServiceEmployee implements IServiceEmployee{
 
 
     private String checkDataEmployee(Employee emplo){
-        LocalDate hourNow = LocalDate.now();
-        int birthday = hourNow.compareTo(emplo.getBirthDay());
-        int adult = 18;
+        LocalDate dateNow = LocalDate.now();
+        LocalDate birthday = emplo.getBirthDay();
+        Long diference = ChronoUnit.YEARS.between(birthday,dateNow);
+        Long adult = 18L;
 
 
         if(emplo.getName().isEmpty() && emplo.getUsername().isEmpty()){
@@ -47,7 +51,7 @@ public class ServiceEmployee implements IServiceEmployee{
             return "Incorrect date.";
         }
 
-        if (birthday < adult){
+        if (diference < adult){
             return "The age is not sufficient for register ";
         }
 
@@ -55,9 +59,8 @@ public class ServiceEmployee implements IServiceEmployee{
             return "The salary can´t smallest to 0";
         }
 
-        if(emplo.getPosition().equalsIgnoreCase("administrator")
-                || emplo.getPosition().equalsIgnoreCase("manager")){
-            return "The position doesn´t exist";
+        if (emplo.getPosition() == null){
+            return "The positions doesn´t exist";
         }
 
         return null;

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +21,10 @@ public class ServiceClient implements IServiceClient{
     IRepositoryClient repositoryClient;
 
     private String checkDataClient(Client client){
-        LocalDate hourNow = LocalDate.now();
-        int birthday = hourNow.compareTo(client.getBirthDay());
-        int adult = 18;
+        LocalDate dateNow = LocalDate.now();
+        LocalDate birthday = client.getBirthDay();
+        Long diference = ChronoUnit.YEARS.between(birthday,dateNow);
+        Long adult = 18L;
 
 
         if(client.getName().isEmpty() && client.getUsername().isEmpty()){
@@ -44,12 +47,13 @@ public class ServiceClient implements IServiceClient{
             return "Incorrect date.";
         }
 
-        if (birthday < adult){
+        if (diference < adult){
             return "The age is not sufficient for register ";
         }
 
         return null;
     }
+
 
     @Override
     public Client createClient(Client cli) throws ErrorDataException {

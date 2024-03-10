@@ -5,6 +5,7 @@ import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Client;
 import com.omega.Proyecto.omega.Repository.IRepositoryClient;
 import com.omega.Proyecto.omega.Service.ServiceClient;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -37,11 +38,19 @@ public class ServiceClientTest
 
     @Test
     public void createClientTest() throws ErrorDataException {
+        newClient.setId(1L);
+        newClient.setName("Client");
+        newClient.setUsername("Aux");
+        newClient.setDni("12456654");
+        newClient.setBirthDay(LocalDate.parse("1999-04-23"));
+        newClient.setNationality("Argentina");
+        newClient.setPhoneNumber("123456897");
+        newClient.setEmail("ClientAux@gmail.com");
         Mockito.when(repoClient.save(newClient)).thenReturn(newClient);
 
         Client clientAux = serviceClient.createClient(newClient);
 
-        Assertions.assertEquals(newClient,clientAux);
+        Assertions.assertEquals(newClient, clientAux);
     }
 
     @Test
@@ -84,6 +93,25 @@ public class ServiceClientTest
         serviceClient.deleteClient(cli.getId());
 
         Assertions.assertFalse(cli.isFlag());
+    }
+
+    @Test (expected = ErrorDataException.class)
+    public void createClientTestException() throws ErrorDataException {
+        Mockito.when(repoClient.save(newClient)).thenReturn(newClient);
+
+        Client clientAux = new Client();
+        clientAux.setId(1L);
+        clientAux.setName("Client");
+        clientAux.setUsername("Aux");
+        clientAux.setDni("12456654");
+        clientAux.setBirthDay(LocalDate.parse("1999-04-23"));
+        clientAux.setNationality("Argentina");
+        clientAux.setPhoneNumber("123456897");
+        clientAux.setEmail("ClientAux@gmail.com");
+
+        serviceClient.createClient(clientAux);
+
+        Assertions.assertEquals(newClient,clientAux);
     }
 
     @Test (expected = ObjectNFException.class)

@@ -2,6 +2,7 @@ package com.omega.Proyecto.ServicesTest;
 
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
+import com.omega.Proyecto.omega.Model.Client;
 import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryEmployee;
 import com.omega.Proyecto.omega.Service.ServiceClient;
@@ -17,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,11 +41,22 @@ public class ServiceEmployeeTest {
 
     @Test
     public void createEmployeeTest() throws ErrorDataException {
+        newEmployee.setId(1L);
+        newEmployee.setName("Client");
+        newEmployee.setUsername("Aux");
+        newEmployee.setDni("12456654");
+        newEmployee.setBirthDay(LocalDate.parse("1999-04-23"));
+        newEmployee.setNationality("Argentina");
+        newEmployee.setPhoneNumber("123456897");
+        newEmployee.setEmail("ClientAux@gmail.com");
+        newEmployee.setPosition("administrator");
+        newEmployee.setSalary(20000L);
+
         Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
 
-        Employee employeeAux = servEmployee.createEmployee(newEmployee);
+        Employee emploAux = servEmployee.createEmployee(newEmployee);
 
-        Assertions.assertEquals(newEmployee,employeeAux);
+        Assertions.assertEquals(newEmployee, emploAux);
     }
 
     @Test
@@ -66,6 +79,25 @@ public class ServiceEmployeeTest {
         Assertions.assertEquals(employeeListAux,employeeList);
     }
 
+    @Test (expected = ErrorDataException.class)
+    public void createEmployeeTestExceptions() throws ErrorDataException {
+        Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
+
+        Employee emploAux = new Employee();
+        emploAux.setId(1L);
+        emploAux.setName("Client");
+        emploAux.setUsername("Aux");
+        emploAux.setDni("12456654");
+        emploAux.setBirthDay(LocalDate.parse("1999-04-23"));
+        emploAux.setNationality("Argentina");
+        emploAux.setPhoneNumber("123456897");
+        emploAux.setEmail("ClientAux@gmail.com");
+        emploAux.setSalary(10000L);
+
+        servEmployee.createEmployee(emploAux);
+
+        Assertions.assertEquals(emploAux,newEmployee);
+    }
 
     @Test
     public void deleteEmployeeTest() throws ObjectNFException{
