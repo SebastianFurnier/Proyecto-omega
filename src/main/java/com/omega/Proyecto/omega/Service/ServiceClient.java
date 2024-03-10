@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -23,8 +22,8 @@ public class ServiceClient implements IServiceClient{
     private String checkDataClient(Client client){
         LocalDate dateNow = LocalDate.now();
         LocalDate birthday = client.getBirthDay();
-        Long diference = ChronoUnit.YEARS.between(birthday,dateNow);
-        Long adult = 18L;
+        long diference = ChronoUnit.YEARS.between(birthday,dateNow);
+        long adult = 18L;
 
 
         if(client.getName().isEmpty() && client.getUsername().isEmpty()){
