@@ -1,10 +1,11 @@
 package com.omega.Proyecto.omega.Model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-
 
 
 @Data
@@ -16,11 +17,12 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    private String name;
     private String username;
+    private String password;
     private String dni;
     private LocalDate birthDay;
     private String nationality;
     private String phoneNumber;
     private String email;
+
 }

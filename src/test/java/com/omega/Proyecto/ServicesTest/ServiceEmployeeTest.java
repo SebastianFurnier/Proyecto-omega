@@ -38,14 +38,12 @@ public class ServiceEmployeeTest {
     @Test
     public void createEmployeeTest() throws ErrorDataException {
         newEmployee.setId(1L);
-        newEmployee.setName("Client");
         newEmployee.setUsername("Aux");
         newEmployee.setDni("12456654");
         newEmployee.setBirthDay(LocalDate.parse("1999-04-23"));
         newEmployee.setNationality("Argentina");
         newEmployee.setPhoneNumber("123456897");
         newEmployee.setEmail("ClientAux@gmail.com");
-        newEmployee.setPosition("administrator");
         newEmployee.setSalary(20000L);
 
         Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
@@ -81,7 +79,6 @@ public class ServiceEmployeeTest {
 
         Employee emploAux = new Employee();
         emploAux.setId(1L);
-        emploAux.setName("Employee");
         emploAux.setUsername("Aux");
         emploAux.setDni("12456654");
         emploAux.setBirthDay(LocalDate.parse("1999-04-23"));
