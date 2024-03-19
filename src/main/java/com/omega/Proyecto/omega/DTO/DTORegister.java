@@ -1,5 +1,6 @@
 package com.omega.Proyecto.omega.DTO;
 
+import com.omega.Proyecto.omega.Model.Rol;
 import lombok.Data;
 
 @Data

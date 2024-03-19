@@ -1,6 +1,7 @@
 package com.omega.Proyecto.omega.Security;
 
 import com.omega.Proyecto.omega.Model.AuthenticationResponse;
+import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryEmployee;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
