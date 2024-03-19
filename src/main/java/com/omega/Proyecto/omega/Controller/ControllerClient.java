@@ -4,6 +4,7 @@ import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Client;
 import com.omega.Proyecto.omega.Service.IServiceClient;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +50,7 @@ public class ControllerClient {
                                @RequestParam (required = false,name = "newPhoneNumbre")String newPhoneNumbre,
                                @RequestParam (required = false,name = "newEmail")String newEmail,
                                @RequestParam (required = false,name = "flag") boolean flag) throws ErrorDataException,ObjectNFException{
-        IServClient.modifyClient(id,newId,newName,newUsername,newDni,newDate,newNationality,newPhoneNumbre,newEmail,flag);
+        IServClient.modifyClient(id,newId,newUsername,newDni,newDate,newNationality,newPhoneNumbre,newEmail,flag);
 
         return this.IServClient.getClient(id);
     }

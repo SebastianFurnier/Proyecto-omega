@@ -3,6 +3,7 @@ package com.omega.Proyecto.omega.Service;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Employee;
+import com.omega.Proyecto.omega.Model.Rol;
 
 
 import java.time.LocalDate;
@@ -15,11 +16,18 @@ public interface IServiceEmployee {
     void deleteEmployee(Long id) throws ObjectNFException;
     Employee getEmployee(Long id) throws ObjectNFException;
     List<Employee> getAllEmployee();
-    void modifyEmployee(Long idOriginal, Long newId , String newName , String newUsername , String newDni ,
-                               LocalDate newDate , String newNationality , String newPhoneNumbre , String newEmail , String newPosition , Long newSalary,boolean flag)
+
+    void modifyEmployee(Long idOriginal, Long newId, String newUsername, String newDni, LocalDate newDate, String newNationality,
+                        String newPhoneNumber, String newEmail, Long newSalary, boolean flag, Rol newRol)
                                 throws ErrorDataException,ObjectNFException;
 
     List<Employee> getEmployeesByFlag(boolean flag);
 
     Employee getEmployeeByFlagAndId(boolean flag,Long id) throws ErrorDataException,ObjectNFException;
+
+    Boolean existsByUsername(String username);
+
+    Optional<Employee> findByUsername(String username);
+
+
 }

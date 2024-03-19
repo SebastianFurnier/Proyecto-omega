@@ -4,6 +4,7 @@ import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ExceptionDetails;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Employee;
+import com.omega.Proyecto.omega.Model.Rol;
 import com.omega.Proyecto.omega.Repository.IRepositoryEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,8 +29,8 @@ public class ServiceEmployee implements IServiceEmployee{
         Long adult = 18L;
 
 
-        if(emplo.getName().isEmpty() && emplo.getUsername().isEmpty()){
-            return "Name or username is empty";
+        if(emplo.getUsername().isEmpty()){
+            return "Username or username is empty";
         }
 
         if(emplo.getEmail().isEmpty()){
@@ -56,9 +57,6 @@ public class ServiceEmployee implements IServiceEmployee{
             return "The salary can´t smallest to 0";
         }
 
-        if (emplo.getPosition() == null){
-            return "The positions doesn´t exist";
-        }
 
         return null;
     }
@@ -94,27 +92,25 @@ public class ServiceEmployee implements IServiceEmployee{
         return IRepoEmplo.findAll();
     }
 
+
+
     @Override
-    public void modifyEmployee(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate, String newNationality,
-                               String newPhoneNumber, String newEmail , String newPosition, Long newSalary,boolean flag)
-                                throws ErrorDataException,ObjectNFException{
-
+    public void modifyEmployee(Long idOriginal, Long newId, String newUsername, String newDni, LocalDate newDate, String newNationality, String newPhoneNumber, String newEmail, Long newSalary, boolean flag, Rol newRol) throws ErrorDataException, ObjectNFException {
         Employee emplo = this.getEmployee(idOriginal);
-
         emplo.setId(newId);
-        emplo.setName(newName);
         emplo.setUsername(newUsername);
         emplo.setDni(newDni);
         emplo.setBirthDay(newDate);
         emplo.setNationality(newNationality);
         emplo.setPhoneNumber(newPhoneNumber);
         emplo.setEmail(newEmail);
-        emplo.setPosition(newPosition);
         emplo.setSalary(newSalary);
         emplo.setFlag(flag);
+        emplo.setRol(newRol);
 
         this.createEmployee(emplo);
     }
+
 
     @Override
     public List<Employee> getEmployeesByFlag(boolean flag) {
@@ -127,5 +123,15 @@ public class ServiceEmployee implements IServiceEmployee{
 
         return optionalEmployee.orElseThrow(()-> new ObjectNFException("Id is not found.",
                 new ExceptionDetails("ID is not found","error", HttpStatus.NOT_FOUND)));
+    }
+
+    @Override
+    public Boolean existsByUsername(String username) {
+        return IRepoEmplo.existsByUsername(username);
+    }
+
+    @Override
+    public Optional<Employee> findByUsername(String username) {
+        return IRepoEmplo.findByUsername(username);
     }
 }

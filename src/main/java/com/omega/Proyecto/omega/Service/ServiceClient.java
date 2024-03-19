@@ -26,8 +26,8 @@ public class ServiceClient implements IServiceClient{
         long adult = 18L;
 
 
-        if(client.getName().isEmpty() && client.getUsername().isEmpty()){
-            return "Name or username is empty";
+        if(client.getUsername().isEmpty()){
+            return "UserName or username is empty";
         }
 
         if(client.getEmail().isEmpty()){
@@ -81,12 +81,11 @@ public class ServiceClient implements IServiceClient{
     }
 
     @Override
-    public void modifyClient(Long idOriginal, Long newId, String newName, String newUsername, String newDni, LocalDate newDate,
+    public void modifyClient(Long idOriginal, Long newId, String newUsername, String newDni, LocalDate newDate,
                              String newNationality, String newPhoneNumbre, String newEmail, boolean flag) throws ErrorDataException, ObjectNFException {
 
             Client cli = this.getClient(idOriginal);
             cli.setId(newId);
-            cli.setName(newName);
             cli.setUsername(newUsername);
             cli.setDni(newDni);
             cli.setBirthDay(newDate);
@@ -109,8 +108,8 @@ public class ServiceClient implements IServiceClient{
     }
 
     @Override
-    public Client getClientByFlagAndId(boolean flag, Long id) throws ObjectNFException{
-        Optional<Client> optionalClient = repositoryClient.getClientByFlagAndId(flag,id);
+    public Client getClientByFlagAndId(boolean flag, Long idClient) throws ObjectNFException{
+        Optional<Client> optionalClient = repositoryClient.getClientByFlagAndId(flag, idClient);
 
         return optionalClient.orElseThrow(()-> new ObjectNFException("Id is not found"
                 , new ExceptionDetails ("Id is not found","error",HttpStatus.NOT_FOUND)));
