@@ -5,6 +5,7 @@ import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.*;
 import com.omega.Proyecto.omega.Repository.IRepositorySale;
 import com.omega.Proyecto.omega.Service.ServiceSale;
+import jakarta.mail.MessagingException;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -32,10 +33,10 @@ public class ServiceSaleTest
     @Autowired
     private ServiceSale serviceSale;
     private final Sale newSale = new Sale(1L,  LocalDate.now(), PaymentMethod.DEBIT,
-            new Employee(),  new Client(), new TouristicServPack(), true);
+            new Employee(),  new Client(), new TouristicServPack(), true, 1000);
 
     @Test
-    public void createCorrectSale() throws ErrorDataException {
+    public void createCorrectSale() throws ErrorDataException, ObjectNFException, MessagingException {
         Mockito.when(repositorySale.save(newSale)).thenReturn(newSale);
 
         Sale saleAux = serviceSale.createSale(newSale);
@@ -44,7 +45,7 @@ public class ServiceSaleTest
     }
 
     @Test(expected = ErrorDataException.class)
-    public void createIncorrectSale() throws ErrorDataException{
+    public void createIncorrectSale() throws ErrorDataException, ObjectNFException, MessagingException {
         serviceSale.createSale(new Sale());
     }
 

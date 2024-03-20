@@ -27,7 +27,7 @@ public class ControllerEmployee {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody Employee request){
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody Employee request) throws ErrorDataException {
         return ResponseEntity.ok(authenticationService.register(request));
     }
     

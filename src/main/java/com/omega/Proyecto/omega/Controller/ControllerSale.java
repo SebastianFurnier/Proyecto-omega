@@ -4,6 +4,7 @@ import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Sale;
 import com.omega.Proyecto.omega.Service.ServiceSale;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class ControllerSale {
     private ServiceSale serviceSale;
 
     @PostMapping("/create")
-    public void createSale(@RequestBody Sale sale) throws ErrorDataException {
+    public void createSale(@RequestBody Sale sale) throws ErrorDataException, ObjectNFException, MessagingException {
         serviceSale.createSale(sale);
     }
 

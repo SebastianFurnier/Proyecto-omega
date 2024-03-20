@@ -3,8 +3,9 @@ package com.omega.Proyecto.omega.Service;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ExceptionDetails;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
-import com.omega.Proyecto.omega.Model.Sale;
+import com.omega.Proyecto.omega.Model.*;
 import com.omega.Proyecto.omega.Repository.IRepositorySale;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,12 @@ import java.util.Optional;
 public class ServiceSale implements IServiceSale {
     @Autowired
     private IRepositorySale repositorySale;
+    @Autowired
+    private IEmailService emailService;
+    @Autowired
+    private IServiceClient serviceClient;
+    @Autowired
+    private IServiceEmployee serviceEmployee;
 
     private String checkDataSale(Sale sale){
 
@@ -35,8 +42,41 @@ public class ServiceSale implements IServiceSale {
         return null;
     }
 
+    private void buildMail(Sale sale) throws ObjectNFException, MessagingException, ErrorDataException {
+        TouristicServPack touristicServPack = sale.getTouristicServPack();
+
+        Client clientAux = serviceClient.getClientByFlagAndId(true, sale.getClient().getId());
+        Employee employee = serviceEmployee.getEmployeeByFlagAndId(true, sale.getEmployee().getId());
+
+        if (clientAux == null
+                || clientAux.getEmail() == null
+                || clientAux.getEmail().isEmpty()
+                || touristicServPack == null)
+            return;
+
+        List<String> destinations = sale
+                .getTouristicServPack()
+                .getTouristicServs()
+                .stream()
+                .map(TouristicServ::getDestination)
+                .toList();
+
+
+        EmailDTO emailDTO = new EmailDTO();
+
+        emailDTO.setDestinations(destinations);
+        emailDTO.setClientName(clientAux.getUsername());
+        emailDTO.setReceiver(clientAux.getEmail());
+        emailDTO.setSellerName(employee.getUsername());
+        emailDTO.setCost(sale.getCost());
+        emailDTO.setSaleDate(sale.getDateSale());
+        emailDTO.setSubject("Hello " + clientAux.getUsername() + ", you have a reservation!");
+
+        emailService.sendMail(emailDTO);
+    }
+
     @Override
-    public Sale createSale(Sale sale) throws ErrorDataException {
+    public Sale createSale(Sale sale) throws ErrorDataException, ObjectNFException, MessagingException {
         String errorMessage = checkDataSale(sale);
 
         if (errorMessage !=  null){
@@ -44,6 +84,12 @@ public class ServiceSale implements IServiceSale {
                     new ExceptionDetails(errorMessage, "error", HttpStatus.BAD_REQUEST));
         }
         sale.setActive(true);
+
+        sale.setCost(sale.getTouristicServPack().getCostPackage());
+
+        if(sale.getClient() != null)
+            buildMail(sale);
+
         return repositorySale.save(sale);
     }
 

@@ -26,4 +26,5 @@ public class Sale {
     @OneToOne
     private TouristicServPack touristicServPack;
     private boolean active;
+    private float cost;
 }

@@ -1,8 +1,11 @@
 package com.omega.Proyecto.omega.Security;
 
+import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Model.AuthenticationResponse;
 import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Repository.IRepositoryEmployee;
+import com.omega.Proyecto.omega.Service.IServiceEmployee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +19,9 @@ public class AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
 
+    @Autowired
+    private IServiceEmployee employeeService;
+
     public AuthenticationService(IRepositoryEmployee repo, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
         this.repo = repo;
         this.passwordEncoder = passwordEncoder;
@@ -23,18 +29,10 @@ public class AuthenticationService {
         this.authenticationManager = authenticationManager;
     }
 
-    public AuthenticationResponse register(Employee request){
-        Employee employee = new Employee();
-        employee.setUsername(request.getUsername());
-        employee.setPassword(passwordEncoder.encode(request.getPassword()));
-
-        employee.setRol(request.getRol());
-
-        employee = repo.save(employee);
-
-        String token = jwtService.generatorToken(employee);
-
-
+    public AuthenticationResponse register(Employee request) throws ErrorDataException {
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
+        employeeService.createEmployee(request);
+        String token = jwtService.generatorToken(request);
 
         return new AuthenticationResponse(token);
     }
