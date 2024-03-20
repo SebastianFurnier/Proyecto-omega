@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/package")
+@CrossOrigin(origins = "http://localhost:3000/")
 public class ControllerPackage {
     @Autowired
     private ServiceTouristicServPack servicePackage;
