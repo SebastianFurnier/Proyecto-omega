@@ -1,9 +1,7 @@
 package com.omega.Proyecto.omega.DTO;
 
 import com.omega.Proyecto.omega.Model.Rol;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class EmployeeDTO extends PersonDTO{

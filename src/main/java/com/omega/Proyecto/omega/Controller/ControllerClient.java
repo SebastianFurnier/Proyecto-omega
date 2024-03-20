@@ -4,16 +4,12 @@ import com.omega.Proyecto.omega.DTO.PersonDTO;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Client;
-import com.omega.Proyecto.omega.Model.Person;
 import com.omega.Proyecto.omega.Service.IServiceClient;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
