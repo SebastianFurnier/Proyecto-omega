@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<h1 th:text="${name} ? 'Hello ' + ${name} + ', thanks for choosing us!' :
+     'Hello, thanks for choosing us!'"></h1>
+<h2>Your destinations: </h2>
+<ul th:each="destination : ${destinations}">
+    <li th:text="${destination}"></li>
+</ul>
+<h2>Sale dates:</h2>
+<ul>
+    <li th:text="'Seller: ' + ${seller}"></li>
+    <li th:text="'Cost: $' + ${cost}"></li>
+    <li th:text="'Sales date: ' + ${#temporals.format(date, 'dd-mm-yyyy')}"></li>
+</ul>
+</body>
+</html>

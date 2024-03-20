@@ -1,29 +1,23 @@
-package com.omega.Proyecto.omega.Model;
+package com.omega.Proyecto.omega.DTO;
 
-import jakarta.persistence.*;
+
+import com.omega.Proyecto.omega.Model.PaymentMethod;
+import com.omega.Proyecto.omega.Model.TouristicServPack;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Sale {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class SaleDTO {
     private Long idSale;
     private LocalDate dateSale;
     private PaymentMethod paymentMethod;
-    @ManyToOne
-    private Employee employee;
-    @ManyToOne
-    private Client client;
-    @OneToOne
+    private EmployeeDTO employee;
+    private PersonDTO client;
     private TouristicServPack touristicServPack;
     private boolean active;
     private float cost;

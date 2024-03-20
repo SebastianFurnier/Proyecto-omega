@@ -75,9 +75,10 @@ public class ServiceEmployeeTest {
 
     @Test (expected = ErrorDataException.class)
     public void createEmployeeTestExceptions() throws ErrorDataException {
-        Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
-
         Employee emploAux = new Employee();
+        Mockito.when(repoEmployee.save(emploAux)).thenReturn(emploAux);
+
+
         emploAux.setId(1L);
         emploAux.setUsername("Aux");
         emploAux.setDni("12456654");
@@ -87,9 +88,9 @@ public class ServiceEmployeeTest {
         emploAux.setEmail("EmployeeAux@gmail.com");
         emploAux.setSalary(10000L);
 
-        servEmployee.createEmployee(emploAux);
+        Employee employee = servEmployee.createEmployee(emploAux);
 
-        Assertions.assertEquals(emploAux,newEmployee);
+        Assertions.assertEquals(emploAux,employee);
     }
 
     @Test
