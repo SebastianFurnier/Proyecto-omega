@@ -17,12 +17,14 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    private String username;
+    private String name;
+    private String lastName;
     private String password;
     private String dni;
     private LocalDate birthDay;
     private String nationality;
     private String phoneNumber;
     private String email;
+    private String username = getEmail();
 
 }

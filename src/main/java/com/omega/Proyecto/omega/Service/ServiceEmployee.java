@@ -92,13 +92,12 @@ public class ServiceEmployee implements IServiceEmployee{
         return IRepoEmplo.findAll();
     }
 
-
-
     @Override
-    public void modifyEmployee(Long idOriginal, Long newId, String newUsername, String newDni, LocalDate newDate, String newNationality, String newPhoneNumber, String newEmail, Long newSalary, boolean flag, Rol newRol) throws ErrorDataException, ObjectNFException {
+    public void modifyEmployee(Long idOriginal, Long newId, String newName, String newLastName, String newDni, LocalDate newDate, String newNationality, String newPhoneNumber, String newEmail, Long newSalary, boolean flag, Rol newRol) throws ErrorDataException, ObjectNFException {
         Employee emplo = this.getEmployee(idOriginal);
         emplo.setId(newId);
-        emplo.setUsername(newUsername);
+        emplo.setName(newName);
+        emplo.setLastName(newLastName);
         emplo.setDni(newDni);
         emplo.setBirthDay(newDate);
         emplo.setNationality(newNationality);

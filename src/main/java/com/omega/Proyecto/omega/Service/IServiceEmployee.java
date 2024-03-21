@@ -17,7 +17,7 @@ public interface IServiceEmployee {
     Employee getEmployee(Long id) throws ObjectNFException;
     List<Employee> getAllEmployee();
 
-    void modifyEmployee(Long idOriginal, Long newId, String newUsername, String newDni, LocalDate newDate, String newNationality,
+    void modifyEmployee(Long idOriginal, Long newId,String newName,String newLastName ,String newDni, LocalDate newDate, String newNationality,
                         String newPhoneNumber, String newEmail, Long newSalary, boolean flag, Rol newRol)
                                 throws ErrorDataException,ObjectNFException;
 

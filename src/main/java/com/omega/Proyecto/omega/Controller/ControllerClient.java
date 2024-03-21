@@ -20,12 +20,12 @@ public class ControllerClient {
     @Autowired
     IServiceClient IServClient;
 
-    private List<PersonDTO> makeClientDTOList(List<Client> clientList){
+    private List<PersonDTO> makeClientDTOList(List<Client> clientList) {
         return clientList.stream()
                 .map(client -> {
                     PersonDTO clientDto = new PersonDTO();
                     clientDto.setIdPerson(client.getId());
-                    clientDto.setUsername(client.getUsername());
+                    clientDto.setUsername(client.getEmail());
                     return clientDto;
                 })
                 .collect(Collectors.toList());
@@ -33,7 +33,7 @@ public class ControllerClient {
 
     @PostMapping("/create")
     public void createClient(@RequestBody Client cli) throws ErrorDataException {
-         IServClient.createClient(cli);
+        IServClient.createClient(cli);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -42,49 +42,49 @@ public class ControllerClient {
     }
 
     @GetMapping("/get/{id}")
-    public PersonDTO getClient(@PathVariable Long id) throws ObjectNFException{
+    public PersonDTO getClient(@PathVariable Long id) throws ObjectNFException {
         Client client = IServClient.getClient(id);
         PersonDTO clientDTO = new PersonDTO();
 
-        clientDTO.setUsername(client.getUsername());
+        clientDTO.setUsername(client.getEmail());
         clientDTO.setIdPerson(client.getId());
 
         return clientDTO;
     }
 
     @GetMapping("/getAll")
-    public List<PersonDTO> getAllClient(){
+    public List<PersonDTO> getAllClient() {
         List<Client> clientList = IServClient.getAllClient();
         return makeClientDTOList(clientList);
     }
 
     @PutMapping("/modify/{id}")
     public PersonDTO modifyClient(@PathVariable Long id,
-                               @RequestParam (required = false ,name = "newId")Long newId ,
-                               @RequestParam (required = false,name = "newName")String newName,
-                               @RequestParam (required = false,name = "newUsername")String newUsername,
-                               @RequestParam (required = false,name = "newDni")String newDni,
-                               @RequestParam (required = false,name = "newDate") LocalDate newDate,
-                               @RequestParam (required = false,name = "newNationality") String newNationality,
-                               @RequestParam (required = false,name = "newPhoneNumbre")String newPhoneNumbre,
-                               @RequestParam (required = false,name = "newEmail")String newEmail,
-                               @RequestParam (required = false,name = "flag") boolean flag) throws ErrorDataException,ObjectNFException{
-        IServClient.modifyClient(id,newId,newUsername,newDni,newDate,newNationality,newPhoneNumbre,newEmail,flag);
+                                  @RequestParam(required = false, name = "newId") Long newId,
+                                  @RequestParam(required = false, name = "newName") String newName,
+                                  @RequestParam(required = false, name = "newLastName") String newLastName,
+                                  @RequestParam(required = false, name = "newDni") String newDni,
+                                  @RequestParam(required = false, name = "newDate") LocalDate newDate,
+                                  @RequestParam(required = false, name = "newNationality") String newNationality,
+                                  @RequestParam(required = false, name = "newPhoneNumbre") String newPhoneNumbre,
+                                  @RequestParam(required = false, name = "newEmail") String newEmail,
+                                  @RequestParam(required = false, name = "flag") boolean flag) throws ErrorDataException, ObjectNFException {
+        IServClient.modifyClient(id, newId,newName,newLastName,newDni, newDate, newNationality, newPhoneNumbre, newEmail, flag);
 
         Client client = this.IServClient.getClient(id);
-        return new PersonDTO(client.getId(), client.getUsername());
+        return new PersonDTO(client.getId(), client.getEmail());
     }
 
     @GetMapping("/getAllFlag/{flag}")
-    public List<PersonDTO> getAllFlag(@PathVariable boolean flag){
+    public List<PersonDTO> getAllFlag(@PathVariable boolean flag) {
         List<Client> clientList = IServClient.getClientsByFlag(flag);
         return makeClientDTOList(clientList);
     }
 
     @GetMapping("/getClientFlagAndId/{flag}/{id}")
-    public PersonDTO getClientByFlagAndById(@PathVariable boolean flag,@PathVariable Long id) throws ObjectNFException{
-        Client client = IServClient.getClientByFlagAndId(flag,id);
-        return new PersonDTO(client.getId(), client.getUsername());
+    public PersonDTO getClientByFlagAndById(@PathVariable boolean flag, @PathVariable Long id) throws ObjectNFException {
+        Client client = IServClient.getClientByFlagAndId(flag, id);
+        return new PersonDTO(client.getId(), client.getEmail());
     }
 
 }

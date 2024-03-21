@@ -26,8 +26,8 @@ public class ServiceClient implements IServiceClient{
         long adult = 18L;
 
 
-        if(client.getUsername().isEmpty()){
-            return "UserName or username is empty";
+        if(client.getEmail().isEmpty()){
+            return "Email is empty";
         }
 
         if(client.getEmail().isEmpty()){
@@ -80,26 +80,29 @@ public class ServiceClient implements IServiceClient{
                 new ExceptionDetails("ID not found","error",HttpStatus.NOT_FOUND)));
     }
 
-    @Override
-    public void modifyClient(Long idOriginal, Long newId, String newUsername, String newDni, LocalDate newDate,
-                             String newNationality, String newPhoneNumbre, String newEmail, boolean flag) throws ErrorDataException, ObjectNFException {
 
-            Client cli = this.getClient(idOriginal);
-            cli.setId(newId);
-            cli.setUsername(newUsername);
-            cli.setDni(newDni);
-            cli.setBirthDay(newDate);
-            cli.setNationality(newNationality);
-            cli.setPhoneNumber(newPhoneNumbre);
-            cli.setEmail(newEmail);
-            cli.setFlag(flag);
-
-            this.createClient(cli);
-    }
 
     @Override
     public List<Client> getAllClient() {
         return repositoryClient.findAll();
+    }
+
+    @Override
+    public void modifyClient(Long idOriginal, Long newId, String newName, String newLastName, String newDni,
+                             LocalDate newDate, String newNationality, String newPhoneNumbre, String newEmail,
+                             boolean flag) throws ErrorDataException, ObjectNFException {
+        Client cli = this.getClient(idOriginal);
+        cli.setId(newId);
+        cli.setName(newName);
+        cli.setLastName(newLastName);
+        cli.setDni(newDni);
+        cli.setBirthDay(newDate);
+        cli.setNationality(newNationality);
+        cli.setPhoneNumber(newPhoneNumbre);
+        cli.setEmail(newEmail);
+        cli.setFlag(flag);
+
+        this.createClient(cli);
     }
 
     @Override

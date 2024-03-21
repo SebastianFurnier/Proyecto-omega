@@ -12,8 +12,9 @@ public class ServiceUserDetailsImp implements UserDetailsService {
 
     @Autowired
     private IRepositoryEmployee IRepoEmployee;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return IRepoEmployee.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("The user doesn´t exist."));
+        return IRepoEmployee.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("The user doesn´t exist."));
     }
 }

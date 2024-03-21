@@ -37,7 +37,8 @@ public class ServiceClientTest
     @Test
     public void createClientTest() throws ErrorDataException {
         newClient.setId(1L);
-        newClient.setUsername("Aux");
+        newClient.setName("Aux");
+        newClient.setLastName("proof");
         newClient.setDni("12456654");
         newClient.setBirthDay(LocalDate.parse("1999-04-23"));
         newClient.setNationality("Argentina");
@@ -95,7 +96,8 @@ public class ServiceClientTest
     @Test (expected = ErrorDataException.class)
     public void createClientTestException() throws ErrorDataException {
         newClient.setId(1L);
-        newClient.setUsername("Aux");
+        newClient.setName("Aux");
+        newClient.setLastName("proof");
         newClient.setDni("12456654");
         newClient.setBirthDay(LocalDate.parse("2009-04-23")); // I have simuleted a short age
         newClient.setNationality("Argentina");

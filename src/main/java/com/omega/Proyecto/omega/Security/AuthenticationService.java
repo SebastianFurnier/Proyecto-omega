@@ -16,17 +16,18 @@ public class AuthenticationService {
     private final IRepositoryEmployee repo;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-
     private final AuthenticationManager authenticationManager;
 
     @Autowired
     private IServiceEmployee employeeService;
 
-    public AuthenticationService(IRepositoryEmployee repo, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
+    public AuthenticationService(IRepositoryEmployee repo, PasswordEncoder passwordEncoder, JwtService jwtService,
+                                 AuthenticationManager authenticationManager, IServiceEmployee employeeService) {
         this.repo = repo;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
+        this.employeeService = employeeService;
     }
 
     public AuthenticationResponse register(Employee request) throws ErrorDataException {
@@ -37,7 +38,7 @@ public class AuthenticationService {
         return new AuthenticationResponse(token);
     }
 
-    public AuthenticationResponse authenticate(Employee request){
+    public AuthenticationResponse authenticate(Employee request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -50,4 +51,6 @@ public class AuthenticationService {
 
         return new AuthenticationResponse(token);
     }
+
+
 }

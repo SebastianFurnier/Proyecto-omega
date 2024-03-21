@@ -38,7 +38,8 @@ public class ServiceEmployeeTest {
     @Test
     public void createEmployeeTest() throws ErrorDataException {
         newEmployee.setId(1L);
-        newEmployee.setUsername("Aux");
+        newEmployee.setName("Aux");
+        newEmployee.setLastName("Proof");
         newEmployee.setDni("12456654");
         newEmployee.setBirthDay(LocalDate.parse("1999-04-23"));
         newEmployee.setNationality("Argentina");
@@ -80,7 +81,8 @@ public class ServiceEmployeeTest {
 
 
         emploAux.setId(1L);
-        emploAux.setUsername("Aux");
+        emploAux.setName("Aux");
+        emploAux.setLastName("Proof");
         emploAux.setDni("12456654");
         emploAux.setBirthDay(LocalDate.parse("1999-04-23"));
         emploAux.setNationality("Argentina");

@@ -33,15 +33,10 @@ public class ControllerEmployee {
     public ResponseEntity<AuthenticationResponse> register(@RequestBody Employee request) throws ErrorDataException {
         return ResponseEntity.ok(authenticationService.register(request));
     }
-    
-    @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody Employee request){
-         return ResponseEntity.ok(authenticationService.authenticate(request));
-    }
 
-    @PostMapping("/create")
-    public void createEmployee(@RequestBody Employee employee) throws ErrorDataException {
-        IServEmplo.createEmployee(employee);
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody Employee request) {
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -67,18 +62,20 @@ public class ControllerEmployee {
 
     @PutMapping("/modify/{id}")
     public EmployeeDTO modifyEmployee(@PathVariable Long id,
-                                   @RequestParam(required = false, name = "newId") Long newId,
-                                   @RequestParam(required = false, name = "newUsername") String newUsername,
-                                   @RequestParam(required = false, name = "newDni") String newDni,
-                                   @RequestParam(required = false, name = "newDate") LocalDate newDate,
-                                   @RequestParam(required = false, name = "newNationality") String newNationality,
-                                   @RequestParam(required = false, name = "newPhoneNumber") String newPhoneNumber,
-                                   @RequestParam(required = false, name = "newEmail") String newEmail,
-                                   @RequestParam(required = false, name = "newSalary") Long newSalary,
-                                   @RequestParam(required = false, name = "flag") boolean flag,
-                                   @RequestParam(required = false, name = "rol") Rol newRol) throws ErrorDataException, ObjectNFException {
+                                      @RequestParam(required = false, name = "newId") Long newId,
+                                      @RequestParam(required = false, name = "newName") String newName,
+                                      @RequestParam(required = false, name = "newLastName") String newLastName,
+                                      @RequestParam(required = false, name = "newDni") String newDni,
+                                      @RequestParam(required = false, name = "newDate") LocalDate newDate,
+                                      @RequestParam(required = false, name = "newNationality") String newNationality,
+                                      @RequestParam(required = false, name = "newPhoneNumber") String newPhoneNumber,
+                                      @RequestParam(required = false, name = "newEmail") String newEmail,
+                                      @RequestParam(required = false, name = "newSalary") Long newSalary,
+                                      @RequestParam(required = false, name = "flag") boolean flag,
+                                      @RequestParam(required = false, name = "rol") Rol newRol)
+                                      throws ErrorDataException, ObjectNFException {
 
-        IServEmplo.modifyEmployee(id, newId, newUsername, newDni, newDate, newNationality, newPhoneNumber, newEmail, newSalary, flag, newRol);
+        IServEmplo.modifyEmployee(id,newId,newName,newLastName,newDni,newDate,newNationality,newPhoneNumber,newEmail,newSalary,flag,newRol);
 
         Employee employee = this.IServEmplo.getEmployee(id);
         return new EmployeeDTO(employee.getId(), employee.getUsername(), employee.getRol());

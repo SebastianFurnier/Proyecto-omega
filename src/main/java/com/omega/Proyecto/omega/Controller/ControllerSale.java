@@ -28,7 +28,7 @@ public class ControllerSale {
                 .map(sale -> {
                     PersonDTO clientDTO = new PersonDTO(
                             sale.getClient().getId(),
-                            sale.getClient().getUsername()
+                            sale.getClient().getEmail()
                     );
 
                     EmployeeDTO employeeDTO = new EmployeeDTO(
@@ -55,7 +55,7 @@ public class ControllerSale {
 
         PersonDTO clientDTO = new PersonDTO(
                 client.getId(),
-                client.getUsername());
+                client.getEmail());
 
         EmployeeDTO employeeDTO = new EmployeeDTO(
                 employee.getId(),

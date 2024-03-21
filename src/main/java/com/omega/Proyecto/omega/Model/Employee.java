@@ -1,8 +1,6 @@
 package com.omega.Proyecto.omega.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -45,4 +43,6 @@ public class Employee extends Person implements UserDetails {
     public boolean isEnabled() {
         return flag;
     }
+
+
 }
