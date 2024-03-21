@@ -20,9 +20,6 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     private IRepositoryTouristicServ repositoryTouristicServ;
 
     private String checkDataService(TouristicServ touristicServ){
-        if (touristicServ.getName() == null || touristicServ.getName().isBlank())
-            return "Name cannot be empty.";
-
         if(touristicServ.getCost() <= 0)
             return "Cost must be greater than zero.";
 
@@ -53,10 +50,17 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     }
 
     @Override
+    public void deleteServices(List<Long> services) throws ObjectNFException, ErrorDataException{
+        for (Long id: services) {
+            deleteService(id);
+        }
+    }
+
+    @Override
     public TouristicServ getActiveService(Long id) throws ObjectNFException {
 
         Optional<TouristicServ> optionalTouristicServ =
-                repositoryTouristicServ.getTouristicServsByActiveAndIdTouristicService(true, id);
+                repositoryTouristicServ.getTouristicServByActiveAndIdServ(true, id);
         return optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails(
                 "There is no active service with this ID.", "error", HttpStatus.NOT_FOUND
         )));
@@ -65,7 +69,7 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     @Override
     public TouristicServ getInactiveService(Long id) throws ObjectNFException {
         Optional<TouristicServ> optionalTouristicServ =
-                repositoryTouristicServ.getTouristicServsByActiveAndIdTouristicService(false, id);
+                repositoryTouristicServ.getTouristicServByActiveAndIdServ(false, id);
         return optionalTouristicServ.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails(
                 "There is no service with this ID.", "error", HttpStatus.NOT_FOUND
         )));

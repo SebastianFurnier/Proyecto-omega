@@ -18,60 +18,14 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/sale")
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = {"http://localhost:3000", "http://joni-projects.s3-website.eu-north-1.amazonaws.com"})
 public class ControllerSale {
     @Autowired
     private ServiceSale serviceSale;
 
     private List<SaleDTO> makeSalesDTOList(List<Sale> saleList){
         return saleList.stream()
-                .map(sale -> {
-                    PersonDTO clientDTO = new PersonDTO(
-                            sale.getClient().getId(),
-                            sale.getClient().getEmail()
-                    );
-
-                    EmployeeDTO employeeDTO = new EmployeeDTO(
-                            sale.getEmployee().getId(),
-                            sale.getEmployee().getUsername(),
-                            sale.getEmployee().getRol()
-                    );
-                    return new SaleDTO(
-                            sale.getIdSale(),
-                            sale.getDateSale(),
-                            sale.getPaymentMethod(),
-                            employeeDTO,
-                            clientDTO,
-                            sale.getTouristicServPack(),
-                            sale.isActive(),
-                            sale.getCost()
-                    );
-                }).collect(Collectors.toList());
-    }
-
-    private SaleDTO makeSaleDTO(Sale sale){
-        Client client = sale.getClient();
-        Employee employee = sale.getEmployee();
-
-        PersonDTO clientDTO = new PersonDTO(
-                client.getId(),
-                client.getEmail());
-
-        EmployeeDTO employeeDTO = new EmployeeDTO(
-                employee.getId(),
-                employee.getUsername(),
-                employee.getRol());
-
-        return new SaleDTO(
-                sale.getIdSale(),
-                sale.getDateSale(),
-                sale.getPaymentMethod(),
-                employeeDTO,
-                clientDTO,
-                sale.getTouristicServPack(),
-                sale.isActive(),
-                sale.getCost()
-        );
+                .map(SaleDTO::new).collect(Collectors.toList());
     }
 
     @PostMapping("/create")
@@ -86,14 +40,12 @@ public class ControllerSale {
 
     @GetMapping("/getActiveSale/{id}")
     public SaleDTO getActiveSale(@PathVariable Long id) throws ObjectNFException {
-        Sale sale = serviceSale.getActiveSale(id);
-        return makeSaleDTO(sale);
+        return new SaleDTO(serviceSale.getActiveSale(id));
     }
 
     @GetMapping("/getInactiveSale/{id}")
     public SaleDTO getInactiveSale(@PathVariable Long id) throws ObjectNFException{
-        Sale sale = serviceSale.getInactiveSale(id);
-        return makeSaleDTO(sale);
+        return new SaleDTO(serviceSale.getInactiveSale(id));
     }
 
     @GetMapping("/getAllActive")

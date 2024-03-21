@@ -1,6 +1,6 @@
 package com.omega.Proyecto.omega.Service;
 
-import com.omega.Proyecto.omega.Model.EmailDTO;
+import com.omega.Proyecto.omega.DTO.EmailDTO;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;

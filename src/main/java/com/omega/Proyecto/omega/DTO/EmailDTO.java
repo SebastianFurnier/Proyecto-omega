@@ -1,4 +1,4 @@
-package com.omega.Proyecto.omega.Model;
+package com.omega.Proyecto.omega.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

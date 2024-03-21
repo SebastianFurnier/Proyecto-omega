@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/service")
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = {"http://localhost:3000", "http://joni-projects.s3-website.eu-north-1.amazonaws.com"})
 public class ControllerTouristicServ {
     @Autowired
     private ServiceTouristicServ serviceTouristicServ;
@@ -24,6 +24,11 @@ public class ControllerTouristicServ {
     @DeleteMapping("/delete/{id}")
     public void deleteService(@PathVariable Long id) throws ObjectNFException, ErrorDataException {
         serviceTouristicServ.deleteService(id);
+    }
+
+    @DeleteMapping("/deleteServices")
+    public void deleteServices(@RequestBody List<Long> services) throws ObjectNFException, ErrorDataException {
+        serviceTouristicServ.deleteServices(services);
     }
 
     @GetMapping("/getActive/{id}")

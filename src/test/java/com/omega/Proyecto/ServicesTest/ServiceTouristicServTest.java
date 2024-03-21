@@ -1,7 +1,9 @@
+
 package com.omega.Proyecto.ServicesTest;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
+import com.omega.Proyecto.omega.Model.TypeService;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import com.omega.Proyecto.omega.Service.ServiceTouristicServ;
 import org.junit.Test;
@@ -30,7 +32,7 @@ public class ServiceTouristicServTest
     @Autowired
     private ServiceTouristicServ serviceTouristicServ;
 
-    private final TouristicServ touristicServ = new TouristicServ(1L, "Pasaje Argentina-Brasil",
+    private final TouristicServ touristicServ = new TouristicServ(1L, TypeService.FLY,
             "Pasaje de avion", "Brasil", LocalDate.now().plusDays(7),
             10000, true);
 
@@ -62,7 +64,7 @@ public class ServiceTouristicServTest
     @Test
     public void getTouristicServTest() throws ObjectNFException {
         Long id = 1L;
-        Mockito.when(repositoryTouristicServ.getTouristicServsByActiveAndIdTouristicService(true, id))
+        Mockito.when(repositoryTouristicServ.getTouristicServByActiveAndIdServ(true, id))
                 .thenReturn(Optional.of(touristicServ));
 
         TouristicServ touristicServAux = serviceTouristicServ.getActiveService(id);
@@ -99,4 +101,3 @@ public class ServiceTouristicServTest
 
     }
 }
-

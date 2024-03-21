@@ -9,6 +9,9 @@ import java.util.List;
 public interface IServiceTouristicServ {
     TouristicServ createService(TouristicServ touristicServ) throws ErrorDataException;
     void deleteService(Long id) throws ObjectNFException, ErrorDataException;
+
+    void deleteServices(List<Long> services) throws ObjectNFException, ErrorDataException;
+
     TouristicServ getActiveService(Long id) throws ObjectNFException;
     TouristicServ getInactiveService(Long id) throws ObjectNFException;
     List<TouristicServ> getAllActiveServices();

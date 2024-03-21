@@ -1,5 +1,7 @@
 package com.omega.Proyecto.omega.Service;
 
+import com.omega.Proyecto.omega.DTO.EmailDTO;
+import com.omega.Proyecto.omega.DTO.SaleDTO;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ExceptionDetails;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
@@ -24,6 +26,8 @@ public class ServiceSale implements IServiceSale {
     private IServiceClient serviceClient;
     @Autowired
     private IServiceEmployee serviceEmployee;
+    @Autowired
+    private IServiceTouristicServPack serviceTouristicServPack;
 
     private String checkDataSale(Sale sale){
 
@@ -54,8 +58,7 @@ public class ServiceSale implements IServiceSale {
                 || touristicServPack == null)
             return;
 
-        List<String> destinations = sale
-                .getTouristicServPack()
+        List<String> destinations = touristicServPack
                 .getTouristicServs()
                 .stream()
                 .map(TouristicServ::getDestination)
@@ -77,6 +80,10 @@ public class ServiceSale implements IServiceSale {
 
     @Override
     public Sale createSale(Sale sale) throws ErrorDataException, ObjectNFException, MessagingException {
+
+        Long idPack = sale.getTouristicServPack().getIdPack();
+        sale.setTouristicServPack(serviceTouristicServPack.getActivePackage(idPack));
+
         String errorMessage = checkDataSale(sale);
 
         if (errorMessage !=  null){
@@ -87,10 +94,12 @@ public class ServiceSale implements IServiceSale {
 
         sale.setCost(sale.getTouristicServPack().getCostPackage());
 
+        repositorySale.save(sale);
+
         if(sale.getClient() != null)
             buildMail(sale);
 
-        return repositorySale.save(sale);
+        return sale;
     }
 
     @Override

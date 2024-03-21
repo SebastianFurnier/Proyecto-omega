@@ -8,7 +8,7 @@ import com.omega.Proyecto.omega.Model.TouristicServ;
 import java.util.List;
 
 public interface IServiceTouristicServPack {
-    TouristicServPack createPackage(List<TouristicServ> services) throws ErrorDataException;
+    TouristicServPack createPackage(List<Long> services) throws ErrorDataException;
     void deletePackage(Long id) throws ObjectNFException;
     TouristicServPack getActivePackage(Long id) throws ObjectNFException;
     TouristicServPack getInactivePackage(Long id) throws ObjectNFException;

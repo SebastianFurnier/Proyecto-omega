@@ -13,13 +13,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/package")
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = {"http://localhost:3000", "http://joni-projects.s3-website.eu-north-1.amazonaws.com"})
 public class ControllerPackage {
     @Autowired
     private ServiceTouristicServPack servicePackage;
 
     @PostMapping("/create")
-    public void createPackage(@RequestBody List<TouristicServ> services) throws ErrorDataException {
+    public void createPackage(@RequestBody List<Long> services) throws ErrorDataException {
         servicePackage.createPackage(services);
     }
 

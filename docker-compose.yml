@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+
+  back_app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: jdbc:mysql://agencia_db:3306/agencia?createDatabaseIfNotExist=TRUE&serverTimezone=UTC
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1234
+    restart: always
+    depends_on:
+      agencia_db:
+        condition: service_healthy
+  agencia_db:
+    image: mysql:8.0.33
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: agencia
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
