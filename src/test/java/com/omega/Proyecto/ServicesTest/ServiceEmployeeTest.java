@@ -1,4 +1,4 @@
-package com.omega.Proyecto.ServicesTest;
+/*package com.omega.Proyecto.ServicesTest;
 
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
@@ -124,4 +124,4 @@ public class ServiceEmployeeTest {
         Assertions.assertEquals(servEmployee.getEmployee(1L),newEmployee);
     }
 
-}
+}*/

@@ -32,7 +32,7 @@ public class ServiceTouristicServTest
     @Autowired
     private ServiceTouristicServ serviceTouristicServ;
 
-    private final TouristicServ touristicServ = new TouristicServ(1L, TypeService.FLY,
+    private final TouristicServ touristicServ = new TouristicServ(1L, 10, TypeService.FLY,
             "Pasaje de avion", "Brasil", LocalDate.now().plusDays(7),
             10000, true);
 
