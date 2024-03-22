@@ -16,6 +16,12 @@ We used Spring Security with JWT tokens to manage users and roles.
 - Maven.
 - MySql.
 
+Below we have the uml diagram showing the class modeling:
+
+<p align="center" width="100%">
+    <img src="media/uml.png">
+</p>
+
 To get started on how to set up the project, meet our technical guidelines, go to [our wiki](https://github.com/SebastianFurnier/Proyecto-omega/wiki)
 
 For other useful information abou **Omega team**, you can consult [our Confluence space](https://jonathanmunnozmorales.atlassian.net/wiki/spaces/~71202092c91749501e4b85bff1eaa0e3faf445/pages/33315/Proyecto+Hackacode+by+TodoCode).
