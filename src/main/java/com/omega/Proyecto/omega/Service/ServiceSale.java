@@ -1,7 +1,7 @@
 package com.omega.Proyecto.omega.Service;
 
+import com.omega.Proyecto.omega.DTO.DraftSaleDTO;
 import com.omega.Proyecto.omega.DTO.EmailDTO;
-import com.omega.Proyecto.omega.DTO.SaleDTO;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ExceptionDetails;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
@@ -79,10 +79,15 @@ public class ServiceSale implements IServiceSale {
     }
 
     @Override
-    public Sale createSale(Sale sale) throws ErrorDataException, ObjectNFException, MessagingException {
+    public Sale createSale(DraftSaleDTO saleDto) throws ErrorDataException, ObjectNFException, MessagingException {
 
-        Long idPack = sale.getTouristicServPack().getIdPack();
-        sale.setTouristicServPack(serviceTouristicServPack.getActivePackage(idPack));
+        Sale sale = new Sale();
+
+        sale.setDateSale(saleDto.getDateSale());
+        sale.setPaymentMethod(saleDto.getPaymentMethod());
+        sale.setClient(serviceClient.getClient(saleDto.getClientId()));
+        sale.setEmployee(serviceEmployee.getEmployee(saleDto.getEmployeeId()));
+        sale.setTouristicServPack(serviceTouristicServPack.getActivePackage(saleDto.getPackId()));
 
         String errorMessage = checkDataSale(sale);
 

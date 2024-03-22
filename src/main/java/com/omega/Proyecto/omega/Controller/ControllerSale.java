@@ -1,5 +1,6 @@
 package com.omega.Proyecto.omega.Controller;
 
+import com.omega.Proyecto.omega.DTO.DraftSaleDTO;
 import com.omega.Proyecto.omega.DTO.EmployeeDTO;
 import com.omega.Proyecto.omega.DTO.PersonDTO;
 import com.omega.Proyecto.omega.DTO.SaleDTO;
@@ -29,7 +30,7 @@ public class ControllerSale {
     }
 
     @PostMapping("/create")
-    public void createSale(@RequestBody Sale sale) throws ErrorDataException, ObjectNFException, MessagingException {
+    public void createSale(@RequestBody DraftSaleDTO sale) throws ErrorDataException, ObjectNFException, MessagingException {
         serviceSale.createSale(sale);
     }
 
