@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -54,6 +55,11 @@ public class ControllerEmployee {
         List<Employee> employeeList = IServEmplo.getAllEmployee();
         return employeeList.stream()
                 .map(EmployeeDTO::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("/getByUsername")
+    public EmployeeDTO getByUsername(@PathVariable String username) throws ObjectNFException {
+        return new EmployeeDTO(IServEmplo.findByUsernameFront(username));
     }
 
     @PutMapping("/modify/{id}")

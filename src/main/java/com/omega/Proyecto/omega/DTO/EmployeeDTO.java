@@ -14,6 +14,5 @@ public class EmployeeDTO extends PersonDTO{
         super.setName(employee.getName());
         super.setLastname(employee.getLastName());
         this.rol = employee.getRol();
-
     }
 }

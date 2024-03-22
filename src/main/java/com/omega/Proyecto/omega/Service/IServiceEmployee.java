@@ -29,5 +29,5 @@ public interface IServiceEmployee {
 
     Optional<Employee> findByUsername(String username);
 
-
+    Employee findByUsernameFront(String username) throws ObjectNFException;
 }

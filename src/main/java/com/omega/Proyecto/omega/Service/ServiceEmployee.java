@@ -21,6 +21,9 @@ public class ServiceEmployee implements IServiceEmployee{
     @Autowired
     IRepositoryEmployee IRepoEmplo;
 
+    @Autowired
+    IServiceSale IServSale;
+
 
     private String checkDataEmployee(Employee emplo){
         Long adult = 18L;
@@ -56,7 +59,6 @@ public class ServiceEmployee implements IServiceEmployee{
         if (emplo.getSalary() < 0L){
             return "The salary can´t smallest to 0";
         }
-
 
         return null;
     }
@@ -133,4 +135,14 @@ public class ServiceEmployee implements IServiceEmployee{
     public Optional<Employee> findByUsername(String username) {
         return IRepoEmplo.findByUsername(username);
     }
+
+    @Override
+    public Employee findByUsernameFront(String username) throws ObjectNFException {
+        Optional<Employee> optionalEmployee = IRepoEmplo.findByUsername(username);
+            return optionalEmployee.orElseThrow(()-> new ObjectNFException("ID not found",
+                    new ExceptionDetails("ID not found","error",HttpStatus.NOT_FOUND)));
+        }
 }
+
+
+
