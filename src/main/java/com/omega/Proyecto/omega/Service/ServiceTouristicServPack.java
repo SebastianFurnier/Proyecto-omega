@@ -4,12 +4,14 @@ import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ExceptionDetails;
 import com.omega.Proyecto.omega.Model.TouristicServPack;
 import com.omega.Proyecto.omega.Model.TouristicServ;
+import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServPack;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,16 +20,27 @@ public class ServiceTouristicServPack implements IServiceTouristicServPack {
 
     @Autowired
     private IRepositoryTouristicServPack repositoryPackage;
+    @Autowired
+    private IRepositoryTouristicServ repositoryTouristicServ;
 
     @Override
-    public TouristicServPack createPackage(List<TouristicServ> services) throws ErrorDataException {
+    public TouristicServPack createPackage(List<Long> services) throws ErrorDataException {
 
         if (services.isEmpty())
             throw new ErrorDataException("Incorrect data.",
                     new ExceptionDetails("You must send one o more services.", "error", HttpStatus.BAD_REQUEST));
 
+        List<TouristicServ> servList = new ArrayList<>();
+
+        for (Long id: services) {
+            Optional<TouristicServ> serv =
+                    repositoryTouristicServ.getTouristicServByActiveAndIdServ(true, id);
+            serv.ifPresent(servList::add);
+        }
+
         TouristicServPack packageAux = new TouristicServPack();
-        packageAux.setTouristicServs(services);
+        packageAux.setTouristicServs(servList);
+
         return repositoryPackage.save(packageAux);
     }
 

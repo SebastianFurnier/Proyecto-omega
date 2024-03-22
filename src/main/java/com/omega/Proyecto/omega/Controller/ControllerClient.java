@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/client")
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = {"http://localhost:3000", "http://joni-projects.s3-website.eu-north-1.amazonaws.com"})
+
 public class ControllerClient {
 
     @Autowired
@@ -22,12 +23,7 @@ public class ControllerClient {
 
     private List<PersonDTO> makeClientDTOList(List<Client> clientList) {
         return clientList.stream()
-                .map(client -> {
-                    PersonDTO clientDto = new PersonDTO();
-                    clientDto.setIdPerson(client.getId());
-                    clientDto.setUsername(client.getEmail());
-                    return clientDto;
-                })
+                .map(PersonDTO::new)
                 .collect(Collectors.toList());
     }
 
@@ -43,13 +39,7 @@ public class ControllerClient {
 
     @GetMapping("/get/{id}")
     public PersonDTO getClient(@PathVariable Long id) throws ObjectNFException {
-        Client client = IServClient.getClient(id);
-        PersonDTO clientDTO = new PersonDTO();
-
-        clientDTO.setUsername(client.getEmail());
-        clientDTO.setIdPerson(client.getId());
-
-        return clientDTO;
+        return new PersonDTO(IServClient.getClient(id));
     }
 
     @GetMapping("/getAll")
@@ -71,20 +61,17 @@ public class ControllerClient {
                                   @RequestParam(required = false, name = "flag") boolean flag) throws ErrorDataException, ObjectNFException {
         IServClient.modifyClient(id, newId,newName,newLastName,newDni, newDate, newNationality, newPhoneNumbre, newEmail, flag);
 
-        Client client = this.IServClient.getClient(id);
-        return new PersonDTO(client.getId(), client.getEmail());
+        return new PersonDTO(IServClient.getClient(id));
     }
 
     @GetMapping("/getAllFlag/{flag}")
     public List<PersonDTO> getAllFlag(@PathVariable boolean flag) {
-        List<Client> clientList = IServClient.getClientsByFlag(flag);
-        return makeClientDTOList(clientList);
+        return makeClientDTOList(IServClient.getClientsByFlag(flag));
     }
 
     @GetMapping("/getClientFlagAndId/{flag}/{id}")
     public PersonDTO getClientByFlagAndById(@PathVariable boolean flag, @PathVariable Long id) throws ObjectNFException {
-        Client client = IServClient.getClientByFlagAndId(flag, id);
-        return new PersonDTO(client.getId(), client.getEmail());
+        return new PersonDTO(IServClient.getClientByFlagAndId(flag, id));
     }
 
 }

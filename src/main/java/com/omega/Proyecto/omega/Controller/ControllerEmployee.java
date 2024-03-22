@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/employee")
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = {"http://localhost:3000", "http://joni-projects.s3-website.eu-north-1.amazonaws.com"})
 public class ControllerEmployee {
     @Autowired
     IServiceEmployee IServEmplo;
@@ -46,18 +46,14 @@ public class ControllerEmployee {
 
     @GetMapping("/get/{id}")
     public EmployeeDTO getEmployee(@PathVariable Long id) throws ObjectNFException {
-        Employee employee = IServEmplo.getEmployee(id);
-        return new EmployeeDTO(employee.getId(), employee.getUsername(), employee.getRol());
+        return new EmployeeDTO(IServEmplo.getEmployee(id));
     }
 
     @GetMapping("/getAll")
     public List<EmployeeDTO> getAll() {
         List<Employee> employeeList = IServEmplo.getAllEmployee();
         return employeeList.stream()
-                .map(employee -> new EmployeeDTO(
-                        employee.getId(),
-                        employee.getUsername(),
-                        employee.getRol())).collect(Collectors.toList());
+                .map(EmployeeDTO::new).collect(Collectors.toList());
     }
 
     @PutMapping("/modify/{id}")
@@ -77,24 +73,18 @@ public class ControllerEmployee {
 
         IServEmplo.modifyEmployee(id,newId,newName,newLastName,newDni,newDate,newNationality,newPhoneNumber,newEmail,newSalary,flag,newRol);
 
-        Employee employee = this.IServEmplo.getEmployee(id);
-        return new EmployeeDTO(employee.getId(), employee.getUsername(), employee.getRol());
+        return new EmployeeDTO(IServEmplo.getEmployee(id));
     }
 
     @GetMapping("/getEmployeesByFlag/{flag}")
     public List<EmployeeDTO> getEmployeesByFlag(@PathVariable boolean flag) {
         List<Employee> employeeList = IServEmplo.getEmployeesByFlag(flag);
         return employeeList.stream()
-                .map(employee -> new EmployeeDTO(
-                        employee.getId(),
-                        employee.getUsername(),
-                        employee.getRol()
-                )).collect(Collectors.toList());
+                .map(EmployeeDTO::new).collect(Collectors.toList());
     }
 
     @GetMapping("/getEmployeeByFlagAndId/{flag}/{id}")
     public EmployeeDTO getEmployeeByFlagAndId(@PathVariable boolean flag, @PathVariable Long id) throws ObjectNFException, ErrorDataException {
-        Employee employee = IServEmplo.getEmployeeByFlagAndId(flag, id);
-        return new EmployeeDTO(employee.getId(), employee.getUsername(), employee.getRol());
+        return new EmployeeDTO(IServEmplo.getEmployeeByFlagAndId(flag, id));
     }
 }

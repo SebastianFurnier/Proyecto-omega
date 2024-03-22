@@ -8,7 +8,7 @@ import jakarta.mail.MessagingException;
 import java.util.List;
 
 public interface IServiceSale {
-    public Sale createSale(Sale sale) throws ErrorDataException, ObjectNFException, MessagingException;
+    public Sale createSale(Sale sale) throws ErrorDataException, ObjectNFException, MessagingException, InterruptedException;
     public void deleteSale(Long id) throws ObjectNFException;
     public Sale getActiveSale(Long id) throws ObjectNFException;
 

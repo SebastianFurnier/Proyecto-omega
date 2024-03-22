@@ -16,8 +16,8 @@ import java.time.LocalDate;
 public class TouristicServ {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idTouristicService;
-    private String name;
+    private Long idServ;
+    private TypeService typeService;
     private String description;
     private String destination;
     private LocalDate serviceDate;

@@ -23,11 +23,7 @@ public class ServiceEmployee implements IServiceEmployee{
 
 
     private String checkDataEmployee(Employee emplo){
-        LocalDate dateNow = LocalDate.now();
-        LocalDate birthday = emplo.getBirthDay();
-        Long diference = ChronoUnit.YEARS.between(birthday,dateNow);
         Long adult = 18L;
-
 
         if(emplo.getUsername().isEmpty()){
             return "Username or username is empty";
@@ -48,6 +44,10 @@ public class ServiceEmployee implements IServiceEmployee{
         if (emplo.getBirthDay().isAfter(LocalDate.now())){
             return "Incorrect date.";
         }
+
+        LocalDate dateNow = LocalDate.now();
+        LocalDate birthday = emplo.getBirthDay();
+        Long diference = ChronoUnit.YEARS.between(birthday,dateNow);
 
         if (diference < adult){
             return "The age is not sufficient for register ";
