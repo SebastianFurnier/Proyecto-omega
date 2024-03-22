@@ -28,6 +28,7 @@ public class ServiceSale implements IServiceSale {
     private IServiceEmployee serviceEmployee;
     @Autowired
     private IServiceTouristicServPack serviceTouristicServPack;
+    @Autowired IServiceTouristicServ serviceTouristicServ;
 
     private String checkDataSale(Sale sale){
 
@@ -78,6 +79,18 @@ public class ServiceSale implements IServiceSale {
         emailService.sendMail(emailDTO);
     }
 
+    private void discoutAmountServices(TouristicServPack pack) throws ErrorDataException {
+        List<TouristicServ> touristicServList = pack.getTouristicServs();
+        for (TouristicServ serv: touristicServList) {
+            int amountService = serv.getAmountServ();
+            serv.setAmountServ(amountService-1);
+
+            if((amountService-1) == 0)
+                serv.setActive(false);
+            serviceTouristicServ.editService(serv);
+        }
+    }
+
     @Override
     public Sale createSale(DraftSaleDTO saleDto) throws ErrorDataException, ObjectNFException, MessagingException {
 
@@ -98,6 +111,8 @@ public class ServiceSale implements IServiceSale {
         sale.setActive(true);
 
         sale.setCost(sale.getTouristicServPack().getCostPackage());
+
+        discoutAmountServices(sale.getTouristicServPack());
 
         repositorySale.save(sale);
 

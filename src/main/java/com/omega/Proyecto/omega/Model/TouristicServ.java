@@ -17,6 +17,7 @@ public class TouristicServ {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idServ;
+    private int amountServ;
     private TypeService typeService;
     private String description;
     private String destination;
