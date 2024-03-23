@@ -28,7 +28,8 @@ public class ServiceSale implements IServiceSale {
     private IServiceEmployee serviceEmployee;
     @Autowired
     private IServiceTouristicServPack serviceTouristicServPack;
-    @Autowired IServiceTouristicServ serviceTouristicServ;
+    @Autowired
+    private IServiceTouristicServ serviceTouristicServ;
 
     private String checkDataSale(Sale sale){
 

@@ -21,10 +21,6 @@ public class ServiceEmployee implements IServiceEmployee{
     @Autowired
     IRepositoryEmployee IRepoEmplo;
 
-    @Autowired
-    IServiceSale IServSale;
-
-
     private String checkDataEmployee(Employee emplo){
         Long adult = 18L;
 

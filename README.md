@@ -2,7 +2,7 @@
     <img src="media/logo-comercial-hack.png">
 </p>
 
-## TravelStation (Hackacode's project)
+## TravelSation (Hackacode's project)
 Welcome to the Hackacode-back-omega repository.
 
 This api provides endpoints for sale's manage to a travel agency, services creation, services package etc.
