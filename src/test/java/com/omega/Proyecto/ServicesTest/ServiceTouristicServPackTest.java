@@ -1,10 +1,10 @@
-/*
 package com.omega.Proyecto.ServicesTest;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.TouristicServPack;
 import com.omega.Proyecto.omega.Model.TouristicServ;
 import com.omega.Proyecto.omega.Model.TypeService;
+import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServ;
 import com.omega.Proyecto.omega.Repository.IRepositoryTouristicServPack;
 import com.omega.Proyecto.omega.Service.ServiceTouristicServPack;
 import org.junit.Test;
@@ -31,10 +31,13 @@ public class ServiceTouristicServPackTest
 {
     @MockBean
     private IRepositoryTouristicServPack repoTouristicServPack;
+    @MockBean
+    private IRepositoryTouristicServ repositoryTouristicServ;
     @Autowired
     private ServiceTouristicServPack serviceTouristicServPack;
+
     private final TouristicServPack touristicServPack = new TouristicServPack();
-    private final TouristicServ touristicServ = new TouristicServ(1L, TypeService.FLY,
+    private final TouristicServ touristicServ = new TouristicServ(1L,1, TypeService.FLY,
             "Pasaje de avion", "Brasil", LocalDate.now().plusDays(7),
             10000, true);
 
@@ -85,4 +88,3 @@ public class ServiceTouristicServPackTest
         Assertions.assertEquals(touristicServicesPackagesAuxes, touristicServicesPackagesList);
     }
 }
- */

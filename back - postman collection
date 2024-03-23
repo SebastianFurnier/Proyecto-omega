@@ -1,0 +1,1204 @@
+{
+	"info": {
+		"_postman_id": "6ae14a57-42fd-45c9-9450-109b246a4be0",
+		"name": "Hackacode-Omega",
+		"description": "Pruebas de las api's implementadas para HackaCode 2023",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33000063"
+	},
+	"item": [
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "create service 1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amountService\":10,\r\n    \"typeService\":\"FLY\",\r\n    \"description\":\"fly\",\r\n    \"destination\":\"Colombia\",\r\n    \"serviceDate\":\"2024-04-18\",\r\n    \"cost\":200000.00,\r\n    \"active\":\"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/service/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"service",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create service 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amountService\":10,\r\n    \"typeService\":\"HOTEL\",\r\n    \"description\":\"HOTEL\",\r\n    \"destination\":\"Colombia\",\r\n    \"serviceDate\":\"2024-04-18\",\r\n    \"cost\":200000.00,\r\n    \"active\":\"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/service/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"service",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "activate service",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/service/activate/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"service",
+										"activate",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "Get all active",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/service/getAllActive",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"service",
+										"getAllActive"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get active by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/service/getActive/{id}",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"service",
+										"getActive",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all inactive",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/service/getAllInactive",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"service",
+										"getAllInactive"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get inactive by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/service/getInactive/{id}",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"service",
+										"getInactive",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "delete by id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/service/delete/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"service",
+										"delete",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete list services",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "#Send services list",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/service/deleteServices",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"service",
+										"deleteServices"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "create client",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Sebastian\",\r\n    \"lastname\":\"Furnier\",\r\n    \"dni\":\"10000000\",\r\n    \"birthDay\":\"1996-01-06\",\r\n    \"nationality\":\"argentino\",\r\n    \"phoneNumber\":\"11-1111-1111\",\r\n    \"email\":\"sfurnier@hotmail.com\",\r\n    \"flag\":\"true\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/client/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"client",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/client/getAll",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"client",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/client/get/4",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"client",
+										"get",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by flag",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "//you can change flag",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/client/getAllFlag/true",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"client",
+										"getAllFlag",
+										"true"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get cliente by flag and id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/client/getClientFlagAndId/true/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"client",
+										"getClientFlagAndId",
+										"true",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "delete by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "//you can change id client at the url",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/client/delete/102",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"client",
+										"delete",
+										"102"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Sebastian\",\r\n    \"lastname\":\"furnier\",\r\n    \"username\":\"usuario\",\r\n    \"password\":\"1234\",\r\n    \"dni\":\"10000000\",\r\n    \"birthDay\":\"1996-01-06\",\r\n    \"nationality\":\"argentino\",\r\n    \"email\":\"sfurnier@hotmail.com\",\r\n    \"rol\":\"USER\",\r\n    \"phoneNumber\":\"11-1111-1111\",\r\n    \"flag\":\"true\",\r\n    \"salary\":10000,\r\n    \"urlImage\":\"www\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/employee/register",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"employee",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/employee/login",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"employee",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "get by flag",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/employee/getEmployeesByFlag/true",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"employee",
+										"getEmployeesByFlag",
+										"true"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get by flag and id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/employee/getEmployeeByFlagAndId/true/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"employee",
+										"getEmployeeByFlagAndId",
+										"true",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get by username",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/employee/getByUsername/admin",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"employee",
+										"getByUsername",
+										"admin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/employee/getAll",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"employee",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/employee/get/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"employee",
+										"get",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "delete by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/employee/delete/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"employee",
+										"delete",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Package",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "create pack",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "//list of services' id.\r\n[]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/package/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"package",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTEwNjkxOSwiZXhwIjoxNzExMTkzMzE5fQ.9-7a_Qa536AS-rOVhVrlj19mGxSERXL_MtHifc6N3RM3cgp0EHYHASb0nYl9Ksje",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/package/getAll",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"package",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get inactive by id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/package/getInactive/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"package",
+										"getInactive",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all inactive",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/package/getAllInactive",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"package",
+										"getAllInactive"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all active",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/package/getAllActive",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"package",
+										"getAllActive"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/package/getActive/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"package",
+										"getActive",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "delete by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/package/delete/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"package",
+										"delete",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Sale",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dateSale\": \"2024-02-21\",\r\n    \"paymentMethod\":1,\r\n    \"employeeId\":,\r\n    \"clientId\":,\r\n    \"packId\":\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/sale/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sale",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/sale/getAllSale",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sale",
+										"getAllSale"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get active by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/sale/getSale/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sale",
+										"getSale",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get inactive by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/sale/getInactiveSale/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sale",
+										"getInactiveSale",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all inactive",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/sale/getAllInactive",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sale",
+										"getAllInactive"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all active",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxMTE2MDUyMCwiZXhwIjoxNzExMjQ2OTIwfQ.dDOIBZygDccLOAi733juY4uRoHfNVHAdH878vAS6hDU1SEBcennRqOLYlvDH9ny7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/sale/getAllActive",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sale",
+										"getAllActive"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "inherit"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
