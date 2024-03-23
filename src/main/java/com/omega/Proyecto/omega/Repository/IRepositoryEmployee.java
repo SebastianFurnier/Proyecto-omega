@@ -13,7 +13,7 @@ public interface IRepositoryEmployee extends JpaRepository<Employee, Long> {
     List<Employee> getEmployeesByFlag(boolean flag);
     Optional<Employee> getEmployeeByFlagAndId(boolean flag, Long id);
 
-    Optional<Employee> findByUsername(String username);
+    Optional<Employee> getByUsername(String username);
 
     Boolean existsByUsername(String username);
 }

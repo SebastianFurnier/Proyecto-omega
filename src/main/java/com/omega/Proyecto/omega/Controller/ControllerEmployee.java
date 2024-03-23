@@ -57,7 +57,7 @@ public class ControllerEmployee {
                 .map(EmployeeDTO::new).collect(Collectors.toList());
     }
 
-    @GetMapping("/getByUsername")
+    @GetMapping("/getByUsername/{username}")
     public EmployeeDTO getByUsername(@PathVariable String username) throws ObjectNFException {
         return new EmployeeDTO(IServEmplo.findByUsernameFront(username));
     }

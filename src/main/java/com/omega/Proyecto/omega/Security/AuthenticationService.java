@@ -46,7 +46,7 @@ public class AuthenticationService {
                 )
         );
 
-        Employee employee = repo.findByUsername(request.getUsername()).orElseThrow();
+        Employee employee = repo.getByUsername(request.getUsername()).orElseThrow();
         String token = jwtService.generatorToken(employee);
 
         return new AuthenticationResponse(token);

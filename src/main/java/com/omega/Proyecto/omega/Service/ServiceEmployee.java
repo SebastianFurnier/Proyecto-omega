@@ -129,12 +129,12 @@ public class ServiceEmployee implements IServiceEmployee{
 
     @Override
     public Optional<Employee> findByUsername(String username) {
-        return IRepoEmplo.findByUsername(username);
+        return IRepoEmplo.getByUsername(username);
     }
 
     @Override
     public Employee findByUsernameFront(String username) throws ObjectNFException {
-        Optional<Employee> optionalEmployee = IRepoEmplo.findByUsername(username);
+        Optional<Employee> optionalEmployee = IRepoEmplo.getByUsername(username);
             return optionalEmployee.orElseThrow(()-> new ObjectNFException("ID not found",
                     new ExceptionDetails("ID not found","error",HttpStatus.NOT_FOUND)));
         }

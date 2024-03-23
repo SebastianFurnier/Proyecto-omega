@@ -15,6 +15,6 @@ public class ServiceUserDetailsImp implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return IRepoEmployee.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("The user doesn´t exist."));
+        return IRepoEmployee.getByUsername(username).orElseThrow(() -> new UsernameNotFoundException("The user doesn´t exist."));
     }
 }
