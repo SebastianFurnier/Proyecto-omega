@@ -18,6 +18,7 @@ public class Employee extends Person implements UserDetails {
     private boolean flag;
     @Enumerated(value = EnumType.STRING)
     private Rol rol;
+    private String urlImage;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

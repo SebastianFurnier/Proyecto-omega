@@ -7,12 +7,14 @@ import lombok.Data;
 @Data
 public class EmployeeDTO extends PersonDTO{
     private Rol rol;
+    private String urlImage;
 
     public EmployeeDTO(Employee employee){
         super.setIdPerson(employee.getId());
         super.setUsername(employee.getUsername());
         super.setName(employee.getName());
         super.setLastname(employee.getLastName());
+        this.urlImage = employee.getUrlImage();
         this.rol = employee.getRol();
     }
 }
