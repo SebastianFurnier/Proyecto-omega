@@ -19,6 +19,7 @@ public class Employee extends Person implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Rol rol;
     private String urlImage;
+    private String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

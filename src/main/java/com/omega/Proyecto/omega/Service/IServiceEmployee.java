@@ -32,7 +32,7 @@ public interface IServiceEmployee {
 
     void modifyEmployee(Long idOriginal, String newName, String newLastName, String newDni, LocalDate newDate,
                         String newNationality, String newPhoneNumber, String newEmail, Long newSalary, boolean flag,
-                        Rol newRol) throws ErrorDataException, ObjectNFException;
+                        Rol newRol, String urlImage) throws ErrorDataException, ObjectNFException;
 
     Employee activateEmployee(Long id) throws ObjectNFException;
 }

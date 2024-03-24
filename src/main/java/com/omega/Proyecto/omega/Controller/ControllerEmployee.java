@@ -31,7 +31,8 @@ public class ControllerEmployee {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody Employee request) throws ErrorDataException, IOException {
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody Employee request)
+            throws ErrorDataException, IOException {
         return ResponseEntity.ok(authenticationService.register(request));
     }
 
@@ -73,10 +74,12 @@ public class ControllerEmployee {
                                       @RequestParam(required = false, name = "newEmail") String newEmail,
                                       @RequestParam(required = false, name = "newSalary") Long newSalary,
                                       @RequestParam(required = false, name = "flag") boolean flag,
-                                      @RequestParam(required = false, name = "rol") Rol newRol)
+                                      @RequestParam(required = false, name = "rol") Rol newRol,
+                                      @RequestParam(required = false, name = "urlImage") String urlImage)
             throws ErrorDataException, ObjectNFException {
 
-        IServEmplo.modifyEmployee(id, newName, newLastName, newDni, newDate, newNationality, newPhoneNumber, newEmail, newSalary, flag, newRol);
+        IServEmplo.modifyEmployee(id, newName, newLastName, newDni, newDate, newNationality, newPhoneNumber,
+                newEmail, newSalary, flag, newRol, urlImage);
 
         return new EmployeeDTO(IServEmplo.getEmployee(id));
     }
@@ -89,7 +92,8 @@ public class ControllerEmployee {
     }
 
     @GetMapping("/getEmployeeByFlagAndId/{flag}/{id}")
-    public EmployeeDTO getEmployeeByFlagAndId(@PathVariable boolean flag, @PathVariable Long id) throws ObjectNFException, ErrorDataException {
+    public EmployeeDTO getEmployeeByFlagAndId(@PathVariable boolean flag, @PathVariable Long id)
+            throws ObjectNFException, ErrorDataException {
         return new EmployeeDTO(IServEmplo.getEmployeeByFlagAndId(flag, id));
     }
 

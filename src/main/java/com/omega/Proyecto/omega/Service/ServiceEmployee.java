@@ -100,7 +100,7 @@ public class ServiceEmployee implements IServiceEmployee {
     @Override
     public void modifyEmployee(Long idOriginal, String newName, String newLastName, String newDni, LocalDate newDate,
                                String newNationality, String newPhoneNumber, String newEmail, Long newSalary,
-                               boolean flag, Rol newRol) throws ObjectNFException {
+                               boolean flag, Rol newRol, String urlImage) throws ObjectNFException {
 
         Employee emplo = this.getEmployee(idOriginal);
         if (newName != null) {
@@ -129,6 +129,9 @@ public class ServiceEmployee implements IServiceEmployee {
         }
         if (newRol != null) {
             emplo.setRol(newRol);
+        }
+        if (urlImage != null){
+            emplo.setUrlImage(urlImage);
         }
         emplo.setFlag(true);
         IRepoEmplo.save(emplo);
