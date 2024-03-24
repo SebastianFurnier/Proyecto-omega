@@ -11,7 +11,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 @Service
-public class EmailService implements IEmailService{
+public class EmailService implements IEmailService {
     @Autowired
     private JavaMailSender javaMailSender;
     @Autowired

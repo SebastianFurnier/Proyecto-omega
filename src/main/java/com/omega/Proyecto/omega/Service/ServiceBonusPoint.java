@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ServiceBonusPoint implements IServiceBonusPoint{
+public class ServiceBonusPoint implements IServiceBonusPoint {
 
     @Autowired
     private IServiceSale serviceSale;
+
     @Override
     public String getSalesToday(LocalDate today) {
         List<Sale> allSales = serviceSale.getAllSales();
@@ -49,8 +50,7 @@ public class ServiceBonusPoint implements IServiceBonusPoint{
             totalSales += s.getCost();
         }
 
-        return "The number of sales made today is: " + salesToday.size() +
-                ", and they amounted to a total cost of: $" + totalSales + ",including taxes";
+        return "The number of sales made today is: " + salesToday.size() + ", and they amounted to a total cost of: $" + totalSales + ",including taxes";
     }
 
     @Override
@@ -87,7 +87,6 @@ public class ServiceBonusPoint implements IServiceBonusPoint{
             totalSales += s.getCost();
         }
 
-        return "The number of sales made month is: " + listSaleTharMonth.size() +
-                ", and they amounted to a total cost of: $" + totalSales + ",including taxes";
+        return "The number of sales made month is: " + listSaleTharMonth.size() + ", and they amounted to a total cost of: $" + totalSales + ",including taxes";
     }
 }

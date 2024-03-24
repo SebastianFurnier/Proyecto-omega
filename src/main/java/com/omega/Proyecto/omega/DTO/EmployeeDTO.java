@@ -5,11 +5,11 @@ import com.omega.Proyecto.omega.Model.Rol;
 import lombok.Data;
 
 @Data
-public class EmployeeDTO extends PersonDTO{
+public class EmployeeDTO extends PersonDTO {
     private Rol rol;
     private String urlImage;
 
-    public EmployeeDTO(Employee employee){
+    public EmployeeDTO(Employee employee) {
         super.setIdPerson(employee.getId());
         super.setUsername(employee.getUsername());
         super.setName(employee.getName());

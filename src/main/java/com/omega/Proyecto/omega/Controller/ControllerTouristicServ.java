@@ -37,22 +37,22 @@ public class ControllerTouristicServ {
     }
 
     @GetMapping("/getInactive/{id}")
-    public TouristicServ getInactiveService(@PathVariable Long id) throws ObjectNFException{
+    public TouristicServ getInactiveService(@PathVariable Long id) throws ObjectNFException {
         return serviceTouristicServ.getInactiveService(id);
     }
 
     @GetMapping("/getAllActive")
-    public List<TouristicServ> getAllActiveServices(){
+    public List<TouristicServ> getAllActiveServices() {
         return serviceTouristicServ.getAllActiveServices();
     }
 
     @GetMapping("/getAllInactive")
-    public List<TouristicServ> getAllInactiveServices(){
+    public List<TouristicServ> getAllInactiveServices() {
         return serviceTouristicServ.getAllInactiveServices();
     }
 
     @GetMapping("/getAll")
-    public List<TouristicServ> getAllServices(){
+    public List<TouristicServ> getAllServices() {
         return serviceTouristicServ.getAllServices();
     }
 

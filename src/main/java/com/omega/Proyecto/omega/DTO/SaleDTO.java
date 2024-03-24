@@ -3,7 +3,6 @@ package com.omega.Proyecto.omega.DTO;
 
 import com.omega.Proyecto.omega.Model.PaymentMethod;
 import com.omega.Proyecto.omega.Model.Sale;
-import com.omega.Proyecto.omega.Model.TouristicServPack;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,7 @@ public class SaleDTO {
     private boolean active;
     private float cost;
 
-    public SaleDTO(Sale sale){
+    public SaleDTO(Sale sale) {
         this.idSale = sale.getIdSale();
         this.dateSale = sale.getDateSale();
         this.paymentMethod = sale.getPaymentMethod();

@@ -32,7 +32,7 @@ public class ServiceTouristicServPack implements IServiceTouristicServPack {
 
         List<TouristicServ> servList = new ArrayList<>();
 
-        for (Long id: services) {
+        for (Long id : services) {
             Optional<TouristicServ> serv =
                     repositoryTouristicServ.getTouristicServByActiveAndIdServ(true, id);
             serv.ifPresent(servList::add);
@@ -58,7 +58,7 @@ public class ServiceTouristicServPack implements IServiceTouristicServPack {
         Optional<TouristicServPack> optionalTouristicServicesPackage =
                 repositoryPackage.getTouristicServPackByActiveAndIdPack(true, id);
 
-        return optionalTouristicServicesPackage.orElseThrow( () -> new ObjectNFException("ID not found.",
+        return optionalTouristicServicesPackage.orElseThrow(() -> new ObjectNFException("ID not found.",
                 new ExceptionDetails("There is no active package with this ID.", "error",
                         HttpStatus.BAD_REQUEST)));
     }
@@ -68,7 +68,7 @@ public class ServiceTouristicServPack implements IServiceTouristicServPack {
         Optional<TouristicServPack> optionalTouristicServicesPackage =
                 repositoryPackage.getTouristicServPackByActiveAndIdPack(false, id);
 
-        return optionalTouristicServicesPackage.orElseThrow( () -> new ObjectNFException("ID not found.",
+        return optionalTouristicServicesPackage.orElseThrow(() -> new ObjectNFException("ID not found.",
                 new ExceptionDetails("There is no package with this ID.",
                         "error", HttpStatus.BAD_REQUEST)));
 
@@ -80,12 +80,12 @@ public class ServiceTouristicServPack implements IServiceTouristicServPack {
     }
 
     @Override
-    public List<TouristicServPack> getAllInactivePackage(){
+    public List<TouristicServPack> getAllInactivePackage() {
         return repositoryPackage.getTouristicServsPacksByActive(false);
     }
 
     @Override
-    public List<TouristicServPack> getAllActivePackage(){
+    public List<TouristicServPack> getAllActivePackage() {
         return repositoryPackage.getTouristicServsPacksByActive(true);
     }
 

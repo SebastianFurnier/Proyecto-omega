@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface IRepositoryTouristicServ extends JpaRepository<TouristicServ, Long> {
-     List<TouristicServ> getTouristicServByActive(boolean active);
+    List<TouristicServ> getTouristicServByActive(boolean active);
 
-     Optional<TouristicServ> getTouristicServByActiveAndIdServ(boolean active, Long idTouristicService);
+    Optional<TouristicServ> getTouristicServByActiveAndIdServ(boolean active, Long idTouristicService);
 
 }

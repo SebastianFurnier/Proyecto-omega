@@ -32,14 +32,14 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req->req.requestMatchers("/api/employee/login/**")
+                        req -> req.requestMatchers("/api/employee/login/**")
                                 .permitAll()
-                                .requestMatchers("/api/employee/getByUsername/**").hasAnyAuthority("ADMIN","USER")
+                                .requestMatchers("/api/employee/getByUsername/**").hasAnyAuthority("ADMIN", "USER")
                                 .requestMatchers("/doc/**")
                                 .permitAll()
                                 .requestMatchers("/v3/api-docs")
@@ -56,17 +56,17 @@ public class SecurityConfig {
                                 .anyRequest()
                                 .authenticated()
                 ).userDetailsService(serviceUserDetailsImp)
-                .exceptionHandling(e->e.accessDeniedHandler(customAccessDanieHandler)
+                .exceptionHandling(e -> e.accessDeniedHandler(customAccessDanieHandler)
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
 
-                .sessionManagement(session-> session
+                .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

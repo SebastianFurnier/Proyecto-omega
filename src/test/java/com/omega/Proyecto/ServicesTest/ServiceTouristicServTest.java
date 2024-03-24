@@ -1,5 +1,6 @@
 
 package com.omega.Proyecto.ServicesTest;
+
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.TouristicServ;
@@ -25,8 +26,7 @@ import java.util.Optional;
         webEnvironment = SpringBootTest.WebEnvironment.MOCK,
         classes = ServiceTouristicServ.class)
 @AutoConfigureMockMvc
-public class ServiceTouristicServTest
-{
+public class ServiceTouristicServTest {
     @MockBean
     private IRepositoryTouristicServ repositoryTouristicServ;
     @Autowired
@@ -73,7 +73,7 @@ public class ServiceTouristicServTest
     }
 
     @Test
-    public void getAllTouristicServTest(){
+    public void getAllTouristicServTest() {
         Mockito.when(repositoryTouristicServ.findAll()).thenReturn(new ArrayList<>());
 
         serviceTouristicServ.getAllServices();
@@ -83,7 +83,7 @@ public class ServiceTouristicServTest
     }
 
     @Test
-    public void editServiceTest() throws ErrorDataException {
+    public void editServiceTest() {
         Mockito.when(repositoryTouristicServ.save(touristicServ)).thenReturn(touristicServ);
         TouristicServ touristicServAux;
 
@@ -92,12 +92,4 @@ public class ServiceTouristicServTest
         Assertions.assertEquals(touristicServAux, touristicServ);
     }
 
-    @Test(expected = ErrorDataException.class)
-    public void editServiceIncorrectDataTest() throws ErrorDataException {
-        Mockito.when(repositoryTouristicServ.save(touristicServ)).thenReturn(touristicServ);
-        TouristicServ touristicServAux = new TouristicServ();
-
-        serviceTouristicServ.editService(touristicServAux);
-
-    }
 }

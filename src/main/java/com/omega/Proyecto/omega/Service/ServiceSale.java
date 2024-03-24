@@ -33,17 +33,13 @@ public class ServiceSale implements IServiceSale {
 
     private String checkDataSale(Sale sale) {
 
-        if (sale.getClient() == null)
-            return "The client cannot be empty.";
+        if (sale.getClient() == null) return "The client cannot be empty.";
 
-        if (sale.getDateSale().isAfter(LocalDate.now()))
-            return "Incorrect date.";
+        if (sale.getDateSale().isAfter(LocalDate.now())) return "Incorrect date.";
 
-        if (sale.getEmployee() == null)
-            return "Employee cannot be empty";
+        if (sale.getEmployee() == null) return "Employee cannot be empty";
 
-        if (sale.getTouristicServPack() == null)
-            return "Package cannot be empty";
+        if (sale.getTouristicServPack() == null) return "Package cannot be empty";
 
         return null;
     }
@@ -54,17 +50,10 @@ public class ServiceSale implements IServiceSale {
         Client clientAux = serviceClient.getClientByFlagAndId(true, sale.getClient().getId());
         Employee employee = serviceEmployee.getEmployeeByFlagAndId(true, sale.getEmployee().getId());
 
-        if (clientAux == null
-                || clientAux.getEmail() == null
-                || clientAux.getEmail().isEmpty()
-                || touristicServPack == null)
+        if (clientAux == null || clientAux.getEmail() == null || clientAux.getEmail().isEmpty() || touristicServPack == null)
             return;
 
-        List<String> destinations = touristicServPack
-                .getTouristicServs()
-                .stream()
-                .map(TouristicServ::getDestination)
-                .toList();
+        List<String> destinations = touristicServPack.getTouristicServs().stream().map(TouristicServ::getDestination).toList();
 
 
         EmailDTO emailDTO = new EmailDTO();
@@ -86,8 +75,7 @@ public class ServiceSale implements IServiceSale {
             int amountService = serv.getAmountServ();
             serv.setAmountServ(amountService - 1);
 
-            if ((amountService - 1) == 0)
-                serv.setActive(false);
+            if ((amountService - 1) == 0) serv.setActive(false);
             serviceTouristicServ.editService(serv);
         }
     }
@@ -106,8 +94,7 @@ public class ServiceSale implements IServiceSale {
         String errorMessage = checkDataSale(sale);
 
         if (errorMessage != null) {
-            throw new ErrorDataException(errorMessage,
-                    new ExceptionDetails(errorMessage, "error", HttpStatus.BAD_REQUEST));
+            throw new ErrorDataException(errorMessage, new ExceptionDetails(errorMessage, "error", HttpStatus.BAD_REQUEST));
         }
         sale.setActive(true);
 
@@ -117,8 +104,7 @@ public class ServiceSale implements IServiceSale {
 
         repositorySale.save(sale);
 
-        if (sale.getClient() != null)
-            buildMail(sale);
+        if (sale.getClient() != null) buildMail(sale);
 
         return sale;
     }
@@ -133,18 +119,14 @@ public class ServiceSale implements IServiceSale {
 
     @Override
     public Sale getActiveSale(Long id) throws ObjectNFException {
-        Optional<Sale> optionalSale =
-                repositorySale.getSalesByActiveAndIdSale(true, id);
-        return optionalSale.orElseThrow(() -> new ObjectNFException("ID not found.",
-                new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
+        Optional<Sale> optionalSale = repositorySale.getSalesByActiveAndIdSale(true, id);
+        return optionalSale.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
     }
 
     @Override
     public Sale getInactiveSale(Long id) throws ObjectNFException {
-        Optional<Sale> optionalSale =
-                repositorySale.getSalesByActiveAndIdSale(false, id);
-        return optionalSale.orElseThrow(() -> new ObjectNFException("ID not found.",
-                new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
+        Optional<Sale> optionalSale = repositorySale.getSalesByActiveAndIdSale(false, id);
+        return optionalSale.orElseThrow(() -> new ObjectNFException("ID not found.", new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
     }
 
     @Override

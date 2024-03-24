@@ -14,7 +14,7 @@ public class PersonDTO {
     private String name;
     private String lastname;
 
-    public PersonDTO(Person person){
+    public PersonDTO(Person person) {
         this.idPerson = person.getId();
         this.username = person.getUsername();
         this.name = person.getName();

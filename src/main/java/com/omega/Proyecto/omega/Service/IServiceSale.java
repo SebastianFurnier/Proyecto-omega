@@ -11,12 +11,13 @@ import java.util.List;
 public interface IServiceSale {
     Sale createSale(DraftSaleDTO saleDto) throws ErrorDataException, ObjectNFException, MessagingException;
 
-    public void deleteSale(Long id) throws ObjectNFException;
-    public Sale getActiveSale(Long id) throws ObjectNFException;
+    void deleteSale(Long id) throws ObjectNFException;
+
+    Sale getActiveSale(Long id) throws ObjectNFException;
 
     Sale getInactiveSale(Long id) throws ObjectNFException;
 
-    public List<Sale> getAllSales();
+    List<Sale> getAllSales();
 
     List<Sale> getAllActiveSales();
 

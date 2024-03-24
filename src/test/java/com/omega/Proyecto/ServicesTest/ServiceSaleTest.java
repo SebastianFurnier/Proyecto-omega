@@ -28,8 +28,7 @@ import static org.mockito.ArgumentMatchers.any;
 @SpringBootTest(
         classes = ServiceSale.class)
 @AutoConfigureMockMvc
-public class ServiceSaleTest
-{
+public class ServiceSaleTest {
     @MockBean
     private IRepositorySale repositorySale;
     @MockBean
@@ -50,8 +49,8 @@ public class ServiceSaleTest
     private final TouristicServPack pack = new TouristicServPack();
     private final List<TouristicServ> touristicServList = new ArrayList<>();
 
-    private final Sale newSale = new Sale(1L,  LocalDate.now(), PaymentMethod.DEBIT,
-            new Employee(),  new Client(), new TouristicServPack(), true, 1000);
+    private final Sale newSale = new Sale(1L, LocalDate.now(), PaymentMethod.DEBIT,
+            new Employee(), new Client(), new TouristicServPack(), true, 1000);
 
     private final DraftSaleDTO draftSaleDTO = new DraftSaleDTO();
 
@@ -103,7 +102,7 @@ public class ServiceSaleTest
     }
 
     @Test
-    public void getAllSale(){
+    public void getAllSale() {
         List<Sale> saleList = new ArrayList<>();
         Mockito.when(repositorySale.findAll()).thenReturn(saleList);
 

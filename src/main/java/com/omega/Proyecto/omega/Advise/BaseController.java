@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class BaseController {
 
     @ExceptionHandler(value = ObjectNFException.class)
-    public ResponseEntity<ExceptionDetails> handleObjectNotFoundException(ObjectNFException exception){
+    public ResponseEntity<ExceptionDetails> handleObjectNotFoundException(ObjectNFException exception) {
         return new ResponseEntity<>(exception.getDetails(), exception.getDetails().getStatus());
     }
 
     @ExceptionHandler(value = ErrorDataException.class)
-    public ResponseEntity<ExceptionDetails> handleErrorDataException(ErrorDataException exception){
+    public ResponseEntity<ExceptionDetails> handleErrorDataException(ErrorDataException exception) {
         return new ResponseEntity<>(exception.getDetails(), exception.getDetails().getStatus());
     }
 }

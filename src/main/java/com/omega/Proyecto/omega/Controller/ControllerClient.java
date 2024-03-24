@@ -1,7 +1,6 @@
 package com.omega.Proyecto.omega.Controller;
 
 import com.omega.Proyecto.omega.DTO.ClientDTO;
-import com.omega.Proyecto.omega.DTO.EmployeeDTO;
 import com.omega.Proyecto.omega.DTO.PersonDTO;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
@@ -60,7 +59,7 @@ public class ControllerClient {
                                   @RequestParam(required = false, name = "newPhoneNumbre") String newPhoneNumbre,
                                   @RequestParam(required = false, name = "newEmail") String newEmail,
                                   @RequestParam(required = false, name = "flag") boolean flag) throws ErrorDataException, ObjectNFException {
-        IServClient.modifyClient(id,newName,newLastName,newDni, newDate, newNationality, newPhoneNumbre, newEmail, flag);
+        IServClient.modifyClient(id, newName, newLastName, newDni, newDate, newNationality, newPhoneNumbre, newEmail, flag);
 
         return new PersonDTO(IServClient.getClient(id));
     }
@@ -75,7 +74,7 @@ public class ControllerClient {
         return new PersonDTO(IServClient.getClientByFlagAndId(flag, id));
     }
 
-    @GetMapping("activate/{long}")
+    @GetMapping("activate/{id}")
     public ClientDTO getActiveClient(@PathVariable Long id) throws ObjectNFException {
         return new ClientDTO(IServClient.activateClient(id));
     }

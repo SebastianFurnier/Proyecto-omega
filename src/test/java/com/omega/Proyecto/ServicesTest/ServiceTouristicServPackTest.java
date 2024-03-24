@@ -1,4 +1,5 @@
 package com.omega.Proyecto.ServicesTest;
+
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.TouristicServPack;
@@ -27,8 +28,7 @@ import java.util.Optional;
         webEnvironment = SpringBootTest.WebEnvironment.MOCK,
         classes = ServiceTouristicServPack.class)
 @AutoConfigureMockMvc
-public class ServiceTouristicServPackTest
-{
+public class ServiceTouristicServPackTest {
     @MockBean
     private IRepositoryTouristicServPack repoTouristicServPack;
     @MockBean
@@ -37,7 +37,7 @@ public class ServiceTouristicServPackTest
     private ServiceTouristicServPack serviceTouristicServPack;
 
     private final TouristicServPack touristicServPack = new TouristicServPack();
-    private final TouristicServ touristicServ = new TouristicServ(1L,1, TypeService.FLY,
+    private final TouristicServ touristicServ = new TouristicServ(1L, 1, TypeService.FLY,
             "Pasaje de avion", "Brasil", LocalDate.now().plusDays(7),
             10000, true);
 
@@ -54,7 +54,7 @@ public class ServiceTouristicServPackTest
     }
 
     @Test(expected = ErrorDataException.class)
-    public void createTouristicServPackIncorrectData() throws ErrorDataException{
+    public void createTouristicServPackIncorrectData() throws ErrorDataException {
         serviceTouristicServPack.createPackage(new ArrayList<>());
     }
 
@@ -78,7 +78,7 @@ public class ServiceTouristicServPackTest
     }
 
     @Test
-    public void getAllTouristicPackageTest(){
+    public void getAllTouristicPackageTest() {
         List<TouristicServPack> touristicServicesPackagesList = new ArrayList<>();
         touristicServicesPackagesList.add(touristicServPack);
         Mockito.when(repoTouristicServPack.findAll()).thenReturn(touristicServicesPackagesList);

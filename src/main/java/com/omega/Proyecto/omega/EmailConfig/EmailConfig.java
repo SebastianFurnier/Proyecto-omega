@@ -1,9 +1,7 @@
 package com.omega.Proyecto.omega.EmailConfig;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,7 +13,7 @@ import java.util.Properties;
 @Configuration
 public class EmailConfig {
 
-    private Properties getMailProperties(){
+    private Properties getMailProperties() {
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.auth", "true");
@@ -37,7 +35,7 @@ public class EmailConfig {
                 if (line.contains(text))
                     return line.substring(line.indexOf("=") + 1);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -54,7 +52,7 @@ public class EmailConfig {
     }
 
     @Bean
-    public ResourceLoader resourceLoader(){
+    public ResourceLoader resourceLoader() {
         return new DefaultResourceLoader();
     }
 }

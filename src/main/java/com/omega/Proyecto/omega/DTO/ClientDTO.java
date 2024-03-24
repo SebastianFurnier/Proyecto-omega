@@ -10,7 +10,8 @@ public class ClientDTO {
     private String lastName;
     private String email;
     private String phoneNumber;
-    public ClientDTO(Client client){
+
+    public ClientDTO(Client client) {
         this.setId(client.getId());
         this.setName(client.getName());
         this.setLastName(client.getLastName());

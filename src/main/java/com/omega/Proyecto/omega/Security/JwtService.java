@@ -30,7 +30,7 @@ public class JwtService {
                 if (line.contains("key="))
                     return line.substring(line.indexOf("=") + 1);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -58,7 +58,7 @@ public class JwtService {
     }
 
     private Date extractExpiration(String token) throws IOException {
-        return extractClaim(token,Claims::getExpiration);
+        return extractClaim(token, Claims::getExpiration);
     }
 
     private Claims extractAllClaims(String token) throws IOException {

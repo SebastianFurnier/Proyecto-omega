@@ -1,13 +1,9 @@
 package com.omega.Proyecto.omega.Controller;
 
 import com.omega.Proyecto.omega.DTO.DraftSaleDTO;
-import com.omega.Proyecto.omega.DTO.EmployeeDTO;
-import com.omega.Proyecto.omega.DTO.PersonDTO;
 import com.omega.Proyecto.omega.DTO.SaleDTO;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
-import com.omega.Proyecto.omega.Model.Client;
-import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Model.Sale;
 import com.omega.Proyecto.omega.Service.ServiceSale;
 import jakarta.mail.MessagingException;
@@ -24,7 +20,7 @@ public class ControllerSale {
     @Autowired
     private ServiceSale serviceSale;
 
-    private List<SaleDTO> makeSalesDTOList(List<Sale> saleList){
+    private List<SaleDTO> makeSalesDTOList(List<Sale> saleList) {
         return saleList.stream()
                 .map(SaleDTO::new).collect(Collectors.toList());
     }
@@ -45,24 +41,24 @@ public class ControllerSale {
     }
 
     @GetMapping("/getInactiveSale/{id}")
-    public SaleDTO getInactiveSale(@PathVariable Long id) throws ObjectNFException{
+    public SaleDTO getInactiveSale(@PathVariable Long id) throws ObjectNFException {
         return new SaleDTO(serviceSale.getInactiveSale(id));
     }
 
     @GetMapping("/getAllActive")
-    public List<SaleDTO> getAllActiveSales(){
+    public List<SaleDTO> getAllActiveSales() {
         List<Sale> saleList = serviceSale.getAllActiveSales();
         return makeSalesDTOList(saleList);
     }
 
     @GetMapping("/getAllInactive")
-    public List<SaleDTO> getAllInactiveSales(){
+    public List<SaleDTO> getAllInactiveSales() {
         List<Sale> saleList = serviceSale.getAllInactiveSales();
         return makeSalesDTOList(saleList);
     }
 
     @GetMapping("/getAllSale")
-    public List<SaleDTO> getAllSale(){
+    public List<SaleDTO> getAllSale() {
         List<Sale> saleList = serviceSale.getAllSales();
         return makeSalesDTOList(saleList);
     }

@@ -16,43 +16,43 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ServiceEmployee implements IServiceEmployee{
+public class ServiceEmployee implements IServiceEmployee {
 
     @Autowired
     IRepositoryEmployee IRepoEmplo;
 
-    private String checkDataEmployee(Employee emplo){
+    private String checkDataEmployee(Employee emplo) {
         Long adult = 18L;
 
-        if(emplo.getUsername() !=null && emplo.getUsername().isEmpty()){
+        if (emplo.getUsername() != null && emplo.getUsername().isEmpty()) {
             return "Username or username is empty";
         }
 
-        if(emplo.getEmail() !=null && emplo.getEmail().isEmpty()){
+        if (emplo.getEmail() != null && emplo.getEmail().isEmpty()) {
             return "The field of Email cannot be empty";
         }
 
-        if(emplo.getDni() != null && emplo.getDni().isEmpty()){
+        if (emplo.getDni() != null && emplo.getDni().isEmpty()) {
             return "The field of Dni cannot be empty";
         }
 
-        if (emplo.getPhoneNumber() != null && emplo.getPhoneNumber().isEmpty()){
+        if (emplo.getPhoneNumber() != null && emplo.getPhoneNumber().isEmpty()) {
             return "The field of Phone cannot be empty";
         }
 
-        if (emplo.getBirthDay().isAfter(LocalDate.now())){
+        if (emplo.getBirthDay().isAfter(LocalDate.now())) {
             return "Incorrect date.";
         }
 
         LocalDate dateNow = LocalDate.now();
         LocalDate birthday = emplo.getBirthDay();
-        Long diference = ChronoUnit.YEARS.between(birthday,dateNow);
+        Long diference = ChronoUnit.YEARS.between(birthday, dateNow);
 
-        if (diference < adult){
+        if (diference < adult) {
             return "The age is not sufficient for register ";
         }
 
-        if (emplo.getSalary() < 0L){
+        if (emplo.getSalary() < 0L) {
             return "The salary can´t smallest to 0";
         }
 
@@ -62,15 +62,15 @@ public class ServiceEmployee implements IServiceEmployee{
     @Override
     public Employee createEmployee(Employee emplo) throws ErrorDataException {
 
-        if(IRepoEmplo.existsByUsername(emplo.getUsername())){
+        if (IRepoEmplo.existsByUsername(emplo.getUsername())) {
             String errorMessage = "This username already exist";
-            throw new ErrorDataException(errorMessage, new ExceptionDetails(errorMessage,"error",
+            throw new ErrorDataException(errorMessage, new ExceptionDetails(errorMessage, "error",
                     HttpStatus.BAD_REQUEST));
         }
 
-        String errorMessage = checkDataEmployee(emplo) ;
-        if (errorMessage != null){
-            throw new ErrorDataException(errorMessage,new ExceptionDetails(errorMessage,"error",
+        String errorMessage = checkDataEmployee(emplo);
+        if (errorMessage != null) {
+            throw new ErrorDataException(errorMessage, new ExceptionDetails(errorMessage, "error",
                     HttpStatus.BAD_REQUEST));
         }
         emplo.setFlag(true);
@@ -87,9 +87,9 @@ public class ServiceEmployee implements IServiceEmployee{
 
     @Override
     public Employee getEmployee(Long id) throws ObjectNFException {
-        Optional<Employee> optionalEmployee= IRepoEmplo.findById(id);
-        return optionalEmployee.orElseThrow(()-> new ObjectNFException("ID not found",
-                new ExceptionDetails("ID not found","error",HttpStatus.NOT_FOUND)));
+        Optional<Employee> optionalEmployee = IRepoEmplo.findById(id);
+        return optionalEmployee.orElseThrow(() -> new ObjectNFException("ID not found",
+                new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
     }
 
     @Override
@@ -100,7 +100,7 @@ public class ServiceEmployee implements IServiceEmployee{
     @Override
     public void modifyEmployee(Long idOriginal, String newName, String newLastName, String newDni, LocalDate newDate,
                                String newNationality, String newPhoneNumber, String newEmail, Long newSalary,
-                               boolean flag, Rol newRol) throws ErrorDataException, ObjectNFException {
+                               boolean flag, Rol newRol) throws ObjectNFException {
 
         Employee emplo = this.getEmployee(idOriginal);
         if (newName != null) {
@@ -147,11 +147,11 @@ public class ServiceEmployee implements IServiceEmployee{
     }
 
     @Override
-    public Employee getEmployeeByFlagAndId(boolean flag, Long id) throws ObjectNFException{
-        Optional<Employee> optionalEmployee= IRepoEmplo.getEmployeeByFlagAndId(flag,id);
+    public Employee getEmployeeByFlagAndId(boolean flag, Long id) throws ObjectNFException {
+        Optional<Employee> optionalEmployee = IRepoEmplo.getEmployeeByFlagAndId(flag, id);
 
-        return optionalEmployee.orElseThrow(()-> new ObjectNFException("Id is not found.",
-                new ExceptionDetails("ID is not found","error", HttpStatus.NOT_FOUND)));
+        return optionalEmployee.orElseThrow(() -> new ObjectNFException("Id is not found.",
+                new ExceptionDetails("ID is not found", "error", HttpStatus.NOT_FOUND)));
     }
 
     @Override
@@ -167,9 +167,9 @@ public class ServiceEmployee implements IServiceEmployee{
     @Override
     public Employee findByUsernameFront(String username) throws ObjectNFException {
         Optional<Employee> optionalEmployee = IRepoEmplo.getByUsername(username);
-            return optionalEmployee.orElseThrow(()-> new ObjectNFException("ID not found",
-                    new ExceptionDetails("ID not found","error",HttpStatus.NOT_FOUND)));
-        }
+        return optionalEmployee.orElseThrow(() -> new ObjectNFException("ID not found",
+                new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
+    }
 }
 
 

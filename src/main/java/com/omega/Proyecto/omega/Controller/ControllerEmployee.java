@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -75,9 +74,9 @@ public class ControllerEmployee {
                                       @RequestParam(required = false, name = "newSalary") Long newSalary,
                                       @RequestParam(required = false, name = "flag") boolean flag,
                                       @RequestParam(required = false, name = "rol") Rol newRol)
-                                      throws ErrorDataException, ObjectNFException {
+            throws ErrorDataException, ObjectNFException {
 
-        IServEmplo.modifyEmployee(id,newName,newLastName,newDni,newDate,newNationality,newPhoneNumber,newEmail,newSalary,flag,newRol);
+        IServEmplo.modifyEmployee(id, newName, newLastName, newDni, newDate, newNationality, newPhoneNumber, newEmail, newSalary, flag, newRol);
 
         return new EmployeeDTO(IServEmplo.getEmployee(id));
     }
@@ -94,7 +93,7 @@ public class ControllerEmployee {
         return new EmployeeDTO(IServEmplo.getEmployeeByFlagAndId(flag, id));
     }
 
-    @GetMapping("activate/{long}")
+    @GetMapping("activate/{id}")
     public EmployeeDTO getActiveEmployee(@PathVariable Long id) throws ObjectNFException {
         return new EmployeeDTO(IServEmplo.activateEmployee(id));
     }

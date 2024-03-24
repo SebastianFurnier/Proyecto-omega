@@ -25,8 +25,7 @@ import java.util.Optional;
         webEnvironment = SpringBootTest.WebEnvironment.MOCK,
         classes = ServiceClient.class)
 @AutoConfigureMockMvc
-public class ServiceClientTest
-{
+public class ServiceClientTest {
     @MockBean
     private IRepositoryClient repoClient;
     @Autowired
@@ -58,31 +57,31 @@ public class ServiceClientTest
 
         Client clientAux = serviceClient.getClient(id);
 
-        Assertions.assertEquals(clientAux,newClient);
+        Assertions.assertEquals(clientAux, newClient);
     }
 
     @Test
-    public void getAllClientTest(){
+    public void getAllClientTest() {
         List<Client> clientList = new ArrayList<>();
         Mockito.when(repoClient.findAll()).thenReturn(clientList);
 
         List<Client> clientListAux = serviceClient.getAllClient();
 
-        Assertions.assertEquals(clientListAux,clientList);
+        Assertions.assertEquals(clientListAux, clientList);
     }
 
     @Test
-    public void getClientsByFlagTest(){
+    public void getClientsByFlagTest() {
         List<Client> clientList = serviceClient.getClientsByFlag(true);
         Mockito.when(repoClient.findAll()).thenReturn(clientList);
 
         List<Client> clientListAux = serviceClient.getClientsByFlag(true);
 
-        Assertions.assertEquals(clientList,clientListAux);
+        Assertions.assertEquals(clientList, clientListAux);
     }
 
     @Test
-    public void deleteClientTest() throws ObjectNFException{
+    public void deleteClientTest() throws ObjectNFException {
         Client cli = new Client();
         cli.setId(1L);
         cli.setFlag(true);
@@ -93,7 +92,7 @@ public class ServiceClientTest
         Assertions.assertFalse(cli.isFlag());
     }
 
-    @Test (expected = ErrorDataException.class)
+    @Test(expected = ErrorDataException.class)
     public void createClientTestException() throws ErrorDataException {
         newClient.setId(1L);
         newClient.setName("Aux");
@@ -107,33 +106,33 @@ public class ServiceClientTest
         serviceClient.createClient(newClient);
     }
 
-    @Test (expected = ObjectNFException.class)
-    public void deleteClientExceptionTest() throws ObjectNFException{
+    @Test(expected = ObjectNFException.class)
+    public void deleteClientExceptionTest() throws ObjectNFException {
         Client cli = new Client();
         cli.setId(1L);
         cli.setFlag(true);
         Mockito.when(repoClient.findById(cli.getId())).thenReturn(Optional.of(cli));
 
-        serviceClient.getClientByFlagAndId(false,1L);
+        serviceClient.getClientByFlagAndId(false, 1L);
 
         Assertions.assertTrue(cli.isFlag());
     }
 
-    @Test (expected = ObjectNFException.class)
-    public void getClientByFlagAndIdTest() throws ObjectNFException{
+    @Test(expected = ObjectNFException.class)
+    public void getClientByFlagAndIdTest() throws ObjectNFException {
         Long idOne = 1L;
         Long idTwo = 2L;
-        Mockito.when(repoClient.getClientByFlagAndId(true,idOne)).thenReturn(Optional.of(newClient));
+        Mockito.when(repoClient.getClientByFlagAndId(true, idOne)).thenReturn(Optional.of(newClient));
 
-        Assertions.assertEquals(serviceClient.getClientByFlagAndId(true,idTwo),newClient);
+        Assertions.assertEquals(serviceClient.getClientByFlagAndId(true, idTwo), newClient);
     }
 
-    @Test (expected = ObjectNFException.class)
-    public void modifyClientTest() throws ObjectNFException{
+    @Test(expected = ObjectNFException.class)
+    public void modifyClientTest() throws ObjectNFException {
         Mockito.when(repoClient.save(newClient)).thenReturn(newClient);
         newClient.setId(2L);
 
-       Assertions.assertEquals(serviceClient.getClient(1L),newClient);
+        Assertions.assertEquals(serviceClient.getClient(1L), newClient);
     }
 
 }

@@ -13,13 +13,16 @@ import java.util.Optional;
 
 public interface IServiceEmployee {
     Employee createEmployee(Employee emplo) throws ErrorDataException;
+
     void deleteEmployee(Long id) throws ObjectNFException;
+
     Employee getEmployee(Long id) throws ObjectNFException;
+
     List<Employee> getAllEmployee();
 
     List<Employee> getEmployeesByFlag(boolean flag);
 
-    Employee getEmployeeByFlagAndId(boolean flag,Long id) throws ErrorDataException,ObjectNFException;
+    Employee getEmployeeByFlagAndId(boolean flag, Long id) throws ErrorDataException, ObjectNFException;
 
     Boolean existsByUsername(String username);
 

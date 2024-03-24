@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,20 +63,20 @@ public class ServiceEmployeeTest {
 
         Employee employeeAux = servEmployee.getEmployee(id);
 
-        Assertions.assertEquals(employeeAux,newEmployee);
+        Assertions.assertEquals(employeeAux, newEmployee);
     }
 
     @Test
-    public void getAllEmployeeTest(){
+    public void getAllEmployeeTest() {
         List<Employee> employeeList = new ArrayList<>();
         Mockito.when(repoEmployee.findAll()).thenReturn(employeeList);
 
         List<Employee> employeeListAux = servEmployee.getAllEmployee();
 
-        Assertions.assertEquals(employeeListAux,employeeList);
+        Assertions.assertEquals(employeeListAux, employeeList);
     }
 
-    @Test (expected = ErrorDataException.class)
+    @Test(expected = ErrorDataException.class)
     public void createEmployeeTestExceptions() throws ErrorDataException {
         Employee emploAux = new Employee();
         Mockito.when(repoEmployee.save(emploAux)).thenReturn(emploAux);
@@ -93,11 +94,11 @@ public class ServiceEmployeeTest {
 
         Employee employee = servEmployee.createEmployee(emploAux);
 
-        Assertions.assertEquals(emploAux,employee);
+        Assertions.assertEquals(emploAux, employee);
     }
 
     @Test
-    public void deleteEmployeeTest() throws ObjectNFException{
+    public void deleteEmployeeTest() throws ObjectNFException {
         Employee emplo = new Employee();
         emplo.setId(1L);
         emplo.setFlag(true);
@@ -108,21 +109,21 @@ public class ServiceEmployeeTest {
         Assertions.assertFalse(emplo.isFlag());
     }
 
-    @Test (expected = ObjectNFException.class)
-    public void getEmployeeByFlagAndIdTest() throws ObjectNFException{
+    @Test(expected = ObjectNFException.class)
+    public void getEmployeeByFlagAndIdTest() throws ObjectNFException {
         Long id = 1L;
         Long idAux = 2L;
-        Mockito.when(repoEmployee.getEmployeeByFlagAndId(true,id)).thenReturn(Optional.of(newEmployee));
+        Mockito.when(repoEmployee.getEmployeeByFlagAndId(true, id)).thenReturn(Optional.of(newEmployee));
 
-        Assertions.assertEquals(servEmployee.getEmployeeByFlagAndId(true,idAux),newEmployee);
+        Assertions.assertEquals(servEmployee.getEmployeeByFlagAndId(true, idAux), newEmployee);
     }
 
-    @Test (expected = ObjectNFException.class)
-    public void modifyClientTest() throws ObjectNFException{
+    @Test(expected = ObjectNFException.class)
+    public void modifyClientTest() throws ObjectNFException {
         Mockito.when(repoEmployee.save(newEmployee)).thenReturn(newEmployee);
         newEmployee.setId(2L);
 
-        Assertions.assertEquals(servEmployee.getEmployee(1L),newEmployee);
+        Assertions.assertEquals(servEmployee.getEmployee(1L), newEmployee);
     }
 
 }

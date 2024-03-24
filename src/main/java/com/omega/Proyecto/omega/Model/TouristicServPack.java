@@ -23,16 +23,16 @@ public class TouristicServPack {
     private boolean discount;
     private boolean active;
 
-    public void setTouristicServs(List<TouristicServ> services){
+    public void setTouristicServs(List<TouristicServ> services) {
         touristicServs = services;
         this.active = true;
         checkCost();
     }
 
-    private void checkCost(){
+    private void checkCost() {
         discount = touristicServs.size() > 1;
         costPackage = 0;
-        for(TouristicServ serv : touristicServs){
+        for (TouristicServ serv : touristicServs) {
             costPackage = costPackage + serv.getCost();
         }
     }
