@@ -15,38 +15,38 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ServiceClient implements IServiceClient{
+public class ServiceClient implements IServiceClient {
     @Autowired
     IRepositoryClient repositoryClient;
 
-    private String checkDataClient(Client client){
+    private String checkDataClient(Client client) {
         LocalDate dateNow = LocalDate.now();
         LocalDate birthday = client.getBirthDay();
-        long diference = ChronoUnit.YEARS.between(birthday,dateNow);
+        long diference = ChronoUnit.YEARS.between(birthday, dateNow);
         long adult = 18L;
 
 
-        if(client.getEmail().isEmpty()){
+        if (client.getEmail().isEmpty()) {
             return "Email is empty";
         }
 
-        if(client.getEmail().isEmpty()){
+        if (client.getEmail().isEmpty()) {
             return "The field of Email cannot be empty";
         }
 
-        if(client.getDni().isEmpty()){
+        if (client.getDni().isEmpty()) {
             return "The field of Dni cannot be empty";
         }
 
-        if (client.getPhoneNumber().isEmpty()){
+        if (client.getPhoneNumber().isEmpty()) {
             return "The field of Phone cannot be empty";
         }
 
-        if (client.getBirthDay().isAfter(LocalDate.now())){
+        if (client.getBirthDay().isAfter(LocalDate.now())) {
             return "Incorrect date.";
         }
 
-        if (diference < adult){
+        if (diference < adult) {
             return "The age is not sufficient for register ";
         }
 
@@ -57,11 +57,11 @@ public class ServiceClient implements IServiceClient{
     @Override
     public Client createClient(Client cli) throws ErrorDataException {
         String errorMessage = checkDataClient(cli);
-        if (errorMessage != null){
-            throw new ErrorDataException(errorMessage,new ExceptionDetails(errorMessage,"error", HttpStatus.BAD_REQUEST));
+        if (errorMessage != null) {
+            throw new ErrorDataException(errorMessage, new ExceptionDetails(errorMessage, "error", HttpStatus.BAD_REQUEST));
         }
         cli.setFlag(true);
-       return repositoryClient.save(cli);
+        return repositoryClient.save(cli);
     }
 
     @Override
@@ -77,9 +77,8 @@ public class ServiceClient implements IServiceClient{
         Optional<Client> optionalClient = repositoryClient.findById(id);
 
         return optionalClient.orElseThrow(() -> new ObjectNFException("ID not found",
-                new ExceptionDetails("ID not found","error",HttpStatus.NOT_FOUND)));
+                new ExceptionDetails("ID not found", "error", HttpStatus.NOT_FOUND)));
     }
-
 
 
     @Override
@@ -113,7 +112,8 @@ public class ServiceClient implements IServiceClient{
         if (newEmail != null) {
             cli.setEmail(newEmail);
         }
-        cli.setFlag(flag);
+
+        cli.setFlag(true);
 
         repositoryClient.save(cli);
     }
@@ -124,11 +124,17 @@ public class ServiceClient implements IServiceClient{
     }
 
     @Override
-    public Client getClientByFlagAndId(boolean flag, Long idClient) throws ObjectNFException{
+    public Client getClientByFlagAndId(boolean flag, Long idClient) throws ObjectNFException {
         Optional<Client> optionalClient = repositoryClient.getClientByFlagAndId(flag, idClient);
 
-        return optionalClient.orElseThrow(()-> new ObjectNFException("Id is not found"
-                , new ExceptionDetails ("Id is not found","error",HttpStatus.NOT_FOUND)));
+        return optionalClient.orElseThrow(() -> new ObjectNFException("Id is not found"
+                , new ExceptionDetails("Id is not found", "error", HttpStatus.NOT_FOUND)));
     }
 
+    @Override
+    public Client activateClient(Long id) throws ObjectNFException {
+        Client client = this.getClient(id);
+        client.setFlag(true);
+        return client;
+    }
 }

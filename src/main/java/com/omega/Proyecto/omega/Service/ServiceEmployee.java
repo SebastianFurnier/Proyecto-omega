@@ -98,7 +98,10 @@ public class ServiceEmployee implements IServiceEmployee{
     }
 
     @Override
-    public void modifyEmployee(Long idOriginal, String newName, String newLastName, String newDni, LocalDate newDate, String newNationality, String newPhoneNumber, String newEmail, Long newSalary, boolean flag, Rol newRol) throws ErrorDataException, ObjectNFException {
+    public void modifyEmployee(Long idOriginal, String newName, String newLastName, String newDni, LocalDate newDate,
+                               String newNationality, String newPhoneNumber, String newEmail, Long newSalary,
+                               boolean flag, Rol newRol) throws ErrorDataException, ObjectNFException {
+
         Employee emplo = this.getEmployee(idOriginal);
         if (newName != null) {
             emplo.setName(newName);
@@ -128,6 +131,14 @@ public class ServiceEmployee implements IServiceEmployee{
             emplo.setRol(newRol);
         }
         emplo.setFlag(true);
+        IRepoEmplo.save(emplo);
+    }
+
+    @Override
+    public Employee activateEmployee(Long id) throws ObjectNFException {
+        Employee emplo = this.getEmployee(id);
+        emplo.setFlag(true);
+        return emplo;
     }
 
     @Override
