@@ -31,18 +31,18 @@ public class ServiceSale implements IServiceSale {
     @Autowired
     private IServiceTouristicServ serviceTouristicServ;
 
-    private String checkDataSale(Sale sale){
+    private String checkDataSale(Sale sale) {
 
-        if(sale.getClient() == null)
+        if (sale.getClient() == null)
             return "The client cannot be empty.";
 
-        if(sale.getDateSale().isAfter(LocalDate.now()))
+        if (sale.getDateSale().isAfter(LocalDate.now()))
             return "Incorrect date.";
 
-        if(sale.getEmployee() == null)
+        if (sale.getEmployee() == null)
             return "Employee cannot be empty";
 
-        if(sale.getTouristicServPack() == null)
+        if (sale.getTouristicServPack() == null)
             return "Package cannot be empty";
 
         return null;
@@ -82,11 +82,11 @@ public class ServiceSale implements IServiceSale {
 
     private void discoutAmountServices(TouristicServPack pack) throws ErrorDataException {
         List<TouristicServ> touristicServList = pack.getTouristicServs();
-        for (TouristicServ serv: touristicServList) {
+        for (TouristicServ serv : touristicServList) {
             int amountService = serv.getAmountServ();
-            serv.setAmountServ(amountService-1);
+            serv.setAmountServ(amountService - 1);
 
-            if((amountService-1) == 0)
+            if ((amountService - 1) == 0)
                 serv.setActive(false);
             serviceTouristicServ.editService(serv);
         }
@@ -105,7 +105,7 @@ public class ServiceSale implements IServiceSale {
 
         String errorMessage = checkDataSale(sale);
 
-        if (errorMessage !=  null){
+        if (errorMessage != null) {
             throw new ErrorDataException(errorMessage,
                     new ExceptionDetails(errorMessage, "error", HttpStatus.BAD_REQUEST));
         }
@@ -117,7 +117,7 @@ public class ServiceSale implements IServiceSale {
 
         repositorySale.save(sale);
 
-        if(sale.getClient() != null)
+        if (sale.getClient() != null)
             buildMail(sale);
 
         return sale;
@@ -153,12 +153,12 @@ public class ServiceSale implements IServiceSale {
     }
 
     @Override
-    public List<Sale> getAllActiveSales(){
+    public List<Sale> getAllActiveSales() {
         return repositorySale.getSaleByActive(true);
     }
 
     @Override
-    public List<Sale> getAllInactiveSales(){
+    public List<Sale> getAllInactiveSales() {
         return repositorySale.getSaleByActive(false);
     }
 }

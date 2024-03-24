@@ -14,19 +14,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ServiceTouristicServ implements IServiceTouristicServ
-{
+public class ServiceTouristicServ implements IServiceTouristicServ {
     @Autowired
     private IRepositoryTouristicServ repositoryTouristicServ;
 
-    private String checkDataService(TouristicServ touristicServ){
-        if(touristicServ.getCost() <= 0)
+    private String checkDataService(TouristicServ touristicServ) {
+        if (touristicServ.getCost() <= 0)
             return "Cost must be greater than zero.";
 
-        if(touristicServ.getDestination() == null || touristicServ.getDestination().isBlank())
+        if (touristicServ.getDestination() == null || touristicServ.getDestination().isBlank())
             return "Destination cannot be empty";
 
-        if(touristicServ.getServiceDate().isBefore(LocalDate.now()))
+        if (touristicServ.getServiceDate().isBefore(LocalDate.now()))
             return "Date incorrect.";
 
         return null;
@@ -35,7 +34,7 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     @Override
     public TouristicServ createService(TouristicServ touristicServ) throws ErrorDataException {
         String errorMassage = checkDataService(touristicServ);
-        if (errorMassage != null){
+        if (errorMassage != null) {
             throw new ErrorDataException("Incorrect data.",
                     new ExceptionDetails(errorMassage, "error", HttpStatus.BAD_REQUEST));
         }
@@ -50,8 +49,8 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     }
 
     @Override
-    public void deleteServices(List<Long> services) throws ObjectNFException, ErrorDataException{
-        for (Long id: services) {
+    public void deleteServices(List<Long> services) throws ObjectNFException, ErrorDataException {
+        for (Long id : services) {
             deleteService(id);
         }
     }
@@ -81,12 +80,12 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     }
 
     @Override
-    public List<TouristicServ> getAllInactiveServices(){
+    public List<TouristicServ> getAllInactiveServices() {
         return repositoryTouristicServ.getTouristicServByActive(false);
     }
 
     @Override
-    public List<TouristicServ> getAllServices(){
+    public List<TouristicServ> getAllServices() {
         return repositoryTouristicServ.findAll();
     }
 
