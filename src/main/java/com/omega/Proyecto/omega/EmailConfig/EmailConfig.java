@@ -13,7 +13,6 @@ import java.io.*;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:email.properties")
 public class EmailConfig {
 
     private Properties getMailProperties(){
