@@ -6,6 +6,7 @@ import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Sale;
 import jakarta.mail.MessagingException;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IServiceSale {
@@ -21,4 +22,8 @@ public interface IServiceSale {
     List<Sale> getAllActiveSales();
 
     List<Sale> getAllInactiveSales();
+
+    String getSalesToday(Date today);
+
+    String getMonthlySales();
 }

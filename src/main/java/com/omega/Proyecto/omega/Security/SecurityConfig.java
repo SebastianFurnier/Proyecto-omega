@@ -52,6 +52,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/package/**").hasAnyAuthority("ADMIN", "USER")
                                 .requestMatchers("/api/sale/**").hasAnyAuthority("ADMIN", "USER")
                                 .requestMatchers("/api/service/**").hasAnyAuthority("ADMIN", "USER")
+                                .requestMatchers("/api/owner").hasAnyAuthority("ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 ).userDetailsService(serviceUserDetailsImp)

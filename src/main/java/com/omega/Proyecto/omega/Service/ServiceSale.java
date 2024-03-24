@@ -13,6 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,18 +34,18 @@ public class ServiceSale implements IServiceSale {
     @Autowired
     private IServiceTouristicServ serviceTouristicServ;
 
-    private String checkDataSale(Sale sale){
+    private String checkDataSale(Sale sale) {
 
-        if(sale.getClient() == null)
+        if (sale.getClient() == null)
             return "The client cannot be empty.";
 
-        if(sale.getDateSale().isAfter(LocalDate.now()))
+        if (sale.getDateSale().isAfter(LocalDate.now()))
             return "Incorrect date.";
 
-        if(sale.getEmployee() == null)
+        if (sale.getEmployee() == null)
             return "Employee cannot be empty";
 
-        if(sale.getTouristicServPack() == null)
+        if (sale.getTouristicServPack() == null)
             return "Package cannot be empty";
 
         return null;
@@ -82,11 +85,11 @@ public class ServiceSale implements IServiceSale {
 
     private void discoutAmountServices(TouristicServPack pack) throws ErrorDataException {
         List<TouristicServ> touristicServList = pack.getTouristicServs();
-        for (TouristicServ serv: touristicServList) {
+        for (TouristicServ serv : touristicServList) {
             int amountService = serv.getAmountServ();
-            serv.setAmountServ(amountService-1);
+            serv.setAmountServ(amountService - 1);
 
-            if((amountService-1) == 0)
+            if ((amountService - 1) == 0)
                 serv.setActive(false);
             serviceTouristicServ.editService(serv);
         }
@@ -105,7 +108,7 @@ public class ServiceSale implements IServiceSale {
 
         String errorMessage = checkDataSale(sale);
 
-        if (errorMessage !=  null){
+        if (errorMessage != null) {
             throw new ErrorDataException(errorMessage,
                     new ExceptionDetails(errorMessage, "error", HttpStatus.BAD_REQUEST));
         }
@@ -117,7 +120,7 @@ public class ServiceSale implements IServiceSale {
 
         repositorySale.save(sale);
 
-        if(sale.getClient() != null)
+        if (sale.getClient() != null)
             buildMail(sale);
 
         return sale;
@@ -153,12 +156,89 @@ public class ServiceSale implements IServiceSale {
     }
 
     @Override
-    public List<Sale> getAllActiveSales(){
+    public List<Sale> getAllActiveSales() {
         return repositorySale.getSaleByActive(true);
     }
 
     @Override
-    public List<Sale> getAllInactiveSales(){
+    public List<Sale> getAllInactiveSales() {
         return repositorySale.getSaleByActive(false);
     }
+
+    @Override
+    public String getSalesToday(Date today) {
+        List<Sale> allSales = this.getAllSales();
+        List<Sale> salesToday = new ArrayList<>();
+        LocalDate now = LocalDate.now();
+        float commision;
+        float totalCost;
+        float totalSales = 0;
+
+        for (Sale s : allSales) {
+            if (s.getDateSale().equals(now)) {
+                salesToday.add(s);
+                if (s.getPaymentMethod().equals(PaymentMethod.DEBIT)) {
+                    commision = (s.getCost() * 3) / 100;
+                    totalCost = s.getCost() + commision;
+                    s.setCost(totalCost);
+                }
+                if (s.getPaymentMethod().equals(PaymentMethod.CREDIT)) {
+                    commision = (s.getCost() * 9) / 100;
+                    totalCost = s.getCost() + commision;
+                    s.setCost(totalCost);
+                }
+                if (s.getPaymentMethod().equals(PaymentMethod.TRANSFER)) {
+                    commision = (s.getCost() * 2.45f) / 100;
+                    totalCost = s.getCost() + commision;
+                    s.setCost(totalCost);
+                }
+            }
+        }
+
+        for (Sale s : salesToday) {
+            totalSales += s.getCost();
+        }
+
+        return "The number of sales made today is: " + salesToday.size() +
+                ", and they amounted to a total cost of: $" + totalSales + ",including taxes";
+    }
+
+    @Override
+    public String getMonthlySales() {
+        List<Sale> listSales = this.getAllSales();
+        Month today = LocalDate.now().getMonth();
+        List<Sale> listSaleTharMonth = new ArrayList<>();
+        float commision;
+        float totalCost;
+        float totalSales = 0;
+
+        for (Sale s : listSales) {
+            if (s.getDateSale().getMonth().equals(today)) {
+                listSaleTharMonth.add(s);
+                if (s.getPaymentMethod().equals(PaymentMethod.DEBIT)) {
+                    commision = (s.getCost() * 3) / 100;
+                    totalCost = s.getCost() + commision;
+                    s.setCost(totalCost);
+                }
+                if (s.getPaymentMethod().equals(PaymentMethod.CREDIT)) {
+                    commision = (s.getCost() * 9) / 100;
+                    totalCost = s.getCost() + commision;
+                    s.setCost(totalCost);
+                }
+                if (s.getPaymentMethod().equals(PaymentMethod.TRANSFER)) {
+                    commision = (s.getCost() * 2.45f) / 100;
+                    totalCost = s.getCost() + commision;
+                    s.setCost(totalCost);
+                }
+            }
+        }
+
+        for (Sale s : listSaleTharMonth) {
+            totalSales += s.getCost();
+        }
+
+        return "The number of sales made month is: " + listSaleTharMonth.size() +
+                ", and they amounted to a total cost of: $" + totalSales + ",including taxes";
+    }
+
 }
