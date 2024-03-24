@@ -14,7 +14,7 @@ public class ControllerBonusPoint {
     @Autowired
     public IServiceBonusPoint serviceBonusPoint;
 
-    @GetMapping("/dealyEarnings/{today}")
+    @GetMapping("/dailyEarnings/{today}")
     public String dealyEarnings(@PathVariable LocalDate today) {
         return serviceBonusPoint.getSalesToday(today);
     }
