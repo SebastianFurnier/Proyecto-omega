@@ -23,6 +23,7 @@ public class ServiceBonusPoint implements IServiceBonusPoint {
         float commision;
         float totalCost;
         float totalSales = 0;
+        String msj;
 
         for (Sale s : allSales) {
             if (s.getDateSale().equals(today)) {
@@ -49,7 +50,13 @@ public class ServiceBonusPoint implements IServiceBonusPoint {
             totalSales += s.getCost();
         }
 
-        return "The number of sales made today is: " + salesToday.size() + ", and they amounted to a total cost of: $" + totalSales + ", including taxes";
+        if(salesToday.size() == 0){
+            msj = "Not sales today.";
+        }else {
+            msj = "The number of sales made today is: **" + salesToday.size() + "**, and they amounted to a total cost of: **$" + totalSales + "**, including taxes";
+        }
+
+        return msj;
     }
 
     @Override
@@ -60,6 +67,7 @@ public class ServiceBonusPoint implements IServiceBonusPoint {
         float commision;
         float totalCost;
         float totalSales = 0;
+        String msj;
 
         for (Sale s : listSales) {
             if (s.getDateSale().getMonth().equals(today)) {
@@ -86,6 +94,12 @@ public class ServiceBonusPoint implements IServiceBonusPoint {
             totalSales += s.getCost();
         }
 
-        return "The number of sales made month is: " + listSaleTharMonth.size() + ", and they amounted to a total cost of: $" + totalSales + ", including taxes";
+        if(listSaleTharMonth.size() == 0){
+            msj = "Not sales this month.";
+        }else {
+            msj = "The number of sales made month is: **" + listSaleTharMonth.size() + "**, and they amounted to a total cost of: **$" + totalSales + "**, including taxes";
+        }
+
+        return msj;
     }
 }
