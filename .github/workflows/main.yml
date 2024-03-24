@@ -21,8 +21,6 @@ jobs:
         run: |
           echo 'email="${{ secrets.EMAIL }}"' > credentials.txt
           echo 'email_password="${{ secrets.EMAIL_PASSWORD }}"' >> credentials.txt
-          echo 'db_user="${{ secrets.DB_USER }"'} >> credentials.txt
-          echo 'db_password="${{ secrets.DB_PASSWORD }}"'>> credentials.txt
           echo 'key="${{ secrets.JWT_KEY }}"' >> credentials.txt
 
 
