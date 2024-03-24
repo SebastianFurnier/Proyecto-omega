@@ -1,10 +1,11 @@
-/*package com.omega.Proyecto.ServicesTest;
+package com.omega.Proyecto.ServicesTest;
 
+import com.omega.Proyecto.omega.DTO.DraftSaleDTO;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.*;
 import com.omega.Proyecto.omega.Repository.IRepositorySale;
-import com.omega.Proyecto.omega.Service.ServiceSale;
+import com.omega.Proyecto.omega.Service.*;
 import jakarta.mail.MessagingException;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -21,32 +22,63 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.MOCK,
         classes = ServiceSale.class)
 @AutoConfigureMockMvc
 public class ServiceSaleTest
 {
     @MockBean
     private IRepositorySale repositorySale;
+    @MockBean
+    private ServiceTouristicServPack serviceTouristicServPack;
+    @MockBean
+    private ServiceClient serviceClient;
+    @MockBean
+    private ServiceEmployee serviceEmployee;
+    @MockBean
+    private ServiceTouristicServ serviceTouristicServ;
+    @MockBean
+    private EmailService emailService;
     @Autowired
     private ServiceSale serviceSale;
+
+    private final Client client = new Client();
+    private final Employee employee = new Employee();
+    private final TouristicServPack pack = new TouristicServPack();
+    private final List<TouristicServ> touristicServList = new ArrayList<>();
+
     private final Sale newSale = new Sale(1L,  LocalDate.now(), PaymentMethod.DEBIT,
             new Employee(),  new Client(), new TouristicServPack(), true, 1000);
 
+    private final DraftSaleDTO draftSaleDTO = new DraftSaleDTO();
+
     @Test
     public void createCorrectSale() throws ErrorDataException, ObjectNFException, MessagingException {
+        pack.setTouristicServs(touristicServList);
+
+        draftSaleDTO.setDateSale(LocalDate.now());
+        draftSaleDTO.setEmployeeId(1L);
+        draftSaleDTO.setClientId(2L);
+        draftSaleDTO.setPaymentMethod(PaymentMethod.DEBIT);
+        draftSaleDTO.setPackId(1L);
+
+        Mockito.when(serviceClient.getClient(2L)).thenReturn(client);
+        Mockito.when(serviceEmployee.getEmployee(1L)).thenReturn(employee);
+        Mockito.when(serviceTouristicServPack.getActivePackage(1L)).thenReturn(pack);
         Mockito.when(repositorySale.save(newSale)).thenReturn(newSale);
 
-        Sale saleAux = serviceSale.createSale(newSale);
+        Sale saleAux = serviceSale.createSale(draftSaleDTO);
 
-        Assertions.assertEquals(saleAux, newSale);
+        Mockito.verify(repositorySale, Mockito.times(1)).save(any(Sale.class));
+
     }
 
     @Test(expected = ErrorDataException.class)
     public void createIncorrectSale() throws ErrorDataException, ObjectNFException, MessagingException {
-        serviceSale.createSale(new Sale());
+        serviceSale.createSale(draftSaleDTO);
     }
 
     @Test
@@ -89,4 +121,3 @@ public class ServiceSaleTest
 
     }
 }
-*/

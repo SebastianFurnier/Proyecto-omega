@@ -70,12 +70,12 @@ public class ServiceSale implements IServiceSale {
         EmailDTO emailDTO = new EmailDTO();
 
         emailDTO.setDestinations(destinations);
-        emailDTO.setClientName(clientAux.getEmail());
+        emailDTO.setClientName(clientAux.getName());
         emailDTO.setReceiver(clientAux.getEmail());
         emailDTO.setSellerName(employee.getUsername());
         emailDTO.setCost(sale.getCost());
         emailDTO.setSaleDate(sale.getDateSale());
-        emailDTO.setSubject("Hello " + clientAux.getEmail() + ", you have a reservation!");
+        emailDTO.setSubject("Hello " + clientAux.getName() + ", you have a reservation!");
 
         emailService.sendMail(emailDTO);
     }

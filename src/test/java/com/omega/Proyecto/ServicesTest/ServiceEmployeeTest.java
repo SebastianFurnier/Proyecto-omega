@@ -1,4 +1,4 @@
-/*package com.omega.Proyecto.ServicesTest;
+package com.omega.Proyecto.ServicesTest;
 
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
@@ -38,6 +38,7 @@ public class ServiceEmployeeTest {
     @Test
     public void createEmployeeTest() throws ErrorDataException {
         newEmployee.setId(1L);
+        newEmployee.setUsername("proof");
         newEmployee.setName("Aux");
         newEmployee.setLastName("Proof");
         newEmployee.setDni("12456654");
@@ -79,8 +80,8 @@ public class ServiceEmployeeTest {
         Employee emploAux = new Employee();
         Mockito.when(repoEmployee.save(emploAux)).thenReturn(emploAux);
 
-
         emploAux.setId(1L);
+        emploAux.setUsername("");
         emploAux.setName("Aux");
         emploAux.setLastName("Proof");
         emploAux.setDni("12456654");
@@ -124,4 +125,4 @@ public class ServiceEmployeeTest {
         Assertions.assertEquals(servEmployee.getEmployee(1L),newEmployee);
     }
 
-}*/
+}

@@ -16,6 +16,12 @@ We used Spring Security with JWT tokens to manage users and roles.
 - Maven.
 - MySql.
 
+You can see the endpoint's information:
+- http://vps-3991861-x.dattaweb.com:8080/doc/swagger-ui/index.html#/
+- when the API is running locally: http://localhost:8080/doc/swagger-ui/index.html#/.
+
+You can also test the API locally using the Postman collection named 'Back - postman collection'. 
+
 Below we have the uml diagram showing the class modeling:
 
 <p align="center" width="100%">
