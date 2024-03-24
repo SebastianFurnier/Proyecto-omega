@@ -23,8 +23,8 @@ public class EmployeeDTO {
         this.setUsername(employee.getUsername());
         this.setName(employee.getName());
         this.setLastname(employee.getLastName());
-        this.setUrlImage(getUrlImage());
-        this.setRol(getRol());
+        this.setUrlImage(employee.getUrlImage());
+        this.setRol(employee.getRol());
         this.setActive(employee.isFlag());
     }
 }
