@@ -89,7 +89,7 @@ public class ServiceClient implements IServiceClient {
     @Override
     public void modifyClient(Long idOriginal, String newName, String newLastName, String newDni,
                              LocalDate newDate, String newNationality, String newPhoneNumbre, String newEmail,
-                             boolean flag) throws ErrorDataException, ObjectNFException {
+                             boolean flag) throws ObjectNFException {
         Client cli = this.getClient(idOriginal);
         if (newName != null) {
             cli.setName(newName);
