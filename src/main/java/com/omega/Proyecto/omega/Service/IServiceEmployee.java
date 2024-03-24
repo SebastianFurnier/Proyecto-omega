@@ -17,10 +17,6 @@ public interface IServiceEmployee {
     Employee getEmployee(Long id) throws ObjectNFException;
     List<Employee> getAllEmployee();
 
-    void modifyEmployee(Long idOriginal, Long newId,String newName,String newLastName ,String newDni, LocalDate newDate, String newNationality,
-                        String newPhoneNumber, String newEmail, Long newSalary, boolean flag, Rol newRol)
-                                throws ErrorDataException,ObjectNFException;
-
     List<Employee> getEmployeesByFlag(boolean flag);
 
     Employee getEmployeeByFlagAndId(boolean flag,Long id) throws ErrorDataException,ObjectNFException;
@@ -30,4 +26,6 @@ public interface IServiceEmployee {
     Optional<Employee> findByUsername(String username);
 
     Employee findByUsernameFront(String username) throws ObjectNFException;
+
+    void modifyEmployee(Long idOriginal, String newName, String newLastName, String newDni, LocalDate newDate, String newNationality, String newPhoneNumber, String newEmail, Long newSalary, boolean flag, Rol newRol) throws ErrorDataException, ObjectNFException;
 }

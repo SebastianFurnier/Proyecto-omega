@@ -14,9 +14,10 @@ public interface IServiceClient {
     void deleteClient(Long idClient) throws ObjectNFException;
     Client getClient(Long idClient) throws ObjectNFException;
     List<Client> getAllClient();
-    void modifyClient(Long idOriginal, Long newId,String newName,String newLastName, String newDni ,
-                             LocalDate newDate , String newNationality , String newPhoneNumbre , String newEmail,boolean flag)
-                                throws ErrorDataException, ObjectNFException;
+    void modifyClient(Long idOriginal, String newName, String newLastName, String newDni,
+                      LocalDate newDate, String newNationality, String newPhoneNumbre, String newEmail,
+                      boolean flag) throws ErrorDataException, ObjectNFException;
+
     List<Client> getClientsByFlag(boolean flag);
 
     Client getClientByFlagAndId(boolean flag,Long idClient) throws ObjectNFException;

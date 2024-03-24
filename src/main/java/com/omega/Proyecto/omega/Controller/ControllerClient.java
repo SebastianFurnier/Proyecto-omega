@@ -50,7 +50,6 @@ public class ControllerClient {
 
     @PutMapping("/modify/{id}")
     public PersonDTO modifyClient(@PathVariable Long id,
-                                  @RequestParam(required = false, name = "newId") Long newId,
                                   @RequestParam(required = false, name = "newName") String newName,
                                   @RequestParam(required = false, name = "newLastName") String newLastName,
                                   @RequestParam(required = false, name = "newDni") String newDni,
@@ -59,7 +58,7 @@ public class ControllerClient {
                                   @RequestParam(required = false, name = "newPhoneNumbre") String newPhoneNumbre,
                                   @RequestParam(required = false, name = "newEmail") String newEmail,
                                   @RequestParam(required = false, name = "flag") boolean flag) throws ErrorDataException, ObjectNFException {
-        IServClient.modifyClient(id, newId,newName,newLastName,newDni, newDate, newNationality, newPhoneNumbre, newEmail, flag);
+        IServClient.modifyClient(id,newName,newLastName,newDni, newDate, newNationality, newPhoneNumbre, newEmail, flag);
 
         return new PersonDTO(IServClient.getClient(id));
     }

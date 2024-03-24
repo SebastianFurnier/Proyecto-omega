@@ -88,21 +88,34 @@ public class ServiceClient implements IServiceClient{
     }
 
     @Override
-    public void modifyClient(Long idOriginal, Long newId, String newName, String newLastName, String newDni,
+    public void modifyClient(Long idOriginal, String newName, String newLastName, String newDni,
                              LocalDate newDate, String newNationality, String newPhoneNumbre, String newEmail,
                              boolean flag) throws ErrorDataException, ObjectNFException {
         Client cli = this.getClient(idOriginal);
-        cli.setId(newId);
-        cli.setName(newName);
-        cli.setLastName(newLastName);
-        cli.setDni(newDni);
-        cli.setBirthDay(newDate);
-        cli.setNationality(newNationality);
-        cli.setPhoneNumber(newPhoneNumbre);
-        cli.setEmail(newEmail);
+        if (newName != null) {
+            cli.setName(newName);
+        }
+        if (newLastName != null) {
+            cli.setLastName(newLastName);
+        }
+        if (newDni != null) {
+            cli.setDni(newDni);
+        }
+        if (newDate != null) {
+            cli.setBirthDay(newDate);
+        }
+        if (newNationality != null) {
+            cli.setNationality(newNationality);
+        }
+        if (newPhoneNumbre != null) {
+            cli.setPhoneNumber(newPhoneNumbre);
+        }
+        if (newEmail != null) {
+            cli.setEmail(newEmail);
+        }
         cli.setFlag(flag);
 
-        this.createClient(cli);
+        repositoryClient.save(cli);
     }
 
     @Override

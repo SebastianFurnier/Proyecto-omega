@@ -18,6 +18,7 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idSale;
     private LocalDate dateSale;
+
     private PaymentMethod paymentMethod;
     @ManyToOne
     private Employee employee;

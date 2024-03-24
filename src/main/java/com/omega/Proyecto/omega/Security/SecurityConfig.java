@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         req->req.requestMatchers("/api/employee/login/**")
                                 .permitAll()
+                                .requestMatchers("/api/employee/getByUsername/**").hasAnyAuthority("ADMIN","USER")
                                 .requestMatchers("/doc/**")
                                 .permitAll()
                                 .requestMatchers("/v3/api-docs")

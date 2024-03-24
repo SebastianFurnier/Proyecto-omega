@@ -65,7 +65,6 @@ public class ControllerEmployee {
 
     @PutMapping("/modify/{id}")
     public EmployeeDTO modifyEmployee(@PathVariable Long id,
-                                      @RequestParam(required = false, name = "newId") Long newId,
                                       @RequestParam(required = false, name = "newName") String newName,
                                       @RequestParam(required = false, name = "newLastName") String newLastName,
                                       @RequestParam(required = false, name = "newDni") String newDni,
@@ -78,7 +77,7 @@ public class ControllerEmployee {
                                       @RequestParam(required = false, name = "rol") Rol newRol)
                                       throws ErrorDataException, ObjectNFException {
 
-        IServEmplo.modifyEmployee(id,newId,newName,newLastName,newDni,newDate,newNationality,newPhoneNumber,newEmail,newSalary,flag,newRol);
+        IServEmplo.modifyEmployee(id,newName,newLastName,newDni,newDate,newNationality,newPhoneNumber,newEmail,newSalary,flag,newRol);
 
         return new EmployeeDTO(IServEmplo.getEmployee(id));
     }
