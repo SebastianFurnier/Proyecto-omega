@@ -104,7 +104,7 @@ public class ServiceTouristicServ implements IServiceTouristicServ
     }
 
     @Override
-    public TouristicServ editService(TouristicServ touristicServ) throws ErrorDataException {
-        return this.createService(touristicServ);
+    public TouristicServ editService(TouristicServ touristicServ) {
+        return repositoryTouristicServ.save(touristicServ);
     }
 }
