@@ -1,5 +1,7 @@
 package com.omega.Proyecto.omega.Controller;
 
+import com.omega.Proyecto.omega.DTO.ClientDTO;
+import com.omega.Proyecto.omega.DTO.EmployeeDTO;
 import com.omega.Proyecto.omega.DTO.PersonDTO;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
@@ -71,6 +73,11 @@ public class ControllerClient {
     @GetMapping("/getClientFlagAndId/{flag}/{id}")
     public PersonDTO getClientByFlagAndById(@PathVariable boolean flag, @PathVariable Long id) throws ObjectNFException {
         return new PersonDTO(IServClient.getClientByFlagAndId(flag, id));
+    }
+
+    @GetMapping("activate/{long}")
+    public ClientDTO getActiveClient(@PathVariable Long id) throws ObjectNFException {
+        return new ClientDTO(IServClient.activateClient(id));
     }
 
 }

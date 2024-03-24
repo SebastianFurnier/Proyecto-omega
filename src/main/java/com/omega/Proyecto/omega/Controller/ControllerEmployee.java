@@ -93,4 +93,10 @@ public class ControllerEmployee {
     public EmployeeDTO getEmployeeByFlagAndId(@PathVariable boolean flag, @PathVariable Long id) throws ObjectNFException, ErrorDataException {
         return new EmployeeDTO(IServEmplo.getEmployeeByFlagAndId(flag, id));
     }
+
+    @GetMapping("activate/{long}")
+    public EmployeeDTO getActiveEmployee(@PathVariable Long id) throws ObjectNFException {
+        return new EmployeeDTO(IServEmplo.activateEmployee(id));
+    }
+
 }

@@ -3,6 +3,7 @@ package com.omega.Proyecto.omega.Service;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Client;
+import com.omega.Proyecto.omega.Model.Employee;
 
 
 import java.time.LocalDate;
@@ -22,5 +23,5 @@ public interface IServiceClient {
 
     Client getClientByFlagAndId(boolean flag,Long idClient) throws ObjectNFException;
 
-
+    Client activateClient(Long id) throws ObjectNFException;
 }
