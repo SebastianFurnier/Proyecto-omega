@@ -3,13 +3,11 @@ package com.omega.Proyecto.omega.Service;
 import com.omega.Proyecto.omega.Model.PaymentMethod;
 import com.omega.Proyecto.omega.Model.Sale;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
