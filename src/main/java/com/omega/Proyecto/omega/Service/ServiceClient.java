@@ -82,30 +82,29 @@ public class ServiceClient implements IServiceClient {
     }
 
     @Override
-    public void modifyClient(Long idOriginal, String newName, String newLastName, String newDni,
-                             LocalDate newDate, String newNationality, String newPhoneNumbre, String newEmail,
-                             boolean flag) throws ObjectNFException {
-        Client cli = this.getClient(idOriginal);
-        if (newName != null) {
-            cli.setName(newName);
+    public void modifyClient(Client client) throws ObjectNFException {
+        Client cli = this.getClient(client.getId());
+
+        if (client.getName() != null) {
+            cli.setName(client.getName());
         }
-        if (newLastName != null) {
-            cli.setLastName(newLastName);
+        if (client.getLastName() != null) {
+            cli.setLastName(client.getLastName());
         }
-        if (newDni != null) {
-            cli.setDni(newDni);
+        if (client.getDni() != null) {
+            cli.setDni(client.getDni());
         }
-        if (newDate != null) {
-            cli.setBirthDay(newDate);
+        if (client.getBirthDay() != null) {
+            cli.setBirthDay(client.getBirthDay());
         }
-        if (newNationality != null) {
-            cli.setNationality(newNationality);
+        if (client.getNationality() != null) {
+            cli.setNationality(client.getNationality());
         }
-        if (newPhoneNumbre != null) {
-            cli.setPhoneNumber(newPhoneNumbre);
+        if (client.getPhoneNumber() != null) {
+            cli.setPhoneNumber(client.getPhoneNumber());
         }
-        if (newEmail != null) {
-            cli.setEmail(newEmail);
+        if (client.getEmail() != null) {
+            cli.setEmail(client.getEmail());
         }
 
         cli.setFlag(true);

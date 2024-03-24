@@ -48,19 +48,11 @@ public class ControllerClient {
         return makeClientDTOList(clientList);
     }
 
-    @PutMapping("/modify/{id}")
-    public ClientDTO modifyClient(@PathVariable Long id,
-                                  @RequestParam(required = false, name = "newName") String newName,
-                                  @RequestParam(required = false, name = "newLastName") String newLastName,
-                                  @RequestParam(required = false, name = "newDni") String newDni,
-                                  @RequestParam(required = false, name = "newDate") LocalDate newDate,
-                                  @RequestParam(required = false, name = "newNationality") String newNationality,
-                                  @RequestParam(required = false, name = "newPhoneNumbre") String newPhoneNumbre,
-                                  @RequestParam(required = false, name = "newEmail") String newEmail,
-                                  @RequestParam(required = false, name = "flag") boolean flag) throws ErrorDataException, ObjectNFException {
-        IServClient.modifyClient(id, newName, newLastName, newDni, newDate, newNationality, newPhoneNumbre, newEmail, flag);
+    @PutMapping("/modify")
+    public ClientDTO modifyClient(@RequestBody Client client) throws ErrorDataException, ObjectNFException {
+        IServClient.modifyClient(client);
 
-        return new ClientDTO(IServClient.getClient(id));
+        return new ClientDTO(IServClient.getClient(client.getId()));
     }
 
     @GetMapping("/getAllFlag/{flag}")

@@ -16,9 +16,7 @@ public interface IServiceClient {
 
     List<Client> getAllClient();
 
-    void modifyClient(Long idOriginal, String newName, String newLastName, String newDni,
-                      LocalDate newDate, String newNationality, String newPhoneNumbre, String newEmail,
-                      boolean flag) throws ErrorDataException, ObjectNFException;
+    void modifyClient(Client client) throws ErrorDataException, ObjectNFException;
 
     List<Client> getClientsByFlag(boolean flag);
 
