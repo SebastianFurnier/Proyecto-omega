@@ -50,13 +50,7 @@ public class ServiceBonusPoint implements IServiceBonusPoint {
             totalSales += s.getCost();
         }
 
-        if(salesToday.size() == 0){
-            msj = "Not sales today.";
-        }else {
-            msj = "The number of sales made today is: **" + salesToday.size() + "**, and they amounted to a total cost of: **$" + totalSales + "**, including taxes";
-        }
-
-        return msj;
+        return salesToday.size() + " " +  totalSales;
     }
 
     @Override
@@ -94,12 +88,7 @@ public class ServiceBonusPoint implements IServiceBonusPoint {
             totalSales += s.getCost();
         }
 
-        if(listSaleTharMonth.size() == 0){
-            msj = "Not sales this month.";
-        }else {
-            msj = "The number of sales made month is: **" + listSaleTharMonth.size() + "**, and they amounted to a total cost of: **$" + totalSales + "**, including taxes";
-        }
 
-        return msj;
+        return listSaleTharMonth.size() + " " + totalSales;
     }
 }
