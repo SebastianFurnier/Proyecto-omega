@@ -10,12 +10,14 @@ public class ClientDTO {
     private String lastName;
     private String email;
     private String phoneNumber;
+    private boolean active;
 
     public ClientDTO(Client client) {
         this.setId(client.getId());
         this.setName(client.getName());
         this.setLastName(client.getLastName());
         this.setEmail(client.getEmail());
-        this.setEmail(client.getEmail());
+        this.setPhoneNumber(client.getPhoneNumber());
+        this.setActive(client.isFlag());
     }
 }

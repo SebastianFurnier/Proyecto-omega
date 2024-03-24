@@ -20,13 +20,12 @@ public class ServiceBonusPoint implements IServiceBonusPoint {
     public String getSalesToday(LocalDate today) {
         List<Sale> allSales = serviceSale.getAllSales();
         List<Sale> salesToday = new ArrayList<>();
-        LocalDate now = LocalDate.now();
         float commision;
         float totalCost;
         float totalSales = 0;
 
         for (Sale s : allSales) {
-            if (s.getDateSale().equals(now)) {
+            if (s.getDateSale().equals(today)) {
                 salesToday.add(s);
                 if (s.getPaymentMethod().equals(PaymentMethod.DEBIT)) {
                     commision = (s.getCost() * 3) / 100;
@@ -50,7 +49,7 @@ public class ServiceBonusPoint implements IServiceBonusPoint {
             totalSales += s.getCost();
         }
 
-        return "The number of sales made today is: " + salesToday.size() + ", and they amounted to a total cost of: $" + totalSales + ",including taxes";
+        return "The number of sales made today is: " + salesToday.size() + ", and they amounted to a total cost of: $" + totalSales + ", including taxes";
     }
 
     @Override
@@ -87,6 +86,6 @@ public class ServiceBonusPoint implements IServiceBonusPoint {
             totalSales += s.getCost();
         }
 
-        return "The number of sales made month is: " + listSaleTharMonth.size() + ", and they amounted to a total cost of: $" + totalSales + ",including taxes";
+        return "The number of sales made month is: " + listSaleTharMonth.size() + ", and they amounted to a total cost of: $" + totalSales + ", including taxes";
     }
 }

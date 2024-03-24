@@ -3,18 +3,28 @@ package com.omega.Proyecto.omega.DTO;
 import com.omega.Proyecto.omega.Model.Employee;
 import com.omega.Proyecto.omega.Model.Rol;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
-public class EmployeeDTO extends PersonDTO {
+@Getter
+@Setter
+public class EmployeeDTO {
+    private Long idEmployee;
+    private String username;
+    private String name;
+    private String lastname;
     private Rol rol;
     private String urlImage;
+    protected boolean active;
 
     public EmployeeDTO(Employee employee) {
-        super.setIdPerson(employee.getId());
-        super.setUsername(employee.getUsername());
-        super.setName(employee.getName());
-        super.setLastname(employee.getLastName());
-        this.urlImage = employee.getUrlImage();
-        this.rol = employee.getRol();
+        this.setIdEmployee(employee.getId());
+        this.setUsername(employee.getUsername());
+        this.setName(employee.getName());
+        this.setLastname(employee.getLastName());
+        this.setUrlImage(getUrlImage());
+        this.setRol(getRol());
+        this.setActive(employee.isFlag());
     }
 }

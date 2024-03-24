@@ -25,11 +25,6 @@ public class ServiceClient implements IServiceClient {
         long diference = ChronoUnit.YEARS.between(birthday, dateNow);
         long adult = 18L;
 
-
-        if (client.getEmail().isEmpty()) {
-            return "Email is empty";
-        }
-
         if (client.getEmail().isEmpty()) {
             return "The field of Email cannot be empty";
         }
@@ -135,6 +130,7 @@ public class ServiceClient implements IServiceClient {
     public Client activateClient(Long id) throws ObjectNFException {
         Client client = this.getClient(id);
         client.setFlag(true);
+        repositoryClient.save(client);
         return client;
     }
 }

@@ -1,7 +1,6 @@
 package com.omega.Proyecto.omega.Controller;
 
 import com.omega.Proyecto.omega.DTO.ClientDTO;
-import com.omega.Proyecto.omega.DTO.PersonDTO;
 import com.omega.Proyecto.omega.Error.ErrorDataException;
 import com.omega.Proyecto.omega.Error.ObjectNFException;
 import com.omega.Proyecto.omega.Model.Client;
@@ -22,9 +21,9 @@ public class ControllerClient {
     @Autowired
     IServiceClient IServClient;
 
-    private List<PersonDTO> makeClientDTOList(List<Client> clientList) {
+    private List<ClientDTO> makeClientDTOList(List<Client> clientList) {
         return clientList.stream()
-                .map(PersonDTO::new)
+                .map(ClientDTO::new)
                 .collect(Collectors.toList());
     }
 
@@ -39,18 +38,18 @@ public class ControllerClient {
     }
 
     @GetMapping("/get/{id}")
-    public PersonDTO getClient(@PathVariable Long id) throws ObjectNFException {
-        return new PersonDTO(IServClient.getClient(id));
+    public ClientDTO getClient(@PathVariable Long id) throws ObjectNFException {
+        return new ClientDTO(IServClient.getClient(id));
     }
 
     @GetMapping("/getAll")
-    public List<PersonDTO> getAllClient() {
+    public List<ClientDTO> getAllClient() {
         List<Client> clientList = IServClient.getAllClient();
         return makeClientDTOList(clientList);
     }
 
     @PutMapping("/modify/{id}")
-    public PersonDTO modifyClient(@PathVariable Long id,
+    public ClientDTO modifyClient(@PathVariable Long id,
                                   @RequestParam(required = false, name = "newName") String newName,
                                   @RequestParam(required = false, name = "newLastName") String newLastName,
                                   @RequestParam(required = false, name = "newDni") String newDni,
@@ -61,20 +60,20 @@ public class ControllerClient {
                                   @RequestParam(required = false, name = "flag") boolean flag) throws ErrorDataException, ObjectNFException {
         IServClient.modifyClient(id, newName, newLastName, newDni, newDate, newNationality, newPhoneNumbre, newEmail, flag);
 
-        return new PersonDTO(IServClient.getClient(id));
+        return new ClientDTO(IServClient.getClient(id));
     }
 
     @GetMapping("/getAllFlag/{flag}")
-    public List<PersonDTO> getAllFlag(@PathVariable boolean flag) {
+    public List<ClientDTO> getAllFlag(@PathVariable boolean flag) {
         return makeClientDTOList(IServClient.getClientsByFlag(flag));
     }
 
     @GetMapping("/getClientFlagAndId/{flag}/{id}")
-    public PersonDTO getClientByFlagAndById(@PathVariable boolean flag, @PathVariable Long id) throws ObjectNFException {
-        return new PersonDTO(IServClient.getClientByFlagAndId(flag, id));
+    public ClientDTO getClientByFlagAndById(@PathVariable boolean flag, @PathVariable Long id) throws ObjectNFException {
+        return new ClientDTO(IServClient.getClientByFlagAndId(flag, id));
     }
 
-    @GetMapping("activate/{id}")
+    @PutMapping("activate/{id}")
     public ClientDTO getActiveClient(@PathVariable Long id) throws ObjectNFException {
         return new ClientDTO(IServClient.activateClient(id));
     }

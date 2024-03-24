@@ -17,7 +17,7 @@ public class SaleDTO {
     private LocalDate dateSale;
     private PaymentMethod paymentMethod;
     private EmployeeDTO employee;
-    private PersonDTO client;
+    private ClientDTO client;
     private Long idPack;
     private boolean active;
     private float cost;
@@ -27,7 +27,7 @@ public class SaleDTO {
         this.dateSale = sale.getDateSale();
         this.paymentMethod = sale.getPaymentMethod();
         this.employee = new EmployeeDTO(sale.getEmployee());
-        this.client = new PersonDTO(sale.getClient());
+        this.client = new ClientDTO(sale.getClient());
         this.idPack = sale.getTouristicServPack().getIdPack();
         this.active = sale.isActive();
         this.cost = sale.getCost();
