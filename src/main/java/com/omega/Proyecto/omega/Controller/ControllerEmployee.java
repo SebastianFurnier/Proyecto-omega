@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -31,12 +32,12 @@ public class ControllerEmployee {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody Employee request) throws ErrorDataException {
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody Employee request) throws ErrorDataException, IOException {
         return ResponseEntity.ok(authenticationService.register(request));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody Employee request) {
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody Employee request) throws IOException {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 

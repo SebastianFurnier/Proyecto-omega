@@ -11,6 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 public class AuthenticationService {
     private final IRepositoryEmployee repo;
@@ -30,7 +32,7 @@ public class AuthenticationService {
         this.employeeService = employeeService;
     }
 
-    public AuthenticationResponse register(Employee request) throws ErrorDataException {
+    public AuthenticationResponse register(Employee request) throws ErrorDataException, IOException {
         request.setPassword(passwordEncoder.encode(request.getPassword()));
         employeeService.createEmployee(request);
         String token = jwtService.generatorToken(request);
@@ -38,7 +40,7 @@ public class AuthenticationService {
         return new AuthenticationResponse(token);
     }
 
-    public AuthenticationResponse authenticate(Employee request) {
+    public AuthenticationResponse authenticate(Employee request) throws IOException {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
